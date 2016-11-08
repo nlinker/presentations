@@ -8,6 +8,6 @@
 ## How to run
 
 ```
-./build.sh min 03_java-learn-from-haskell
+./build.sh min 04_java-learn-from-haskell
 ```
-and see `03_java-learn-from-haskell/exports`.
+and see `04_java-learn-from-haskell/exports`.

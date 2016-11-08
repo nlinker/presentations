@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="generator" content="pandoc">
+  <meta name="description" content="What Java can learn from Haskell and vice versa" />
+  <meta name="author" content="Nick Linker">
+  <title>What Java can learn from Haskell and vice versa</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="http://lab.hakim.se/reveal-js//css/reveal.css">
+  <link rel="stylesheet" href="https://denehyg.github.io/reveal.js-menu/plugin/reveal.js-menu//menu.css">
+  <link rel="stylesheet" href="http://lab.hakim.se/reveal-js//css/theme/league.css" id="theme">
+
+	<!-- For syntax highlighting -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
+
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'http://lab.hakim.se/reveal-js//css/print/pdf.css' : 'http://lab.hakim.se/reveal-js//css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+
+  <style type="text/css">
+    code{
+      white-space: pre;
+    }
+    .reveal pre code {
+      background: rgba(255, 255, 255, 0.7);
+      color: rgba(0, 0, 0, 0.7);
+    }
+    .reveal section img {
+      margin: 15px 0px;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.9);
+    }
+    strong {
+      color: #777
+    }
+    a:hover {
+      text-decoration: underline !important;
+    }
+    h1.title {
+      font-size: 350% !important;
+    }
+    h1 {
+      font-size: 250% !important;
+    }
+    h2 {
+      font-size: 150% !important;
+    }
+    h3 {
+      font-size: 100% !important;
+    }
+    @media print {
+      #only-print-parent { display: table !important; }
+      #only-print-child { display: table-cell !important; vertical-align: middle;}
+      h1.title { font-size: 400% !important;}
+      h1 { font-size: 300% !important; }
+      h2 { font-size: 200% !important; }
+      h3 { font-size: 150% !important; }
+    }
+  </style>
+  <!--[if lt IE 9]>
+  <script src="http://lab.hakim.se/reveal-js//lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="only-print-parent">
+    <div id="only-print-child">
+      <h1 class="title">What Java can learn from Haskell and vice versa</h2>
+      <h2 class="author">Nick Linker</h2>
+      <h3 class="date">November 2016, ISSArt</h3>
+    </div>
+</section>
+
+<section id="what-java-can-learn-from-haskell" class="slide level1">
+<h2><span class="header-section-number">1</span> What Java can learn from Haskell</h2>
+<h2 id="haskell-is-a-big-language"><span class="header-section-number">1.1</span> Haskell is a big language</h2>
+<ol type="1">
+<li>Expressive (though terse) syntax</li>
+<li>Immutable data structures</li>
+<li>Pure functions <em>with currying</em></li>
+<li>No nulls</li>
+<li>Algebraic Data Types and pattern matching</li>
+<li>Type classes</li>
+<li>Concurrency</li>
+<li>Tools: GHCI, stack</li>
+</ol>
+<h2 id="the-most-impact-is-done-by"><span class="header-section-number">1.2</span> The most impact is done by</h2>
+<ol type="1">
+<li>Syntax, type inference</li>
+<li>ADT &amp; pattern matching</li>
+<li>Type classes</li>
+<li>Pure functions and explicit side effects</li>
+</ol>
+</section>
+<section id="what-haskell-can-learn-from-java" class="slide level1">
+<h2><span class="header-section-number">2</span> What Haskell can learn from Java</h2>
+<h2 id="anyone-knows-java"><span class="header-section-number">2.1</span> Anyone knows Java</h2>
+<ul>
+<li>Much lower learning curve.</li>
+<li>The first time it is really hard to get even simple things.</li>
+<li>Haskell forces to control side effects even when it is not needed.</li>
+<li>Forces to spend much more time on resolving compiler errors.</li>
+<li>Sometimes errors are hard to comprehend</li>
+<li>Advanced types (type families and higher kinded types) appear even in ordinary things (like running REST server)</li>
+<li><p>Haskell compiler implements a lot of extensions</p></li>
+<li>Stackoverflow</li>
+<li>However it is hard to get it done right</li>
+<li><code>cow.eat(grass)</code>, <code>grass.beEatenBy(cow)</code> or <code>field.interact(cow, grass)</code></li>
+<li><p>subtype polymorphism impossible to</p></li>
+</ul>
+<h2 id="convenient-tooling"><span class="header-section-number">2.2</span> Convenient tooling</h2>
+<ul>
+<li>Developer experience is good</li>
+<li>Intellij Idea</li>
+<li>Although not always good from the long-term perspective</li>
+</ul>
+</section>
+<section id="to-use-or-not-to-use" class="slide level1">
+<h2><span class="header-section-number">3</span> To use or not to use?</h2>
+<ol type="1">
+<li>Use in the domains when it is really shine: compiler construction, provable correct code.</li>
+<li>There are a lot of compilers written in Haskell: GHC, Corrode, Elm, Agda, Kaleidoscope, Purescript, Pandoc.</li>
+<li>Many libraries to support compiler constructions.</li>
+<li>It is good for small teams with eagerness to use FP.</li>
+<li></li>
+</ol>
+</section>
+<section id="to-learn-or-not-to-learn" class="slide level1">
+<h2><span class="header-section-number">4</span> To learn or not to learn?</h2>
+<ol type="1">
+<li>Yes!</li>
+<li>Many FP concepts are here is the most explicit way.</li>
+<li>It is very different.</li>
+<li>Get used to type systems other to Java.</li>
+<li>Concurrency and parallelism.</li>
+<li>Monads.</li>
+</ol>
+</section>
+<section id="questions" class="slide level1">
+<h2><span class="header-section-number">5</span> Questions?</h2>
+<figure>
+<img src="../img/99_questions.jpg" />
+</figure>
+</section>
+    </div>
+  </div>
+
+  <script src="http://lab.hakim.se/reveal-js//lib/js/head.min.js"></script>
+  <script src="http://lab.hakim.se/reveal-js//js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+transition: 'convex',
+
+        menu: {
+            // Specifies which side of the presentation the menu will
+            // be shown. Use 'left' or 'right'.
+            side: 'left',
+
+            // Add slide numbers to the titles in the slide list.
+            // Use 'true' or format string (same as reveal.js slide numbers)
+            numbers: false,
+
+            // Specifies which slide elements will be used for generating
+            // the slide titles in the menu. The default selects the first
+            // heading element found in the slide, but you can specify any
+            // valid css selector and the text from the first matching
+            // element will be used.
+            // Note: that a section data-menu-title attribute or an element
+            // with a menu-title class will take precedence over this option
+            titleSelector: 'h1, h2, h3, h4, h5, h6',
+
+            // Hide slides from the menu that do not have a title.
+            // Set to 'true' to only list slides with titles.
+            hideMissingTitles: false,
+
+            // Add markers to the slide titles to indicate the
+            // progress through the presentation
+            markers: false,
+
+            // Specify custom panels to be included in the menu, by
+            // providing an array of objects with 'title', 'icon'
+            // properties, and either a 'src' or 'content' property.
+            custom: false,
+
+            // Specifies the themes that will be available in the themes
+            // menu panel. Set to 'false' to hide themes panel.
+            themes: [
+                { name: 'Black', theme: 'http://lab.hakim.se/reveal-js//css/theme/black.css' },
+                { name: 'White', theme: 'http://lab.hakim.se/reveal-js//css/theme/white.css' },
+                { name: 'League', theme: 'http://lab.hakim.se/reveal-js//css/theme/league.css' },
+                { name: 'Sky', theme: 'http://lab.hakim.se/reveal-js//css/theme/sky.css' },
+                { name: 'Beige', theme: 'http://lab.hakim.se/reveal-js//css/theme/beige.css' },
+                { name: 'Simple', theme: 'http://lab.hakim.se/reveal-js//css/theme/simple.css' },
+                { name: 'Serif', theme: 'http://lab.hakim.se/reveal-js//css/theme/serif.css' },
+                { name: 'Blood', theme: 'http://lab.hakim.se/reveal-js//css/theme/blood.css' },
+                { name: 'Night', theme: 'http://lab.hakim.se/reveal-js//css/theme/night.css' },
+                { name: 'Moon', theme: 'http://lab.hakim.se/reveal-js//css/theme/moon.css' },
+                { name: 'Solarized', theme: 'http://lab.hakim.se/reveal-js//css/theme/solarized.css' }
+            ],
+
+            // Specifies if the transitions menu panel will be shown.
+            transitions: true,
+
+            // Adds a menu button to the slides to open the menu panel.
+            // Set to 'false' to hide the button.
+            openButton: true,
+
+            // If 'true' allows the slide number in the presentation to
+            // open the menu panel. The reveal.js slideNumber option must
+            // be displayed for this to take effect
+            openSlideNumber: false,
+
+            // If true allows the user to open and navigate the menu using
+            // the keyboard. Standard keyboard interaction with reveal
+            // will be disabled while the menu is open.
+            keyboard: true
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'http://lab.hakim.se/reveal-js//lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'http://lab.hakim.se/reveal-js//plugin/zoom-js/zoom.js', async: true },
+          { src: 'http://lab.hakim.se/reveal-js//plugin/notes/notes.js', async: true },
+          //{ src: 'http://lab.hakim.se/reveal-js//plugin/search/search.js', async: true },
+          { src: 'https://denehyg.github.io/reveal.js-menu/plugin/reveal.js-menu//menu.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>
