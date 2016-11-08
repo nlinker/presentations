@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js ie6" > <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7" > <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8" > <![endif]-->
+<!--[if gt IE 8]><!-->  <html class="no-js" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="generator" content="pandoc" />
+  <meta name="description" content="What Java can learn from Haskell and vice versa" />
+  <meta name="author" content="Nick Linker" />
+  <title>What Java can learn from Haskell and vice versa</title>
+
+  <!-- deck core css -->
+  <link rel="stylesheet" href="../lib/deck.js-master/core/deck.core.css">
+
+  <!-- deck extensions css -->
+  <link rel="stylesheet" href="../lib/deck.js-master/extensions/goto/deck.goto.css">
+  <link rel="stylesheet" href="../lib/deck.js-master/extensions/menu/deck.menu.css">
+  <link rel="stylesheet" href="../lib/deck.js-master/extensions/navigation/deck.navigation.css">
+  <link rel="stylesheet" href="../lib/deck.js-master/extensions/scale/deck.scale.css">
+  <link rel="stylesheet" href="../lib/deck.js-master/extensions/status/deck.status.css">
+
+  <!-- deck slide theme css -->
+  <link rel="stylesheet" href="../lib/deck.js-master/themes/style/web-2.0.css">
+  <!--
+  <link rel="stylesheet" href="../lib/deck.js-master/themes/style/neon.css">
+  <link rel="stylesheet" href="../lib/deck.js-master/themes/style/swiss.css">
+  <link rel="stylesheet" href="../lib/deck.js-master/themes/style/web-2.0.css">
+  -->
+
+  <!-- deck slide transition css -->
+  <link rel="stylesheet" href="../lib/deck.js-transition-cube-master/cube.css">
+  <!--
+  <link rel="stylesheet" href="../lib/deck.js-transition-cube-master/cube.css">
+  <link rel="stylesheet" href="../lib/deck.js-master/themes/transition/fade.css">
+  <link rel="stylesheet" href="../lib/deck.js-master/themes/transition/horizontal-slide.css">
+  <link rel="stylesheet" href="../lib/deck.js-master/themes/transition/vertical-slide.css">
+  -->
+
+  <!-- custom css just for this page -->
+  <style>
+    figcaption {
+      display: none;
+      visibility:hidden;
+    }
+
+    #titlepage, #documentauthor, #documentdate {
+      text-align: center;
+    }
+
+    #titlepage {
+      font-size: 5.25em;
+      padding-top: 15%;
+    }
+
+    #documentauthor {
+      font-size: 2.25em;
+    }
+
+    #documentdate {
+      font-size: 1.25em;
+    }
+  </style>
+
+  <!-- modernizr deck js  -->
+  <script src="../lib/deck.js-master/modernizr.custom.js"></script>
+
+</head>
+<body class="deck-container">
+<section class="slide">
+  <h2 id="titlepage">What Java can learn from Haskell and vice versa</h2>
+  <h3 id="documentauthor">Nick Linker</h3>
+  <h4 id="documentdate">November 2016, ISSArt</h4>
+</section>
+
+<section id="what-java-can-learn-from-haskell" class="slide level1">
+<h2><span class="header-section-number">1</span> What Java can learn from Haskell</h2>
+<h2 id="haskell-is-a-big-language"><span class="header-section-number">1.1</span> Haskell is a big language</h2>
+<ol type="1">
+<li>Expressive (though terse) syntax</li>
+<li>Immutable data structures</li>
+<li>Pure functions <em>with currying</em></li>
+<li>No nulls</li>
+<li>Algebraic Data Types and pattern matching</li>
+<li>Type classes</li>
+<li>Concurrency</li>
+<li>Tools: GHCI, stack</li>
+</ol>
+<h2 id="the-most-impact-is-done-by"><span class="header-section-number">1.2</span> The most impact is done by</h2>
+<ol type="1">
+<li>Syntax, type inference</li>
+<li>ADT &amp; pattern matching</li>
+<li>Type classes</li>
+<li>Pure functions and explicit side effects</li>
+</ol>
+</section>
+<section id="what-haskell-can-learn-from-java" class="slide level1">
+<h2><span class="header-section-number">2</span> What Haskell can learn from Java</h2>
+<h2 id="anyone-knows-java"><span class="header-section-number">2.1</span> Anyone knows Java</h2>
+<ul>
+<li>Much lower learning curve.</li>
+<li>The first time it is really hard to get even simple things.</li>
+<li>Haskell forces to control side effects even when it is not needed.</li>
+<li>Forces to spend much more time on resolving compiler errors.</li>
+<li>Sometimes errors are hard to comprehend</li>
+<li>Advanced types (type families and higher kinded types) appear even in ordinary things (like running REST server)</li>
+<li><p>Haskell compiler implements a lot of extensions</p></li>
+<li>Stackoverflow</li>
+<li>However it is hard to get it done right</li>
+<li><code>cow.eat(grass)</code>, <code>grass.beEatenBy(cow)</code> or <code>field.interact(cow, grass)</code></li>
+<li><p>subtype polymorphism impossible to</p></li>
+</ul>
+<h2 id="convenient-tooling"><span class="header-section-number">2.2</span> Convenient tooling</h2>
+<ul>
+<li>Developer experience is good</li>
+<li>Intellij Idea</li>
+<li>Although not always good from the long-term perspective</li>
+</ul>
+</section>
+<section id="to-use-or-not-to-use" class="slide level1">
+<h2><span class="header-section-number">3</span> To use or not to use?</h2>
+<ol type="1">
+<li>Use in the domains when it is really shine: compiler construction, provable correct code.</li>
+<li>There are a lot of compilers written in Haskell: GHC, Corrode, Elm, Agda, Kaleidoscope, Purescript, Pandoc.</li>
+<li>Many libraries to support compiler constructions.</li>
+<li>It is good for small teams with eagerness to use FP.</li>
+<li></li>
+</ol>
+</section>
+<section id="to-learn-or-not-to-learn" class="slide level1">
+<h2><span class="header-section-number">4</span> To learn or not to learn?</h2>
+<ol type="1">
+<li>Yes!</li>
+<li>Many FP concepts are here is the most explicit way.</li>
+<li>It is very different.</li>
+<li>Get used to type systems other to Java.</li>
+<li>Concurrency and parallelism.</li>
+<li>Monads.</li>
+</ol>
+</section>
+<section id="questions" class="slide level1">
+<h2><span class="header-section-number">5</span> Questions?</h2>
+<figure>
+<img src="../img/99_questions.jpg" />
+</figure>
+</section>
+
+<!--footer id="footer">
+  <h4 class="author"> Nick Linker  - November 2016, ISSArt</h4>
+</footer-->
+
+<!-- deck goto extension html -->
+<form action="." method="get" class="goto-form">
+  <label for="goto-slide">Go to slide:</label>
+  <input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
+  <datalist id="goto-datalist"></datalist>
+  <input type="submit" value="Go">
+</form>
+
+<!-- deck navigation extension html -->
+<div aria-role="navigation">
+  <a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
+  <a href="#" class="deck-next-link" title="Next">&#8594;</a>
+</div>
+
+<!-- deck status extension html -->
+<p class="deck-status" aria-role="status">
+  <span class="deck-status-current"></span>
+  /
+  <span class="deck-status-total"></span>
+</p>
+
+<!-- jquery  -->
+<script src="../lib/deck.js-master/jquery.min.js"></script>
+
+<!-- deck core js  -->
+<script src="../lib/deck.js-master/core/deck.core.js"></script>
+
+<!-- deck extension js -->
+<script src="../lib/deck.js-master/extensions/goto/deck.goto.js"></script>
+<script src="../lib/deck.js-master/extensions/menu/deck.menu.js"></script>
+<script src="../lib/deck.js-master/extensions/navigation/deck.navigation.js"></script>
+<script src="../lib/deck.js-master/extensions/scale/deck.scale.js"></script>
+<script src="../lib/deck.js-master/extensions/status/deck.status.js"></script>
+<script src="../lib/deck.search.js-master/search/deck.search.js"></script>
+
+<!-- Initialize the deck. -->
+<script>
+$(function() {
+    $.deck('.slide');
+});
+</script>
+
+</body>
+</html>
