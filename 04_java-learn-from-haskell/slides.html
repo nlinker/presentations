@@ -135,7 +135,9 @@
 				<section data-markdown>
 					<script type="text/template">
 						#### Purity (1)
-						![XKCD](https://imgs.xkcd.com/comics/haskell.png)
+						![XKCD](img/hj-04-xkcd.png)
+
+						Seriously, what about file system? Network? Random?
 					</script>
 				</section>
 
@@ -154,19 +156,150 @@
 						They have the same Java type.
 
 						However, these functions are not interchangeable!
-
-						In Haskell they have different types.
 					</script>
 				</section>
 
 				<section data-markdown>
 					<script type="text/template">
+						#### Purity (3)
+
+						In Haskell they'd have different types:
+
+						```haskell
+						getLength :: String -> Integer
+
+						getFileLength :: String -> IO Integer
+						```
+
+						(Monad tutorial goes here...)
 					</script>
 				</section>
 
+				<section data-background="img/hj-05-agent-smith.jpg" vertical-align="text-bottom">
+					<h2>Expressive Types</h2>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						#### Expressive Types (1)
+						##### Newtypes
+						```java
+						// call this as runScript("sql/RunStuff.sql")
+						Result runScript(String script) { ...}
+						```
+						- Milliseconds vs seconds
+						- Username vs password
+						- Paths vs contents
+						- Indices
+
+						In Haskell wrapping can be free!
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						#### Expressive Types (2)
+						##### Newtypes
+						```haskell
+
+						-- typesafe runScript
+						newtype Path = Path String
+
+						runScript :: Path -> IO Result
+						```
+						Looks like a separate type, but low-level representation is the same.
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						#### Expressive Types (3)
+						##### Algebraic Data Types and pattern matching
+						```haskell
+						data Void
+						data X = X
+						data Y = Y Int Text X
+						data Z = Zx X | Zy Y
+						data Day = Mon | Tue | Wed | Thu | Fri | Sat | Sun
+						data User = User { id :: Int, name :: Text, day :: Day }
+						```
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						#### Expressive Types (4)
+						##### Algebraic Data Types and pattern matching
+						Constructing values and matching
+						```haskell
+						let z = Zy (Y 123 "Hey" X)
+						let u1 = User { id = 1, name = "Vasya", day = Mon }
+						let u2 = User 2 "Petya" Tue
+						let d = Sat
+
+						wd :: Day -> String
+						wd d | d `elem` [Mon, Tue, Wed, Thu] -> "Working day"
+						wd d | d `elem` [Sat, Sun]           -> "Weekend day"
+						wd Fri                               -> "Friday"
+
+						case u1 of
+						  User id name day -> ...
+						```
+					</script>
+				</section>
+
+				<section>
+					<h4>Expressive Types (5)</h4>
+					<h5>Type Classes</h5>
+					<table>
+						<thead>
+							<tr>
+								<th>Data Type</th>
+								<th>Eq</th>
+								<th>Ord</th>
+								<th>ToJSON</th>
+								<th>FromJSON</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Apple</td>
+								<td><span class="fragment fade-in">Eq</span></td>
+								<td><span class="fragment fade-in">Ord</span></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>Orange</td>
+								<td><span class="fragment fade-in">Eq</span></td>
+								<td></td>
+								<td><span class="fragment fade-in">ToJSON</span></td>
+								<td></td>
+							</tr>
+							<tr class="fragment fade-in">
+								<td>Lemon</td>
+								<td>Eq</td>
+								<td>Ord</td>
+								<td>ToJSON</td>
+								<td>FromJSON</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						#### Expressive Types (6)
+						##### Typeclasses
+						![Typeclasses](img/hj-06-typeclasses.png)
+					</script>
+				</section>
+
+				
 
 
 				<section>
+
 					Haskell is Not For Production and Other Tales
 					- Haskell is academic
 					- Haskell is hard
