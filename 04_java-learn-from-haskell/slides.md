@@ -23,6 +23,34 @@
 3. Type classes
 4. Pure functions and explicit side effects
 
+== Stepped paragraphs
+
+[%step]
+This paragraph is displayed first.
+
+[%step]
+Then this paragraph is displayed when the _Next_ arrow is clicked.
+
+== Stepped list items
+
+[%step]
+* A bullet is displayed each time the _Next_ arrow is clicked.
+* B
+* C
+
+== Stepped blocks
+
+[%step]
+--
+Block one
+--
+
+[%step]
+--
+Block two
+--
+
+
 
 # What Haskell can learn from Java
 
