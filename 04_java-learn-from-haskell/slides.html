@@ -20,26 +20,163 @@
 	</head>
 	<body>
 		<div class="reveal">
-			<!-- content goes here -->
-
-
 			<div class="slides">
+				<!-- content goes here -->
+
 				<section data-markdown>
 					<script type="text/template">
-						## Чему Haskell может научить Java и наоборот
+						# What
+						## Java can learn from
+						# Haskell
+						### and vice versa
+						<p class="fragment fade-up">Nick Linker @nick_linker</p>
+					</script>
+				</section>
 
-						## [Source](https://github.com/commercialhaskell/commercialhaskell/blob/master/README.md)
+				<section>
+						<h4>Examples (<a href="https://github.com/commercialhaskell/commercialhaskell/blob/master/README.md">Source</a>)</h4>
+						<p>
+							Anchor Applikativ Assertible Borders Beautiful_Destinations ByteAlly Capital_Match
+							Chordify CircuitHub Commonwealth Bank DigitalX Elsen Extensibl Facebook FP_Complete
+							FPInsight Front_Row_Education Helium_Systems Hooky,_Inc Infinipool Iris_Connect
+							Keera_Studios Kite_&amp;_Lightning Least_Fixed LexisNexis_Risk_Solutions Lumi_Guide
+							Madriska_Inc. Microsoft Midroll MyFansDemand Picus_Security Pivot_Cloud Prezi
+							Rheo_Systems Scoompa Scrive Scyfy_Technologies Silk SimplyRETS Snowdrift.coop
+							Soostone Stack_Builders Standard_Chartered Stitcher Suite_Solutions SumAll
+							Swift_Navigation Systor_Vest thoughtbot Tree.is Tsuru_Capital Turing_Jump
+							UpHere VaryWell VFILES Virtual_Forge Wagon Wellposed Well-Typed Zalore
+						</p>
+				</section>
 
+				<section data-markdown>
+					### Haskell is ...
+					- Functional
+					- Pure
+					- Lazy (by default)
+					- With advanced type system
+					- GHC
+						- 25 years old, but moves fast
+					 	- last release 2016-05-21
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## What java can learn
+						- Expressive syntax
+						- Purity
+						- Expressive Type System
+						- GHCi (REPL)
+						- ...
+					</script>
+				</section>
+
+				<section data-background="img/hj-01-trinity.jpg" vertical-align="text-bottom">
+					<h2>Expressive syntax</h2>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						#### Expressive syntax (1)
+						```haskell
+						size xs = loop xs 0
+						  where
+						    loop [] acc = acc
+						    loop (_ : xs) acc = loop xs (acc + 1)
+
+						-- Usage
+						size [1,2,3]
+						```
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						#### Expressive syntax (2)
+						The type of size above
+						```haskell
+						size :: [t] -> Integer     -- ?
+
+						size :: Num a => [t] -> a  -- actuall type
+						```
+						In general
+						```haskell
+						f :: (C1 a) =>    a -> b -> c -> d -> e
+						(f a1) :: (C1 a) =>    b -> c -> d -> e
+						(f a1 b1) :: (C1 a) =>      c -> d -> e
+						(f a1 b1 c1) :: (C1 a) =>        d -> e
+						(f a1 b1 c1 d1) :: (C1 a) =>          e
+						```
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						#### Expressive syntax (3)
+
+						A spherical program in vacuum
+
+						```haskell
+						module My.Foo where
+
+						import Data.Time hiding (Day)
+
+						foo :: IO ()
+						foo = do
+						  ct <- getCurrentTime
+						  putStrLn ("UTC time = " ++ show ct)
+						```
+					</script>
+				</section>
+
+				<section data-background="img/hj-03-spoon-guy.jpg" vertical-align="text-bottom">
+					<h2>Purity</h2>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						#### Purity (1)
+						![XKCD](https://imgs.xkcd.com/comics/haskell.png)
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						#### Purity (2)
+						```java
+						long getLength(String str) {
+								return str.length();
+						}
+
+						long getFileLength(String path) {
+							 	return new File(path).length();
+						}
+						```
+						They have the same Java type.
+
+						However, these functions are not interchangeable!
+
+						In Haskell they have different types.
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
 					</script>
 				</section>
 
 
-				<section>Slide 2</section>
+
+				<section>
+					Haskell is Not For Production and Other Tales
+					- Haskell is academic
+					- Haskell is hard
+					- Haskellers are hard
+				</section>
+
+
+
+				<!-- end content -->
 			</div>
-
-
-
-			<!-- end content -->
 		</div>
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.js"></script>
