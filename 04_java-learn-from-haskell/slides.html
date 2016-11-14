@@ -100,11 +100,11 @@
 						```
 						In general
 						```haskell
-						f :: (C1 a) =>    a -> b -> c -> d -> e
-						(f a1) :: (C1 a) =>    b -> c -> d -> e
-						(f a1 b1) :: (C1 a) =>      c -> d -> e
-						(f a1 b1 c1) :: (C1 a) =>        d -> e
-						(f a1 b1 c1 d1) :: (C1 a) =>          e
+						f :: (C1 a) => a -> b -> c -> d -> e
+						(f a1) ::           b -> c -> d -> e
+						(f a1 b1) ::             c -> d -> e
+						(f a1 b1 c1) ::               d -> e
+						(f a1 b1 c1 d1) ::                 e
 						```
 					</script>
 				</section>
@@ -373,7 +373,8 @@
 						- Vim
 						- Emacs
 						- Sublime
-						However, no stepping debugger.
+						
+						However, Haskell's stepping debugger (GHCi) is not universal.
 					</script>
 				</section>
 
