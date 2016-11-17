@@ -162,7 +162,6 @@ case u1 of
 Эти вещи используются повсеместно, особенно полезен паттерн-матчинг при разборе сложных выражений,
 и особненно приятно, что если я забуду какой-то случай, компилятор мне об этом скажет.
 
-
 Класс типов - это удивительно полезная штука, это в чём-то похоже на джавовские интерфейсы,
 но в отличие от них классы типов не прибиты гвоздями ни к какому из типов.
 Давайте я приведу пример. Допустим у нас есть тип User
@@ -194,9 +193,7 @@ ToJSON - чтобы можно было преобразовать его в jso
 Достаточно описать только данные, которые нужны для представления сущностей, а поведение будет навешано
 как бы снаружи.
 
-
-Все мы хотим, чтобы нас понимали. Но некоторые из нас также хотят понимать.
-Половина знаний устаревает кждые 10 лет, поэтому нужно концентрироваться на фундаментальном.
+Половина знаний устаревает каждые 10 лет, поэтому нужно концентрироваться на фундаментальном.
 
 + Компактный и неизбыточный синтаксис
 + no nulls
@@ -212,7 +209,7 @@ ToJSON - чтобы можно было преобразовать его в jso
 + type classes, gradual typing не решение
 + types, any function a -> b, despite Function22<T1,T2,T3...,R>
 + Известные компиляторы, написанные на Хаскелл: GHC, Corrode, Elm, Agda, Kaleidoscope, Purescript, Pandoc.
-+ IO monad это sudo в мире монад
++ IO monad это root в мире монад, а liftIO - как sudo
 
 
 - плохая документация кроме самых популярных библиотек.
@@ -234,15 +231,10 @@ ToJSON - чтобы можно было преобразовать его в jso
 
 
 http://bob.ippoli.to/python-haskell-ep2014/#/nonsense-instance
+http://www.slideshare.net/KatieAtie/haskell-is-not-for-production-and-other-tales
 
 > I've seen CSP defined as Actors with a mailbox size of 0. Is that a bad definition?
 > Yes, bad. By either Carl Hewitt's definition of actors or Erlang's. CSP allows local, anonymous, concurrent routing, that's it. Actors are a location transparent, supervised abstraction that can do routing without anonimity.
-
-http://www.howtogeek.com/227093/how-to-block-an-application-from-accessing-the-internet-with-windows-firewall/
-http://www.slideshare.net/KatieAtie/haskell-is-not-for-production-and-other-tales
-
-
-
 
 ### Разговоры про монады
 
