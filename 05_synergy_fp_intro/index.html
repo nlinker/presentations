@@ -67,6 +67,24 @@
                     </script>
                 </section>
 
+                <section data-markdown>
+                    <script type="text/template">
+                        ### About side effects
+                        ```java
+                        long getLength(String str) {
+                            return str.length();
+                        }
+
+                        long getFileLength(String path) {
+                            return new File(path).length();
+                        }
+                        ```
+                        They have the same Java type.
+
+                        However, these functions are not interchangeable!
+                    </script>
+                </section>
+
                 <section data-markdown="">
                     ### What do we know (pros)
                     - Functions are first-class values
