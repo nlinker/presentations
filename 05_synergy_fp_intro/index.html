@@ -214,8 +214,10 @@
                             replicateConcat = (func, num) -> ???;
 
                         ...
-                        Function<String, String> stringFunction = replicateConcat.apply(upperCaser, 3);
-                        assert stringFunction.apply("Hooray!") === "HOORAY!HOORAY!HOORAY!";
+                        Function<String, String> stringFunction
+                            = replicateConcat.apply(upperCaser, 3);
+                        assert stringFunction.apply("Hooray!")
+                            === "HOORAY!HOORAY!HOORAY!";
 
                         // Is it really test???
                         assert repeat.apply(hooray, 3).apply(null) === null;
@@ -267,10 +269,8 @@
                                 final List<Integer> result = new ArrayList<>(n);
                                 // ???
                             };
-
                         Function<List<Integer>, List<Integer>>
                             doubleAll = xs -> map.apply(x -> x * 2, xs);
-
                         ...
                         List<Integer> ints = Arrays.asList(1,2,3,4,5);
                         assert doubleAll.apply(ints)
@@ -286,7 +286,6 @@
                         Basics: map function
                         ```java
                         class Lesson3 {
-
                         Function2<Function<Integer, Integer>, List<Integer>, List<Integer>>
                             map = (f, xs) -> {
                                 final int n = xs.size();
@@ -296,7 +295,6 @@
                                 }
                                 return result;
                             };
-
                         Function<List<Integer>, List<Integer>>
                             doubleAll = xs -> map.apply(x -> x * 2, xs);
                         ```
@@ -322,10 +320,8 @@
                                 final List<String> result = new ArrayList<>(n);
                                 ???
                             };
-
                         Function<List<String>, List<String>>
                             getShortMessages = xs -> filter.apply(x -> x.length() <= 20, xs);
-
                         ...
                         List<String> input = Arrays.asList(
                             "Tempor quis esse consequat sunt ea eiusmod.",
@@ -334,7 +330,6 @@
                         );
                         assert getShortMessages.apply(input)
                             === Arrays.asList("12345678901234567890");
-
                         }
                         ```
                     </script>
@@ -357,9 +352,9 @@
                                     }
                                 return result;
                             };
-
                         Function<List<String>, List<String>>
-                            getShortMessages = xs -> filter.apply(x -> x.length() <= 20, xs);
+                            getShortMessages = xs ->
+                                filter.apply(x -> x.length() <= 20, xs);
 
                         ```
                     </script>
@@ -376,7 +371,6 @@
                         Basics: recursion
                         ```java
                         class Lesson5 {
-
                         static <T, U> List<U> mapRecursive(Function<T, U> f, List<T> xs) {
                             if (xs.isEmpty()) {
                                 return Collections.emptyList();
@@ -384,27 +378,21 @@
                                 final int n = xs.size();
                                 final List<T> tail = xs.subList(1, n);
                                 final U mappedHead = f.apply(xs.get(0));
-                                final List<U> mappedTail = mapRecursive(f, tail);
                                 final List<U> result = new ArrayList<>(n);
-                                //
                                 // ???
-                                //
-                                // call mapRecursive on tail
+                                // HINT: call mapRecursive on tail
                             }
                         }
-
-                        <T> List<T> filterRecursive(Function<T, Boolean> f, List<T> xs) {
-                            // ???
-                        }
+                        ```
                     </script>
                 </section>
+
                 <section data-markdown="">
                     <script type="text/template">
-                        ### Lesson 5
+                        ### Lesson 5 (solution)
                         Basics: recursion
                         ```java
                         class Lesson5 {
-
                         static <T, U> List<U> mapRecursive(Function<T, U> f, List<T> xs) {
                             if (xs.isEmpty()) {
                                 return Collections.emptyList();
@@ -413,12 +401,14 @@
                                 final List<T> tail = xs.subList(1, n);
                                 final U mappedHead = f.apply(xs.get(0));
                                 final List<U> mappedTail = mapRecursive(f, tail);
+                                //                         ^^^^^^^^^^^^
                                 final List<U> result = new ArrayList<>(n);
                                 result.add(mappedHead);
                                 result.addAll(mappedTail);
                                 return result;
                             }
                         }
+                        ```
                     </script>
                 </section>
 
