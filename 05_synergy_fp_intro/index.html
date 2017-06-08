@@ -401,7 +401,7 @@
                                 final List<T> tail = xs.subList(1, n);
                                 final U mappedHead = f.apply(xs.get(0));
                                 final List<U> mappedTail = mapRecursive(f, tail);
-                                //                         ^^^^^^^^^^^^
+                                  //                       ^^^^^^^^^^^^
                                 final List<U> result = new ArrayList<>(n);
                                 result.add(mappedHead);
                                 result.addAll(mappedTail);
@@ -437,6 +437,10 @@
 
                     ```
                     </script>
+                </section>
+
+                <section data-background="img/fp-09-red-pill-blue-pill.jpg">
+                    <h1>Questions?</h1>
                 </section>
 
 <!-------------------------------------------------------------------------------------------------->
