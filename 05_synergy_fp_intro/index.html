@@ -107,8 +107,7 @@
                 <section data-markdown="">
                     <script type="text/template" >
                         ### Recursion
-                        <img
-                             src="img/fp-06-recursion.webp"/>
+                        <img src="img/fp-06-recursion.webp"/>
                     </script>
                 </section>
 
@@ -125,8 +124,17 @@
 
                 <section data-markdown="">
                     <script type="text/template">
+                        <img src="img/fp-07-lesson1.jpg" />
+                    </script>
+                </section>
+
+                <section data-markdown="">
+                    <script type="text/template">
                         ### Lesson 1
+                        Basics: hello world
                         ```java
+                        class Lesson1 {
+
                         Function<String, String> upperCaser = str -> {
                             ???
                         };
@@ -134,9 +142,295 @@
                         Function2<String, Integer, String> concatenator = (str, n) -> {
                             ???
                         };
+
+                        ...
+
+                        assert upperCaser.apply("abc") === "ABC";
+                        assert concatenator.apply("abc", 3) === "abcabcabc";
+
+                        }
                         ```
                     </script>
                 </section>
+                <section data-markdown="">
+                    <script type="text/template">
+                        ### Lesson 1 (solution)
+                        Basics: hello world
+                        ```java
+                        class Lesson1 {
+
+                        Function<String, String> upperCaser = str -> {
+                            return str.toUpperCase();
+                        };
+
+                        Function2<String, Integer, String> concatenator = (str, n) -> {
+                            return String.join("", Collections.nCopies(n, str));
+                        };
+                        ...
+
+                        assert upperCaser.apply("abc") === "ABC";
+                        assert concatenator.apply("abc", 3) === "abcabcabc";
+
+                        }
+                        ```
+                    </script>
+                </section>
+
+
+                <section data-markdown="">
+                    <script type="text/template">
+                        <img src="img/fp-07-lesson2.jpg" />
+                    </script>
+                </section>
+                <section data-markdown="">
+                    <script type="text/template">
+                        ### Lesson 2
+                        Basics: pass and return functions
+                        ```java
+                        class Lesson2 {
+
+                        Function2<Function<Void, Void>, Integer, Function<Void, Void>>
+                            repeat = (operation, num) -> ???;
+
+                        Function2<Function<String, String>, Integer, Function<String, String>>
+                            replicateConcat = (func, num) -> ???;
+
+                        ...
+                        Function<String, String> stringFunction = replicateConcat.apply(upperCaser, 3);
+                        assert stringFunction.apply("Hooray!") === "HOORAY!HOORAY!HOORAY!";
+
+                        // Is it really test???
+                        assert repeat.apply(hooray, 3).apply(null) === null;
+
+                        }
+                        ```
+                    </script>
+                </section>
+                <section data-markdown="">
+                    <script type="text/template">
+                        ### Lesson 2 (solution)
+                        Basics: pass and return functions
+                        ```java
+                        class Lesson2 {
+
+                        Function2<Function<Void, Void>, Integer, Function<Void, Void>>
+                            repeat = (operation, num) -> v -> {
+                                for (int i = 0; i < num; i++)
+                                    operation.apply(v);
+                                return null;
+                            };
+
+                        Function2<Function<String, String>, Integer, Function<String, String>>
+                            replicateConcat = (func, num) -> str -> {
+                                return String.join("", Collections.nCopies(num, func.apply(str)));
+                            };
+
+                        }
+                        ```
+                    </script>
+                </section>
+
+
+                <section data-markdown="">
+                    <script type="text/template">
+                        <img src="img/fp-07-lesson3.jpg" />
+                    </script>
+                </section>
+                <section data-markdown="">
+                    <script type="text/template">
+                        ### Lesson 3
+                        Basics: map function
+                        ```java
+                        class Lesson3 {
+
+                        Function2<Function<Integer, Integer>, List<Integer>, List<Integer>>
+                            map = (f, xs) -> {
+                                final int n = xs.size();
+                                final List<Integer> result = new ArrayList<>(n);
+                                // ???
+                            };
+
+                        Function<List<Integer>, List<Integer>>
+                            doubleAll = xs -> map.apply(x -> x * 2, xs);
+
+                        ...
+                        List<Integer> ints = Arrays.asList(1,2,3,4,5);
+                        assert doubleAll.apply(ints)
+                            === Arrays.asList(2,4,6,8,10);
+
+                        }
+                        ```
+                    </script>
+                </section>
+                <section data-markdown="">
+                    <script type="text/template">
+                        ### Lesson 3 (solution)
+                        Basics: map function
+                        ```java
+                        class Lesson3 {
+
+                        Function2<Function<Integer, Integer>, List<Integer>, List<Integer>>
+                            map = (f, xs) -> {
+                                final int n = xs.size();
+                                final List<Integer> result = new ArrayList<>( n );
+                                for (Integer x : xs) {
+                                    result.add(f.apply(x));
+                                }
+                                return result;
+                            };
+
+                        Function<List<Integer>, List<Integer>>
+                            doubleAll = xs -> map.apply(x -> x * 2, xs);
+                        ```
+                    </script>
+                </section>
+
+
+                <section data-markdown="">
+                    <script type="text/template">
+                        <img src="img/fp-07-lesson4.jpg" />
+                    </script>
+                </section>
+                <section data-markdown="">
+                    <script type="text/template">
+                        ### Lesson 4
+                        Basics: filter function
+                        ```java
+                        class Lesson4 {
+
+                        Function2<Function<String, Boolean>, List<String>, List<String>>
+                            filter = (f, xs) -> {
+                                final int n = xs.size();
+                                final List<String> result = new ArrayList<>(n);
+                                ???
+                            };
+
+                        Function<List<String>, List<String>>
+                            getShortMessages = xs -> filter.apply(x -> x.length() <= 20, xs);
+
+                        ...
+                        List<String> input = Arrays.asList(
+                            "Tempor quis esse consequat sunt ea eiusmod.",
+                            "Id culpa ad proident ad nulla laborum incididunt.",
+                            "12345678901234567890"
+                        );
+                        assert getShortMessages.apply(input)
+                            === Arrays.asList("12345678901234567890");
+
+                        }
+                        ```
+                    </script>
+                </section>
+                <section data-markdown="">
+                    <script type="text/template">
+                        ### Lesson 4 (solution)
+                        Basics: filter function
+                        ```java
+                        class Lesson4 {
+
+                        Function2<Function<String, Boolean>, List<String>, List<String>>
+                            filter = (f, xs) -> {
+                                final int n = xs.size();
+                                final List<String> result = new ArrayList<>(n);
+                                    for (String x : xs) {
+                                        if (f.apply(x)) {
+                                            result.add(x);
+                                        }
+                                    }
+                                return result;
+                            };
+
+                        Function<List<String>, List<String>>
+                            getShortMessages = xs -> filter.apply(x -> x.length() <= 20, xs);
+
+                        ```
+                    </script>
+                </section>
+
+                <section data-markdown="">
+                    <script type="text/template">
+                        <img src="img/fp-07-lesson5.jpg" />
+                    </script>
+                </section>
+                <section data-markdown="">
+                    <script type="text/template">
+                        ### Lesson 5
+                        Basics: recursion
+                        ```java
+                        class Lesson5 {
+
+                        static <T, U> List<U> mapRecursive(Function<T, U> f, List<T> xs) {
+                            if (xs.isEmpty()) {
+                                return Collections.emptyList();
+                            } else {
+                                final int n = xs.size();
+                                final List<T> tail = xs.subList(1, n);
+                                final U mappedHead = f.apply(xs.get(0));
+                                final List<U> mappedTail = mapRecursive(f, tail);
+                                final List<U> result = new ArrayList<>(n);
+                                //
+                                // ???
+                                //
+                                // call mapRecursive on tail
+                            }
+                        }
+
+                        <T> List<T> filterRecursive(Function<T, Boolean> f, List<T> xs) {
+                            // ???
+                        }
+                    </script>
+                </section>
+                <section data-markdown="">
+                    <script type="text/template">
+                        ### Lesson 5
+                        Basics: recursion
+                        ```java
+                        class Lesson5 {
+
+                        static <T, U> List<U> mapRecursive(Function<T, U> f, List<T> xs) {
+                            if (xs.isEmpty()) {
+                                return Collections.emptyList();
+                            } else {
+                                final int n = xs.size();
+                                final List<T> tail = xs.subList(1, n);
+                                final U mappedHead = f.apply(xs.get(0));
+                                final List<U> mappedTail = mapRecursive(f, tail);
+                                final List<U> result = new ArrayList<>(n);
+                                result.add(mappedHead);
+                                result.addAll(mappedTail);
+                                return result;
+                            }
+                        }
+                    </script>
+                </section>
+
+                <section data-markdown="">
+                    <script type="text/template">
+                        <img src="img/fp-08-neo-haskell.png" />
+                    </script>
+                </section>
+                <section data-markdown="">
+                    <script type="text/template">
+                    ```haskell
+
+                    map :: (a -> b) -> [a] -> [b]
+                    map _ [] = []
+                    map f (x:xs) = f x : map f xs
+
+                    doubleAll :: [Integer] -> [Integer]
+                    doubleAll xs = map (* 2) xs
+
+                    filter :: (a -> Bool) -> [a] -> [a]
+                    filter _ [] = []
+                    filter f (x:xs) = if f x then x : filter f xs
+
+                    getShortMessages :: [String] -> [String]
+                    getShortMessages xs = filter (length xs <= 20) xs
+
+                    ```
+                    </script>
+                </section>
+
 <!-------------------------------------------------------------------------------------------------->
 			</div>
 		</div>
