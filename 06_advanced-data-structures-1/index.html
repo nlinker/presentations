@@ -45,465 +45,73 @@
         <!-------------------------------------------------------------------------------------------------->
         <section data-markdown="" data-background="img/ads-00-background.png">
             <script type="text/template">
-                ## Advanced data structures
+                # Advanced data structures
                 ## part 1
                 <div class="fragment fade-up info">
-                    <span class="textclass">Nick Linker @nlinker@gmail.com</span>
-                    <img class="imageclass" src="img/fp-01-issart-logo.png"/>
+                    < class="textclass">Nick Linker :: nlinker -> gmail -> com</span>
+                    <img class="imageclass" src="img/ads-01-issart-logo.png"/>
                 </div>
-                nlinker.github.io/presentations/
+                nlinker.github.io/presentations/06_advanced-data-structures-1
             </script>
         </section>
 
         <section data-markdown="">
             <script type="text/template">
-                ### Happy debugging
-                <img src="img/fp-03-debug1.gif"/>
-            </script>
-        </section>
-
-        <section data-markdown>
-            <script type="text/template">
-                ### Happy debugging
-                <img src="img/fp-04-debug2.gif"/>
-            </script>
-        </section>
-
-        <section data-markdown>
-            <script type="text/template">
-                ### About side effects
-                ```java
-                long getLength(String str) {
-                return str.length();
-                }
-
-                long getFileLength(String path) {
-                return new File(path).length();
-                }
-                ```
-                They have the same Java type.
-
-                However, these functions are not interchangeable!
-            </script>
-        </section>
-
-        <section data-markdown="">
-            ### What do we know (pros)
-            - Functions are first-class values
-            - Functions are pure
-            - All data is immutable
-            - Easier to debug
-            - Easier to test
-            - Easier to parallelize
-            - Recursion over loops
-        </section>
-
-        <section data-markdown="">
-            ### What do we know (cons)
-            - Harder to learn (*)
-            - Harder to express some algorithms
-            - Harder to make it high performance
-            - Requires explicitly treat side effects
-            - Explicitly make IO layer
-            - Often requires GC
-        </section>
-
-        <section data-markdown="">
-            <script type="text/template">
-                ### Functions
-                <img height="500px" width="500px"
-                     src="img/fp-02-morpheus-what-if.jpg"/>
+                ### Classification
+                1. _Ephemeral_ - changes to DS destroy all past info
+                2. _Partial persistence_ - changes to most recent version, query to all past versions
+                3. _Full persistence_ - changes to any version allowed, version tree
+                4. _Confluent persistence_ - versions form arbitrary DAG
+                5. _Functional_ - data structure immutable (arbitrary DAG?)
             </script>
         </section>
 
         <section data-markdown="">
             <script type="text/template">
-                ### Immutable data
-                <img height="335" width="568"
-                     src="img/fp-05-immutability.png"/>
+                ### Trie
+                <img height="420px" src="img/ads-02-trie.png"/>
+                `{aaac,aab,ab,abb,abba}`
             </script>
         </section>
 
         <section data-markdown="">
             <script type="text/template">
-                ### Recursion
-                <img src="img/fp-06-recursion.webp"/>
+                ### Compact trie
+                <img src="img/ads-03-compact-trie.png"/>
             </script>
         </section>
 
         <section data-markdown="">
             <script type="text/template">
-                ### Practice
-                ```bash
-                $ git clone https://github.com/nlinker/synergy-fp-intro
-                $ cd synergy-fp-intro
-                $ mvn test
-                ```
+                ### Compact trie, DAWG
+                `{aaa, aba, bbc, cbc, cc}`
+                <img src="img/ads-04-dawg.png"/>
             </script>
         </section>
 
         <section data-markdown="">
             <script type="text/template">
-                <img src="img/fp-07-lesson1.jpg"/>
-            </script>
-        </section>
+                ### PATRICIA trie
+                A = [`a`=00, `b`=01, `c`=10, `d`=11]
+                dad = 110011, dab = 110001, cab = 100001
+                root ->
 
-        <section data-markdown="">
-            <script type="text/template">
-                ### Lesson 1
-                Basics: hello world
-                ```java
-                class Lesson1 {
-
-                Function
-                <String, String> upperCaser = str -> {
-                ???
-                };
-
-                Function2
-                <String, Integer, String> concatenator = (str, n) -> {
-                ???
-                };
-
-                ...
-
-                assert upperCaser.apply("abc") === "ABC";
-                assert concatenator.apply("abc", 3) === "abcabcabc";
-
-                }
-                ```
-            </script>
-        </section>
-        <section data-markdown="">
-            <script type="text/template">
-                ### Lesson 1 (solution)
-                Basics: hello world
-                ```java
-                class Lesson1 {
-
-                Function
-                <String, String> upperCaser = str -> {
-                return str.toUpperCase();
-                };
-
-                Function2
-                <String, Integer, String> concatenator = (str, n) -> {
-                return String.join("", Collections.nCopies(n, str));
-                };
-                ...
-
-                assert upperCaser.apply("abc") === "ABC";
-                assert concatenator.apply("abc", 3) === "abcabcabc";
-
-                }
-                ```
+                <img src="img/ads-03-compact-trie.png"/>
             </script>
         </section>
 
 
         <section data-markdown="">
             <script type="text/template">
-                <img src="img/fp-07-lesson2.jpg"/>
-            </script>
-        </section>
-        <section data-markdown="">
-            <script type="text/template">
-                ### Lesson 2
-                Basics: pass and return functions
-                ```java
-                class Lesson2 {
-
-                Function2
-                <Function
-                <Void, Void>, Integer, Function
-                <Void, Void>>
-                repeat = (operation, num) -> ???;
-
-                Function2
-                <Function
-                <String, String>, Integer, Function
-                <String, String>>
-                replicateConcat = (func, num) -> ???;
-
-                ...
-                Function
-                <String, String> stringFunction
-                = replicateConcat.apply(upperCaser, 3);
-                assert stringFunction.apply("Hooray!")
-                === "HOORAY!HOORAY!HOORAY!";
-
-                // Is it really test???
-                assert repeat.apply(hooray, 3).apply(null) === null;
-
-                }
-                ```
-            </script>
-        </section>
-        <section data-markdown="">
-            <script type="text/template">
-                ### Lesson 2 (solution)
-                Basics: pass and return functions
-                ```java
-                class Lesson2 {
-
-                Function2
-                <Function
-                <Void, Void>, Integer, Function
-                <Void, Void>>
-                repeat = (operation, num) -> v -> {
-                for (int i = 0; i < num; i++)
-                operation.apply(v);
-                return null;
-                };
-
-                Function2
-                <Function
-                <String, String>, Integer, Function
-                <String, String>>
-                replicateConcat = (func, num) -> str -> {
-                return String.join("", Collections.nCopies(num, func.apply(str)));
-                };
-
-                }
-                ```
-            </script>
-        </section>
-
-
-        <section data-markdown="">
-            <script type="text/template">
-                <img src="img/fp-07-lesson3.jpg"/>
-            </script>
-        </section>
-        <section data-markdown="">
-            <script type="text/template">
-                ### Lesson 3
-                Basics: map function
-                ```java
-                class Lesson3 {
-
-                Function2
-                <Function
-                <Integer, Integer>, List
-                <Integer>, List
-                    <Integer>>
-                        map = (f, xs) -> {
-                        final int n = xs.size();
-                        final List
-                        <Integer> result = new ArrayList<>(n);
-                            // ???
-                            };
-                            Function
-                            <List
-                            <Integer>, List
-                                <Integer>>
-                                    doubleAll = xs -> map.apply(x -> x * 2, xs);
-                                    ...
-                                    List
-                                    <Integer> ints = Arrays.asList(1,2,3,4,5);
-                                        assert doubleAll.apply(ints)
-                                        === Arrays.asList(2,4,6,8,10);
-
-                                        }
-                                        ```
-            </script>
-        </section>
-        <section data-markdown="">
-            <script type="text/template">
-                ### Lesson 3 (solution)
-                Basics: map function
-                ```java
-                class Lesson3 {
-                Function2
-                <Function
-                <Integer, Integer>, List
-                <Integer>, List
-                    <Integer>>
-                        map = (f, xs) -> {
-                        final int n = xs.size();
-                        final List
-                        <Integer> result = new ArrayList<>( n );
-                            for (Integer x : xs) {
-                            result.add(f.apply(x));
-                            }
-                            return result;
-                            };
-                            Function
-                            <List
-                            <Integer>, List
-                                <Integer>>
-                                    doubleAll = xs -> map.apply(x -> x * 2, xs);
-                                    ```
-            </script>
-        </section>
-
-
-        <section data-markdown="">
-            <script type="text/template">
-                <img src="img/fp-07-lesson4.jpg"/>
-            </script>
-        </section>
-        <section data-markdown="">
-            <script type="text/template">
-                ### Lesson 4
-                Basics: filter function
-                ```java
-                class Lesson4 {
-
-                Function2
-                <Function
-                <String, Boolean>, List
-                <String>, List
-                    <String>>
-                        filter = (f, xs) -> {
-                        final int n = xs.size();
-                        final List
-                        <String> result = new ArrayList<>(n);
-                            ???
-                            };
-                            Function
-                            <List
-                            <String>, List
-                                <String>>
-                                    getShortMessages = xs -> filter.apply(x -> x.length() <= 20, xs);
-                                    ...
-                                    List
-                                    <String> input = Arrays.asList(
-                                        "Tempor quis esse consequat sunt ea eiusmod.",
-                                        "Id culpa ad proident ad nulla laborum incididunt.",
-                                        "12345678901234567890"
-                                        );
-                                        assert getShortMessages.apply(input)
-                                        === Arrays.asList("12345678901234567890");
-                                        }
-                                        ```
-            </script>
-        </section>
-        <section data-markdown="">
-            <script type="text/template">
-                ### Lesson 4 (solution)
-                Basics: filter function
-                ```java
-                class Lesson4 {
-
-                Function2
-                <Function
-                <String, Boolean>, List
-                <String>, List
-                    <String>>
-                        filter = (f, xs) -> {
-                        final int n = xs.size();
-                        final List
-                        <String> result = new ArrayList<>(n);
-                            for (String x : xs) {
-                            if (f.apply(x)) {
-                            result.add(x);
-                            }
-                            }
-                            return result;
-                            };
-                            Function
-                            <List
-                            <String>, List
-                                <String>>
-                                    getShortMessages = xs ->
-                                    filter.apply(x -> x.length() <= 20, xs);
-
-                                    ```
+                ### Compact trie
+                <img src="img/ads-03-compact-trie.png"/>
             </script>
         </section>
 
         <section data-markdown="">
-            <script type="text/template">
-                <img src="img/fp-07-lesson5.jpg"/>
+            <script type="text/template" >
+                <img src="img/ads-09-philoceraptor.png"/>
             </script>
-        </section>
-        <section data-markdown="">
-            <script type="text/template">
-                ### Lesson 5
-                Basics: recursion
-                ```java
-                class Lesson5 {
-                static
-                <T, U> List<U> mapRecursive(Function
-                    <T
-                    , U> f, List
-                    <T> xs) {
-                        if (xs.isEmpty()) {
-                        return Collections.emptyList();
-                        } else {
-                        final int n = xs.size();
-                        final List
-                        <T> tail = xs.subList(1, n);
-                            final U mappedHead = f.apply(xs.get(0));
-                            final List<U> result = new ArrayList<>(n);
-                                // ???
-                                // HINT: call mapRecursive on tail
-                                }
-                                }
-                                ```
-            </script>
-        </section>
-
-        <section data-markdown="">
-            <script type="text/template">
-                ### Lesson 5 (solution)
-                Basics: recursion
-                ```java
-                class Lesson5 {
-                static
-                <T, U> List<U> mapRecursive(Function
-                    <T
-                    , U> f, List
-                    <T> xs) {
-                        if (xs.isEmpty()) {
-                        return Collections.emptyList();
-                        } else {
-                        final int n = xs.size();
-                        final List
-                        <T> tail = xs.subList(1, n);
-                            final U mappedHead = f.apply(xs.get(0));
-                            final List<U> mappedTail = mapRecursive(f, tail);
-                                // ^^^^^^^^^^^^
-                                final List<U> result = new ArrayList<>(n);
-                                    result.add(mappedHead);
-                                    result.addAll(mappedTail);
-                                    return result;
-                                    }
-                                    }
-                                    ```
-            </script>
-        </section>
-
-        <section data-markdown="">
-            <script type="text/template">
-                <img src="img/fp-08-neo-haskell.png"/>
-            </script>
-        </section>
-        <section data-markdown="">
-            <script type="text/template">
-                ```haskell
-
-                map :: (a -> b) -> [a] -> [b]
-                map _ [] = []
-                map f (x:xs) = f x : map f xs
-
-                doubleAll :: [Integer] -> [Integer]
-                doubleAll xs = map (* 2) xs
-
-                filter :: (a -> Bool) -> [a] -> [a]
-                filter _ [] = []
-                filter f (x:xs) = if f x then x : filter f xs
-
-                getShortMessages :: [String] -> [String]
-                getShortMessages xs = filter (length xs <= 20) xs
-
-                ```
-            </script>
-        </section>
-
-        <section data-background="img/fp-09-red-pill-blue-pill.jpg">
-            <h1>Questions?</h1>
         </section>
 
         <!-------------------------------------------------------------------------------------------------->

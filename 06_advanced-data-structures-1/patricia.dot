@@ -1,0 +1,5 @@
+digraph G {
+  rankdir=LR
+  a->ab1->ab2->b
+  a->b[label=between]
+}
