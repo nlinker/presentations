@@ -1,0 +1,29 @@
+digraph tst {
+  rankdir=UD
+  ordering=out
+  inv0 [shape=none,label=""]
+  inv1 [shape=none,label=""]
+  inv2 [shape=none,label=""]
+  inv3 [shape=none,label=""]
+  inv4 [shape=none,label=""]
+  t1 [label="t"]
+  t2 [label="t"]
+  e1 [label="e"]
+  e2 [label="e"]
+  u1 [label="u"]
+  u2 [label="u"]
+  s1 [label="s"]
+  s2 [label="s"]
+  c -> a -> t1 -> s1
+  t1 -> inv0
+  t1 -> inv1
+  u1 -> p
+  c -> u1 -> t2 -> e1
+  u1 -> inv4 [shape=invis]
+  t2 -> inv2
+  c -> h -> e2
+  h -> u2 -> i
+  u2 -> s2
+  u2 -> inv3
+
+}

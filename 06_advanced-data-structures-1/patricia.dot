@@ -1,5 +1,15 @@
 digraph G {
-  rankdir=LR
-  a->ab1->ab2->b
-  a->b[label=between]
+  rankdir=UD
+  root [shape=box,label="root"];
+  node1 [label="*"];
+  node2 [label="*"];
+  node3 [label="*"];
+  node4 [label="*"];
+  node5 [label="*"];
+
+  root -> node1 [label="1"]
+  node1 -> node2 [label="00001"]
+  node1 -> node3 [label="100"]
+  node3 -> node4 [label="01"]
+  node3 -> node5 [label="11"]
 }

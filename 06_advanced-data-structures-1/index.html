@@ -48,10 +48,10 @@
                 # Advanced data structures
                 ## part 1
                 <div class="fragment fade-up info">
-                    < class="textclass">Nick Linker :: nlinker -> gmail -> com</span>
+                    <span class="textclass">Nick Linker</span>
                     <img class="imageclass" src="img/ads-01-issart-logo.png"/>
                 </div>
-                nlinker.github.io/presentations/06_advanced-data-structures-1
+                <!--nlinker.github.io/presentations/06_advanced-data-structures-1-->
             </script>
         </section>
 
@@ -63,6 +63,20 @@
                 3. _Full persistence_ - changes to any version allowed, version tree
                 4. _Confluent persistence_ - versions form arbitrary DAG
                 5. _Functional_ - data structure immutable (arbitrary DAG?)
+
+                Q: Is it true 5 => 2, 3, 4?
+            </script>
+        </section>
+
+        <section data-markdown="">
+            <script type="text/template">
+                ### Terminology notes
+                1. Trie [`trai]
+                2. Prefix tree, suffix tree, Patricia tree
+                Practical Algorithm to Retrieve Information Coded in Alphanumeric (c) Donald R. Morrison
+                3. Radix tree
+                4. Double-array trie
+                5. HAT-trie (also array-based, cache friendly)
             </script>
         </section>
 
@@ -78,6 +92,7 @@
             <script type="text/template">
                 ### Compact trie
                 <img src="img/ads-03-compact-trie.png"/>
+                Q: Is the shape depends on the insertion order?
             </script>
         </section>
 
@@ -91,26 +106,147 @@
 
         <section data-markdown="">
             <script type="text/template">
-                ### PATRICIA trie
-                A = [`a`=00, `b`=01, `c`=10, `d`=11]
-                dad = 110011, dab = 110001, cab = 100001
-                root ->
+                ### Patricia tree
+                ```
+                A = [a=00, b=01, c=10, d=11]
+                {cab = 100001, dab = 110001, dad = 110011}
+                ```
+                <img src="img/ads-05-patricia.png"/>
+                <img src="img/ads-05-patricia-dag.png"/>
 
-                <img src="img/ads-03-compact-trie.png"/>
+                [Patricia Trie Template Class](https://www.codeproject.com/Articles/9497/Patricia-Trie-Template-Class)
             </script>
         </section>
 
+        <section data-markdown="">
+            <script type="text/template">
+                ### Ternary search tree
+                `{cute, at, as, he, cats, cup, i, us}`
+                ```
+                Ordering = LT | EQ | GT
+                ```
+                <img src="img/ads-06-tst.png"/>
+            </script>
+        </section>
 
         <section data-markdown="">
             <script type="text/template">
-                ### Compact trie
-                <img src="img/ads-03-compact-trie.png"/>
+                ### Double-array trie, step 1
+                <img src="img/ads-07-the-example-1.png"/>
+            </script>
+        </section>
+
+        <section data-markdown="">
+            <script type="text/template">
+                ### Double-array trie, step 2
+                Trie as DFA, transition table
+
+                |    | #  | a  | b  | c |
+                |----|----|----|----|---|
+                | 1  |    | 3  |    |   |
+                | 2  |    |    |    |   |
+                | 3  |    | 4  | 5  |   |
+                | 4  |    | 6  | 7  |   |
+                | 5  | 8  |    | 10 |   |
+                | 6  |    |    |    | 9 |
+                | 7  | 13 |    |    |   |
+                | 8  |    |    |    |   |
+                | 9  | 2  |    |    |   |
+                | 10 | 11 | 12 |    |   |
+                | 11 |    |    |    |   |
+                | 12 | 14 |    |    |   |
+                | 13 |    |    |    |   |
+                | 14 |    |    |    |   |
+            </script>
+        </section>
+
+        <section data-markdown="">
+            <script type="text/template">
+                ### Double-array trie, step 3
+                ```java
+                check[base[s] + c] = s
+                next[base[s] + c] = t
+                if (check[base[s] + c] == s) // walking
+                    then next_node = next[base[s] + c]
+                    else failure()
+                ```
+                <img src="img/ads-07-triple-array.png"/>
+                <img src="img/ads-07-the-code.png">
+            </script>
+        </section>
+
+        <section data-markdown="">
+            <script type="text/template">
+                ### Double-array trie 4
+                Get rid of next
+                ```java
+                check[base[s] + c] = s
+                base[s] + c = t
+                if (check[base[s] + c] = s) // walking
+                    then next_node = base[s] + c
+                    else failure()
+                ```
+                <img src="img/ads-07-triple-to-double-array.png"/>
+                <img src="img/ads-07-the-code.png">
+            </script>
+        </section>
+
+        <section data-markdown="">
+            <script type="text/template">
+                ### Double-array trie, Example
+                <img src="img/ads-07-the-example-1.png"/>
+            </script>
+        </section>
+
+        <section data-markdown="">
+            <script type="text/template">
+                ### Double-array trie, Example
+                ```java
+                check[base[s] + c] = s
+                base[s] + c = t
+                if (check[base[s] + c] = s) // walking
+                    then next_node = base[s] + c
+                    else failure()
+                ```
+                <img src="img/ads-07-the-code.png">
+                <img src="img/ads-07-the-example-2.png"/>
+            </script>
+        </section>
+
+        <section data-markdown="">
+            <script type="text/template">
+                ### Task
+                Let's make auto-completion
+                <img src="img/ads-08-auto-completion-nike.png">
+            </script>
+        </section>
+
+        <section data-markdown="">
+            <script type="text/template">
+                ### Task
+                Let's make auto-completion, requirements
+                <div class="fragment fade-up">
+                    <span>1. alphabetical order</span>
+                </div>
+                <div class="fragment fade-up">
+                    <span>2. plus at most 10 items</span>
+                </div>
+                <div class="fragment fade-up">
+                    <span>3. plus sorted by frequency (forget 1)</span>
+                </div>
+                <div class="fragment fade-up">
+                    <span>4. plus suggestions start from any word</span>
+                    <img src="img/ads-09-suggestions-task.png"/>
+                </div>
+                <div class="fragment fade-up">
+                    <span>5. plus spelling correction</span>
+                </div>
             </script>
         </section>
 
         <section data-markdown="">
             <script type="text/template" >
-                <img src="img/ads-09-philoceraptor.png"/>
+                <img src="img/ads-10-philoceraptor.png"/>
             </script>
         </section>
 
