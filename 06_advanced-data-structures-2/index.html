@@ -59,198 +59,109 @@
             <script type="text/template">
                 ### Functional data structures
                 0. Motivation
-                1. Immutable list
+                1. Immutable stack
+                3. Immutable queue/deque
                 2. Immutable tree
-                3. Immutable queue
-                4. Immutable deque
                 5. Immutable hashmap
                 6. Zipper
-
             </script>
         </section>
 
         <section data-markdown="">
             <script type="text/template">
-                ### Terminology notes
-                1. Trie [`trai]
-                2. Prefix tree, suffix tree, Patricia tree<br />
-                _Practical Algorithm to Retrieve Information Coded in Alphanumeric, Donald R. Morrison, 1968_
-                3. Radix tree
-                4. Double-array trie
-                5. HAT-trie (also array-based, cache friendly)
+                ### Motivation
+                1. Compositional, easier to reason about
+                2. Easier to test
+                3. Time-travel
+                4. Nice for concurrency
+                5. Some operations are faster (e.g. detect changes)
             </script>
         </section>
 
         <section data-markdown="">
             <script type="text/template">
-                ### Trie
-                <img height="420px" src="img/ads-02-trie.png"/>
-                `{aaac,aab,ab,abb,abba}`
-            </script>
-        </section>
-
-        <section data-markdown="">
-            <script type="text/template">
-                ### Compact trie
-                <img src="img/ads-03-compact-trie.png"/>
-                Q: Is the shape depends on the insertion order?
-            </script>
-        </section>
-
-        <section data-markdown="">
-            <script type="text/template">
-                ### Compact trie, DAWG
-                `{aaa, aba, bbc, cbc, cc}`
-                <img src="img/ads-04-dawg.png"/>
-            </script>
-        </section>
-
-        <section data-markdown="">
-            <script type="text/template">
-                ### Patricia tree
+                ### Immutable stack, 0
                 ```
-                A = [a=00, b=01, c=10, d=11]
-                {cab = 100001, dab = 110001, dad = 110011}
+                val x0 = ...
+                val x1 = x0.add('d')
+                val x2 = x1.add('e')
+                val x3 = x1.add("e")
                 ```
-                <img src="img/ads-05-patricia.png"/>
-                <img src="img/ads-05-patricia-dag.png"/>
-
-                [Patricia Trie Template Class](https://www.codeproject.com/Articles/9497/Patricia-Trie-Template-Class)
             </script>
         </section>
 
         <section data-markdown="">
             <script type="text/template">
-                ### Ternary search tree
-                `{cute, at, as, he, cats, cup, i, us}`
+                ### Immutable stack, 1
                 ```
-                Ordering = LT | EQ | GT
+                val x0 = ...
+                val x1 = x0.add("d")
+                val x2 = x0.add("e")
+                val x3 = x2.add("f")
+                val x4 = x1.remove("c")
                 ```
-                <img src="img/ads-06-tst.png"/>
+                <img height="400" src="img/ads-02-stack-1.png"/>
             </script>
         </section>
 
         <section data-markdown="">
             <script type="text/template">
-                ### Double-array trie, step 1
-                <img src="img/ads-07-the-example-1.png"/>
-            </script>
-        </section>
-
-        <section data-markdown="">
-            <script type="text/template">
-                ### Double-array trie, step 2
-                Trie as DFA, transition table
-
-                |    | #  | a  | b  | c |
-                |----|----|----|----|---|
-                | 1  |    | 3  |    |   |
-                | 2  |    |    |    |   |
-                | 3  |    | 4  | 5  |   |
-                | 4  |    | 6  | 7  |   |
-                | 5  | 8  |    | 10 |   |
-                | 6  |    |    |    | 9 |
-                | 7  | 13 |    |    |   |
-                | 8  |    |    |    |   |
-                | 9  | 2  |    |    |   |
-                | 10 | 11 | 12 |    |   |
-                | 11 |    |    |    |   |
-                | 12 | 14 |    |    |   |
-                | 13 |    |    |    |   |
-                | 14 |    |    |    |   |
-            </script>
-        </section>
-
-        <section data-markdown="">
-            <script type="text/template">
-                ### Double-array trie, step 3
-                ```java
-                check[base[s] + c] = s
-                next[base[s] + c] = t
-                if (check[base[s] + c] == s) // walking
-                    then next_node = next[base[s] + c]
-                    else failure()
+                ### Immutable stack, 2
                 ```
-                <img src="img/ads-07-triple-array.png"/>
-                <img src="img/ads-07-the-code.png">
-            </script>
-        </section>
-
-        <section data-markdown="">
-            <script type="text/template">
-                ### Double-array trie 4
-                Get rid of next
-                ```java
-                check[base[s] + c] = s
-                base[s] + c = t
-                if (check[base[s] + c] = s) // walking
-                    then next_node = base[s] + c
-                    else failure()
+                val x0 = ...
+                val x1 = x0.add("d")
+                val x2 = x0.add("e")
+                val x3 = x2.add("f")
+                val x4 = x1.remove("c")
                 ```
-                <img src="img/ads-07-triple-to-double-array.png"/>
-                <img src="img/ads-07-the-code.png">
+                <img height="400" src="img/ads-02-stack-2.png"/>
             </script>
         </section>
 
         <section data-markdown="">
             <script type="text/template">
-                ### Double-array trie, Example
-                <img src="img/ads-07-the-example-1.png"/>
-            </script>
-        </section>
-
-        <section data-markdown="">
-            <script type="text/template">
-                ### Double-array trie, Example
-                ```java
-                check[base[s] + c] = s
-                base[s] + c = t
-                if (check[base[s] + c] = s) // walking
-                    then next_node = base[s] + c
-                    else failure()
+                ### Immutable stack, 3
                 ```
-                <img src="img/ads-07-the-code.png">
-                <img src="img/ads-07-the-example-2.png"/>
+                val x0 = ...
+                val x1 = x0.add("d")
+                val x2 = x0.add("e")
+                val x3 = x2.add("f")
+                val x4 = x1.remove("c")
+                ```
+                <img height="400" src="img/ads-02-stack-3.png"/>
             </script>
         </section>
 
         <section data-markdown="">
             <script type="text/template">
-                ### Task
-                Let's make auto-completion
-                <img src="img/ads-08-auto-completion-nike.png">
+                ### Immutable stack, 4
+                ```
+                val x0 = ...
+                val x1 = x0.add("d")
+                val x2 = x0.add("e")
+                val x3 = x2.add("f")
+                val x4 = x1.remove("c")
+                ```
+                <img height="400" src="img/ads-02-stack-4.png"/>
             </script>
         </section>
 
-        <section data-markdown="">
-            <script type="text/template">
-                ### Task
-                Let's make auto-completion, requirements
-                <div class="fragment fade-up">
-                    <span>1. alphabetical order</span>
-                </div>
-                <div class="fragment fade-up">
-                    <span>2. plus at most 10 items</span>
-                </div>
-                <div class="fragment fade-up">
-                    <span>3. plus sorted by frequency (forget 1)</span>
-                </div>
-                <div class="fragment fade-up">
-                    <span>4. plus suggestions start from any word</span>
-                    <img src="img/ads-09-suggestions-task.png"/>
-                </div>
-                <div class="fragment fade-up">
-                    <span>5. plus spelling correction</span>
-                </div>
-            </script>
-        </section>
+        <!--<div class="fragment fade-up fade-out">-->
+            <!--<img src="img/ads-02-stack-2.png"/>-->
+        <!--</div>-->
+        <!--<div class="fragment fade-up fade-out">-->
+            <!--<img src="img/ads-02-stack-3.png"/>-->
+        <!--</div>-->
+        <!--<div class="fragment fade-up fade-out">-->
+            <!--<img src="img/ads-02-stack-4.png"/>-->
+        <!--</div>-->
 
-        <section data-markdown="">
-            ### Questions?
-            <script type="text/template" >
-                <img src="img/ads-19-philoceraptor.jpg"/>
-            </script>
-        </section>
+        <!--<section data-markdown="">-->
+            <!--<script type="text/template" >-->
+                <!--### Questions?-->
+                <!--<img src="img/ads-19-philoceraptor.jpg"/>-->
+            <!--</script>-->
+        <!--</section>-->
 
         <!-------------------------------------------------------------------------------------------------->
     </div>
