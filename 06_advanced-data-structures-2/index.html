@@ -79,7 +79,13 @@
             </script>
         </section>
 
+
         <section data-markdown="">
+            <script type="text/template">
+                ## Functional stack
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
             <script type="text/template">
                 ### Functional stack, 0
                 ```
@@ -91,7 +97,6 @@
                 ```
             </script>
         </section>
-
         <section data-markdown="" data-transition="none">
             <script type="text/template">
                 ### Functional stack, 1
@@ -151,15 +156,19 @@
 
         <section data-markdown="">
             <script type="text/template">
+                ## Functional deque
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
                 ### Functional deque, 0
                 1. putFirst, putLast
                 2. takeFirst, takeLast
                 3. also concat, size, map/filter/fold
                 4. aka `BankersQueue` (from Okasaki)
-
             </script>
         </section>
-        <section data-markdown="">
+        <section data-markdown="" data-transition="none">
             <script type="text/template">
                 ### Functional deque, 1
                 1. putFirst, putLast
@@ -235,6 +244,11 @@
 
         <section data-markdown="">
             <script type="text/template">
+                ## Functional trees
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
                 ### Functional trees, 1
                 1. Share as much as possible
                 2. Path copying
@@ -272,6 +286,11 @@
 
 
         <section data-markdown="">
+            <script type="text/template">
+                ## Functional hash map
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
             <script type="text/template">
                 ### Functional hash map, 1
                 1. Persistent bit-partitioned hash trie
@@ -319,37 +338,85 @@
             </script>
         </section>
 
+        <section data-markdown="">
+            <script type="text/template">
+                ## Functional red-black tree
+            </script>
+        </section>
         <section data-markdown="" data-transition="none">
             <script type="text/template">
-                ### Functional RB tree, 1
+                ### Functional RB tree, definition
 
-                1. No red node has red parents
+                1. No red node has red parent
                 2. Every root-to-leaf path contains the same number of black nodes
                 3. New inserted node is red
                 4. Root is black
 
             </script>
         </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### Functional RB tree, insert
 
+                ```haskell
+                data Color = R | B
+                data Tree a = E | T Color (Tree a) a (Tree a)
 
+                insert :: Ord a => a -> Tree a -> Tree a
+                insert x t =
+                  let T _ a y b = ins t in
+                  T B a y b
+                  where
+                    ins E          =  T R E x E
+                    ins s@(T col a y b)
+                      | x < y      =  balance col (ins a) y b
+                      | x > y      =  balance col a y (ins b)
+                      | otherwise  =  s
+                ```
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### Functional RB tree, balance
 
+                ```haskell
+                balance :: Color -> Tree a -> a -> Tree a -> Tree a
+                balance B (T R (T R a x b) y c ) z d = T R (T B a x b) y (T B c z d)
+                balance B (T R a x (T R b y c)) z d  = T R (T B a x b) y (T B c z d)
+                balance B a x (T R (T R b y c) z d ) = T R (T B a x b) y (T B c z d)
+                balance B a x (T R b y (T R c z d))  = T R (T B a x b) y (T B c z d)
+                balance col a x b = T col a x b
+                ```
+                <img height="350" src="img/ads-06-red-black-tree.png"/>
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### Functional RB tree, deletion
 
-        <!--<div class="fragment fade-up fade-out">-->
-            <!--<img src="img/ads-02-stack-2.png"/>-->
-        <!--</div>-->
-        <!--<div class="fragment fade-up fade-out">-->
-            <!--<img src="img/ads-02-stack-3.png"/>-->
-        <!--</div>-->
-        <!--<div class="fragment fade-up fade-out">-->
-            <!--<img src="img/ads-02-stack-4.png"/>-->
-        <!--</div>-->
+                What about deletion?
 
-        <!--<section data-markdown="">-->
-            <!--<script type="text/template" >-->
-                <!--### Questions?-->
-                <!--<img src="img/ads-19-philoceraptor.jpg"/>-->
-            <!--</script>-->
-        <!--</section>-->
+                - In Okasaki book the deletion is left for the reader :-)
+                - And _it is_ hard!
+                - [The missing method: Deleting from Okasaki's red-black trees](http://matt.might.net/articles/red-black-delete/)
+
+                <img height="250" src="img/ads-06-red-black-tree-deletion.png" />
+            </script>
+        </section>
+
+        <section data-markdown="">
+            <script type="text/template">
+                ### Trees everywhere
+                <img height="500" src="img/ads-18-persistent-tree-lul.png" />
+            </script>
+        </section>
+
+        <section data-markdown="">
+            <script type="text/template" >
+                ### Questions?
+                <img src="img/ads-19-philoceraptor.jpg"/>
+            </script>
+        </section>
 
         <!-------------------------------------------------------------------------------------------------->
     </div>
