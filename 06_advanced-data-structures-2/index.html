@@ -59,11 +59,10 @@
             <script type="text/template">
                 ### Functional data structures
                 0. Motivation
-                1. Immutable stack
-                3. Immutable queue/deque
-                2. Immutable tree
-                5. Immutable hashmap
-                6. Zipper
+                1. Functional stack
+                2. Functional queue/deque
+                3. Functional tree
+                4. Functional hash map
             </script>
         </section>
 
@@ -75,76 +74,225 @@
                 3. Time-travel
                 4. Nice for concurrency
                 5. Some operations are faster (e.g. detect changes)
+
+                _Chris Okasaki "Purely functional data structures"_
             </script>
         </section>
 
         <section data-markdown="">
             <script type="text/template">
-                ### Immutable stack, 0
+                ### Functional stack, 0
                 ```
-                val x0 = ...
-                val x1 = x0.add('d')
-                val x2 = x1.add('e')
-                val x3 = x1.add("e")
+                let x0 = ["c", "b", "a"]
+                let x1 = "d" : x0
+                let x2 = "e" : x0
+                let x3 = "f" : x2
+                let x4 = delete "c" x1
                 ```
             </script>
         </section>
 
-        <section data-markdown="">
+        <section data-markdown="" data-transition="none">
             <script type="text/template">
-                ### Immutable stack, 1
+                ### Functional stack, 1
                 ```
-                val x0 = ...
-                val x1 = x0.add("d")
-                val x2 = x0.add("e")
-                val x3 = x2.add("f")
-                val x4 = x1.remove("c")
+                let x0 = ["c", "b", "a"]
+                let x1 = "d" : x0
+                let x2 = "e" : x0
+                let x3 = "f" : x2
+                let x4 = delete "c" x1
                 ```
                 <img height="400" src="img/ads-02-stack-1.png"/>
             </script>
         </section>
 
-        <section data-markdown="">
+        <section data-markdown="" data-transition="none">
             <script type="text/template">
-                ### Immutable stack, 2
+                ### Functional stack, 2
                 ```
-                val x0 = ...
-                val x1 = x0.add("d")
-                val x2 = x0.add("e")
-                val x3 = x2.add("f")
-                val x4 = x1.remove("c")
+                let x0 = ["c", "b", "a"]
+                let x1 = "d" : x0
+                let x2 = "e" : x0
+                let x3 = "f" : x2
+                let x4 = delete "c" x1
                 ```
                 <img height="400" src="img/ads-02-stack-2.png"/>
             </script>
         </section>
 
-        <section data-markdown="">
+        <section data-markdown="" data-transition="none">
             <script type="text/template">
-                ### Immutable stack, 3
+                ### Functional stack, 3
                 ```
-                val x0 = ...
-                val x1 = x0.add("d")
-                val x2 = x0.add("e")
-                val x3 = x2.add("f")
-                val x4 = x1.remove("c")
+                let x0 = ["c", "b", "a"]
+                let x1 = "d" : x0
+                let x2 = "e" : x0
+                let x3 = "f" : x2
+                let x4 = delete "c" x1
                 ```
                 <img height="400" src="img/ads-02-stack-3.png"/>
             </script>
         </section>
 
-        <section data-markdown="">
+        <section data-markdown="" data-transition="none">
             <script type="text/template">
-                ### Immutable stack, 4
+                ### Functional stack, 4
                 ```
-                val x0 = ...
-                val x1 = x0.add("d")
-                val x2 = x0.add("e")
-                val x3 = x2.add("f")
-                val x4 = x1.remove("c")
+                let x0 = ["c", "b", "a"]
+                let x1 = "d" : x0
+                let x2 = "e" : x0
+                let x3 = "f" : x2
+                let x4 = delete "c" x1
                 ```
                 <img height="400" src="img/ads-02-stack-4.png"/>
             </script>
         </section>
+
+
+        <section data-markdown="">
+            <script type="text/template">
+                ### Functional deque, 0
+                1. putFirst, putLast
+                2. takeFirst, takeLast
+                3. also concat, size, map/filter/fold
+                4. aka `BankersQueue` (from Okasaki)
+
+            </script>
+        </section>
+        <section data-markdown="">
+            <script type="text/template">
+                ### Functional deque, 1
+                1. putFirst, putLast
+                2. takeFirst, takeLast
+
+                <img height="400" src="img/ads-03-deque-1.png"/>
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### Functional deque, 2
+                1. putFirst, putLast
+                2. takeFirst, takeLast
+
+                <img height="400" src="img/ads-03-deque-2.png"/>
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### Functional deque, 3
+                1. putFirst, putLast
+                2. takeFirst, takeLast
+
+                <img height="400" src="img/ads-03-deque-3.png"/>
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### Functional deque, 4
+                1. putFirst, putLast
+                2. takeFirst, takeLast
+
+                <img height="400" src="img/ads-03-deque-4.png"/>
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### Functional deque, 5
+                1. putFirst, putLast
+                2. takeFirst, takeLast
+
+                <img height="400" src="img/ads-03-deque-5.png"/>
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### Functional deque, 6
+                1. putFirst, putLast
+                2. takeFirst, takeLast
+
+                <img height="400" src="img/ads-03-deque-6.png"/>
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### Functional deque, 7
+                1. putFirst, putLast
+                2. takeFirst, takeLast
+
+                <img height="400" src="img/ads-03-deque-7.png"/>
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### Functional deque, 8
+                1. putFirst, putLast
+                2. takeFirst, takeLast
+
+                <img height="400" src="img/ads-03-deque-8.png"/>
+            </script>
+        </section>
+
+
+        <section data-markdown="">
+            <script type="text/template">
+                ### Functional trees, 1
+                1. Share as much as possible
+                2. Path copying
+
+                <img height="400" src="img/ads-04-tree-1.png">
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### Functional trees, 2
+                1. Share as much as possible
+                2. Path copying
+
+                <img height="400" src="img/ads-04-tree-2.png">
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### Functional trees, 3
+                1. Share as much as possible
+                2. Path copying
+
+                <img height="400" src="img/ads-04-tree-3.png">
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### Functional trees, 4
+                1. Share as much as possible
+                2. Path copying
+
+                <img height="400" src="img/ads-04-tree-4.png">
+            </script>
+        </section>
+
+
+        <section data-markdown="">
+            <script type="text/template">
+                ### Functional hash map, 1
+                1. Persistent bit-partitioned hash trie
+                1. Path copying
+                1. Integer hash split by 5 bits
+
+                > `hashCode = 0xcafebabe`
+
+                level  |6 |5    |4    |3    |2    |1    |0
+                -------|--|-----|-----|-----|-----|-----|-----
+                bits   |11|00101|01111|11101|01110|10101|11110
+                symbol |3 |5    |15   |29   |14   |21   |30
+            </script>
+        </section>
+
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### Functional hash map, 2
+            </script>
+        </section>
+
 
         <!--<div class="fragment fade-up fade-out">-->
             <!--<img src="img/ads-02-stack-2.png"/>-->
