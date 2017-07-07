@@ -277,21 +277,61 @@
                 1. Persistent bit-partitioned hash trie
                 1. Path copying
                 1. Integer hash split by 5 bits
-
-                > `hashCode = 0xcafebabe`
+                ```
+                hashCode = 0xcafebabe
+                ```
 
                 level  |6 |5    |4    |3    |2    |1    |0
                 -------|--|-----|-----|-----|-----|-----|-----
                 bits   |11|00101|01111|11101|01110|10101|11110
-                symbol |3 |5    |15   |29   |14   |21   |30
+                index  |3 |5    |15   |29   |14   |21   |30
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### Functional hash map, 2
+
+                <img src="img/ads-05-hashmap-1.png">
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### Functional hash map, 3
+                ```
+                hashCode = 0xcafebabe
+                ```
+                level  |6 |5    |4    |3    |2    |1    |0
+                -------|--|-----|-----|-----|-----|-----|-----
+                bits   |11|00101|01111|11101|01110|10101|11110
+                index  |3 |5    |15   |29   |14   |21   |30
+
+                <img src="img/ads-05-hashmap-2.png">
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### Functional hash map, 4
+
+                1. What to do with the last 2 bits?
+                2. What if we want to have array, not hashmap?
+
+                <img src="img/ads-05-hashmap-2.png">
             </script>
         </section>
 
         <section data-markdown="" data-transition="none">
             <script type="text/template">
-                ### Functional hash map, 2
+                ### Functional RB tree, 1
+
+                1. No red node has red parents
+                2. Every root-to-leaf path contains the same number of black nodes
+                3. New inserted node is red
+                4. Root is black
+
             </script>
         </section>
+
+
 
 
         <!--<div class="fragment fade-up fade-out">-->
