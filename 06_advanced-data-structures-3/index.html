@@ -89,7 +89,7 @@
             <script type="text/template">
                 ### Functional deque
 
-                How to make access to both ends not to drop performance?
+                How to make the access to both ends so that the performance not dropping suddenly?
 
                 <img height="400" src="img/ads-02-grumpy-cat-no-dllist.jpg"/>
             </script>
@@ -204,8 +204,9 @@
 
                 ```haskell
                 class Monoid a where
-                    mempty :: a
+                    mempty  :: a
                     mappend :: a -> a -> a
+
                     ε = mempty
                     ⊕ = mappend
                 ```
@@ -395,15 +396,15 @@
                 <img src="img/ads-10-3d-tree-3.png" />
             </script>
         </section>
-        <section data-markdown="" data-transition="none">
-            <script type="text/template">
-                ### Quad-tree
+        <!--<section data-markdown="" data-transition="none">-->
+            <!--<script type="text/template">-->
+                <!--### Quad-tree-->
 
-                _Question_: what the data structure is suitable for the tiling?
+                <!--_Question_: what the data structure is suitable for the tiling?-->
 
-                <img src="img/ads-11-quad-tree-question.png" />
-            </script>
-        </section>
+                <!--<img src="img/ads-11-quad-tree-question.png" />-->
+            <!--</script>-->
+        <!--</section>-->
 
         <!-- ================== Union-find ================== -->
         <!--<section data-markdown="">-->
