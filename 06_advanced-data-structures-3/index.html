@@ -59,8 +59,7 @@
             <script type="text/template">
                 ### Persistent and geometric data structures
                 1. Finger tree
-                2. Efficient Union-find
-                3. R-Tree, kd-tree, LSD-tree
+                2. R-Tree, kd-tree, LSD-tree
             </script>
         </section>
 
@@ -232,15 +231,52 @@
             <script type="text/template">
                 ### Finger tree, annotations
 
-                Priority annotations:
+                What to put into the nodes instead of `?`s?
+                <img height="400" src="img/ads-05-tree-annotation.png" />
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### Finger tree, annotations
+
+                Priority annotations
+                <img height="400" src="img/ads-05-tree-annotation-priority.png" />
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### Finger tree, annotations
+
+                Size annotations
+                <img height="400" src="img/ads-05-tree-annotation-size.png.png" />
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### Finger tree, complexity
+
+                |  operations   | Finger trees | 2-3 tree | List       |
+                |---------------|--------------|----------|------------|
+                | app/prepend   | O(1)         | O(log n) | O(1), O(n) |
+                | head, last    | O(1)         | O(log n) | O(1), O(n) |
+                | concat        | do this      | O(log n) | O(n)       |
+                | split         | do this      | O(log n) | O(n)       |
+                | index         | do this      | O(log n) | O(n)       |
 
             </script>
         </section>
 
+        <!-- ================== Spatial trees ================== -->
+        <section data-markdown="">
+            <script type="text/template">
+            ### Spatial trees
+            1. Problem is to store geo spatial data
+            2. Maintain some notion of proximity, natural for geo data
+            3. Generalization of BST
 
-
-
-
+             - [_Kd Trees (youtube)_](https://youtu.be/W94M9D_yXKk)
+            </script>
+        </section>
 
         <!-- ================== Union-find ================== -->
         <!--<section data-markdown="">-->
@@ -249,21 +285,6 @@
                 <!--1. Key role in minimum spanning tree algorithm-->
                 <!--2. Other classification problems-->
                 <!--3. Naïve implementation is very inefficient-->
-
-                <!-- - [Conchon, Filli&#226;tre _A Persistent Union-Find Data Structure_](https://www.lri.fr/~filliatr/ftp/publis/puf-wml07.pdf)-->
-                <!-- - [Imperative Disjoint-set data structure](https://en.wikipedia.org/wiki/Disjoint-set_data_structure)-->
-            <!--</script>-->
-        <!--</section>-->
-
-
-
-        <!-- ================== Spatial trees ================== -->
-        <!--<section data-markdown="">-->
-            <!--<script type="text/template">-->
-                <!--### Spatial trees-->
-                <!--1. Problem is to store geo spatial data-->
-                <!--2. Maintain some notion of proximity, natural for geo data-->
-                <!--3. Generalization of BST-->
 
                 <!-- - [Conchon, Filli&#226;tre _A Persistent Union-Find Data Structure_](https://www.lri.fr/~filliatr/ftp/publis/puf-wml07.pdf)-->
                 <!-- - [Imperative Disjoint-set data structure](https://en.wikipedia.org/wiki/Disjoint-set_data_structure)-->
