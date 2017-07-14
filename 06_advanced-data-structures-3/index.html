@@ -64,6 +64,7 @@
             </script>
         </section>
 
+        <!-- ================== finger tree ================== -->
         <section data-markdown="">
             <script type="text/template">
                 ### Finger tree
@@ -77,37 +78,153 @@
                 - [Implementing Doubly Linked Lists in Haskell (youtube)](https://www.youtube.com/watch?v=-HZ4bo_USvE&t=7s)
             </script>
         </section>
-
         <section data-markdown="">
             <script type="text/template">
-                ### Union-find
-                1. Key role in minimum spanning tree algorithm
-                2. Other classification problems
-                3. Naïve implementation is very inefficient
+                ### Functional deque
 
-                - [Conchon, Filli&#226;tre _A Persistent Union-Find Data Structure_](https://www.lri.fr/~filliatr/ftp/publis/puf-wml07.pdf)
-                - [Imperative Disjoint-set data structure](https://en.wikipedia.org/wiki/Disjoint-set_data_structure)
+                Whe have to do `reverse` operation sometimes :-(
+                <img height="400" src="img/ads-02-deque-4.png"/>
             </script>
         </section>
-
         <section data-markdown="">
             <script type="text/template">
-                ### Spatial trees
-                1. Problem is to store geo spatial data
-                2. Maintain some notion of proximity, natural for geo data
-                3. Generalization of BST
+                ### Functional deque
 
-                - [Conchon, Filli&#226;tre _A Persistent Union-Find Data Structure_](https://www.lri.fr/~filliatr/ftp/publis/puf-wml07.pdf)
-                - [Imperative Disjoint-set data structure](https://en.wikipedia.org/wiki/Disjoint-set_data_structure)
+                How to make access to both ends not to drop performance?
+
+                <img height="400" src="img/ads-02-grumpy-cat-no-dllist.jpg"/>
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### Balanced 2-3-4 tree
+
+                - (Almost) ideally balanced, uniform height
+                - Can have any number of elements, not only `2^n`
+
+                <img height="400" src="img/ads-03-finger-tree-0.png" />
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### Building finger tree 1
+                <img height="500" src="img/ads-03-finger-tree-1.png" />
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### Building finger tree 2
+                <img height="500" src="img/ads-03-finger-tree-2.png" />
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### Building finger tree 3
+                <img height="500" src="img/ads-03-finger-tree-3.png" />
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### Building finger tree 4
+                <img height="500" src="img/ads-03-finger-tree-4.png" />
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### Building finger tree 5
+                <img height="500" src="img/ads-03-finger-tree-5.png" />
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### Building finger tree 6
+                <img height="500" src="img/ads-03-finger-tree-6.png" />
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### Finger tree
+                ```haskell
+                -- red
+                data FingerTree a = Empty
+                    | Single a
+                    | Deep (Digit a) (FingerTree (Node a)) (Digit a)
+
+                -- none
+                data Digit a = One a | Two a a | Three a a a | Four a a a a
+
+                -- green
+                data Node a = Node2 a a | Node3 a a a
+                ```
+                <img src="img/ads-04-tree01.svg" />
+                <img src="img/ads-04-tree02.svg" />
+                <img src="img/ads-04-tree03.svg" />
+                <img src="img/ads-04-tree04.svg" />
+                <img src="img/ads-04-tree05.svg" />
+                <img src="img/ads-04-tree06.svg" />
+                <img src="img/ads-04-tree07.svg" />
+                <img src="img/ads-04-tree08.svg" />
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### Finger tree
+                ```haskell
+                -- red
+                data FingerTree a = Empty
+                    | Single a
+                    | Deep (Digit a) (FingerTree (Node a)) (Digit a)
+
+                -- none
+                data Digit a = One a | Two a a | Three a a a | Four a a a a
+
+                -- green
+                data Node a = Node2 a a | Node3 a a a
+                ```
+                <img src="img/ads-04-tree09.svg" />
+                <img src="img/ads-04-tree09.svg" />
             </script>
         </section>
 
-        <section data-markdown="">
-            <script type="text/template" >
-                ### Questions?
-                <img src="img/ads-19-philoceraptor.jpg"/>
-            </script>
-        </section>
+
+
+
+
+
+        <!-- ================== Union-find ================== -->
+        <!--<section data-markdown="">-->
+            <!--<script type="text/template">-->
+                <!--### Union-find-->
+                <!--1. Key role in minimum spanning tree algorithm-->
+                <!--2. Other classification problems-->
+                <!--3. Naïve implementation is very inefficient-->
+
+                <!-- - [Conchon, Filli&#226;tre _A Persistent Union-Find Data Structure_](https://www.lri.fr/~filliatr/ftp/publis/puf-wml07.pdf)-->
+                <!-- - [Imperative Disjoint-set data structure](https://en.wikipedia.org/wiki/Disjoint-set_data_structure)-->
+            <!--</script>-->
+        <!--</section>-->
+
+
+
+        <!-- ================== Spatial trees ================== -->
+        <!--<section data-markdown="">-->
+            <!--<script type="text/template">-->
+                <!--### Spatial trees-->
+                <!--1. Problem is to store geo spatial data-->
+                <!--2. Maintain some notion of proximity, natural for geo data-->
+                <!--3. Generalization of BST-->
+
+                <!-- - [Conchon, Filli&#226;tre _A Persistent Union-Find Data Structure_](https://www.lri.fr/~filliatr/ftp/publis/puf-wml07.pdf)-->
+                <!-- - [Imperative Disjoint-set data structure](https://en.wikipedia.org/wiki/Disjoint-set_data_structure)-->
+            <!--</script>-->
+        <!--</section>-->
+
+        <!--<section data-markdown="">-->
+            <!--<script type="text/template" >-->
+                <!--### Questions?-->
+                <!--<img src="img/ads-19-philoceraptor.jpg"/>-->
+            <!--</script>-->
+        <!--</section>-->
 
         <!-------------------------------------------------------------------------------------------------->
     </div>
