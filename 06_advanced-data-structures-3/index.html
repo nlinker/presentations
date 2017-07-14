@@ -184,6 +184,58 @@
                 <img src="img/ads-04-tree10.svg" />
             </script>
         </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### Finger tree, prepend
+                ```haskell
+                prepend x Empty = Single x
+                prepend x (Single y) = Deep (Digit1 x) Empty (Digit1 y)
+                prepend x (Deep ... ) = ...
+                ```
+                <img height="400" src="img/ads-03-finger-tree-prepend.png" />
+            </script>
+        </section>
+
+
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### Finger tree, annotations
+
+                What about non-leaf nodes?
+
+                ```haskell
+                class Monoid a where
+                    mempty :: a
+                    mappend :: a -> a -> a
+                    ε = mempty
+                    ⊕ = mappend
+                ```
+
+                - identity element: ε ⊕ x = x ⊕ ε = x
+                - and associativity: (x ⊕ y) ⊕ z = x ⊕ (y ⊕ z)
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### Finger tree, annotations
+
+                Monoid examples:
+
+                1. Numbers and `(+)`
+                1. Numbers and `(*)`
+                1. Intervals and `(:)`
+                1. Strings and concatenation
+                1. Lists and concatenation
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### Finger tree, annotations
+
+                Priority annotations:
+
+            </script>
+        </section>
 
 
 
