@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Advanced Data Structures 4</title>
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+    <style>
+        .info {
+            display: inline-block;
+        }
+
+        .textclass {
+            float: left;
+            width: 500px;
+            height: 227px;
+            line-height: 227px;
+        }
+
+        .imageclass {
+            float: right;
+            width: 200px;
+            height: 227px;
+        }
+    </style>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <!-------------------------------------------------------------------------------------------------->
+        <section data-markdown="" data-background="img/ads-00-background.png">
+            <script type="text/template">
+                # Advanced data structures
+                ## part 4
+                <div class="fragment fade-up info">
+                    <span class="textclass">Nick Linker</span>
+                    <img class="imageclass" src="img/ads-01-issart-logo.png"/>
+                </div>
+                <!--nlinker.github.io/presentations/06_advanced-data-structures-4-->
+            </script>
+        </section>
+
+        <section data-markdown="">
+            <script type="text/template">
+                ### Probability and distribution
+                1. Persistent union-find
+                2. Bloom and Cuckoo filters
+                3. CRDTs
+            </script>
+        </section>
+
+        <!-- ================== Persistent Union-find ================== -->
+        <!--Naïve implementation is very inefficient-->
+        <section data-markdown="">
+            <script type="text/template">
+                ### Union-find
+                1. Key role in algorithms, e.g. minimum spanning tree
+                2. Other classification problems
+
+
+                - [Conchon, Filli&#226;tre _A Persistent Union-Find Data Structure_](https://www.lri.fr/~filliatr/ftp/publis/puf-wml07.pdf)-->
+                - [Imperative Disjoint-set data structure](https://en.wikipedia.org/wiki/Disjoint-set_data_structure)
+                - [Kruskal’s MST & Union-Find](https://www.cs.cmu.edu/~ckingsf/class/02713-s13/lectures/lec03-othermst.pdf)
+            </script>
+        </section>
+
+        <!-- ================== Union-find ================== -->
+        <!--<section data-markdown="">-->
+            <!--<script type="text/template">-->
+                <!--### Union-find-->
+                <!--1. Key role in minimum spanning tree algorithm-->
+                <!--2. Other classification problems-->
+                <!--3. Naïve implementation is very inefficient-->
+
+                <!-- - [Conchon, Filli&#226;tre _A Persistent Union-Find Data Structure_](https://www.lri.fr/~filliatr/ftp/publis/puf-wml07.pdf)-->
+                <!-- - [Imperative Disjoint-set data structure](https://en.wikipedia.org/wiki/Disjoint-set_data_structure)-->
+            <!--</script>-->
+        <!--</section>-->
+
+        <section data-markdown="">
+            <script type="text/template" >
+                ### Questions?
+                <img src="img/ads-19-philoceraptor-procrastination.jpg"/>
+            </script>
+        </section>
+
+        <!-------------------------------------------------------------------------------------------------->
+    </div>
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+
+<script>
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    Reveal.initialize({
+        dependencies: [
+            {src: 'plugin/markdown/marked.js'},
+            {src: 'plugin/markdown/markdown.js'},
+            {src: 'plugin/notes/notes.js', async: true},
+            {
+                src: 'plugin/highlight/highlight.js',
+                async: true,
+                callback: function () { hljs.initHighlightingOnLoad(); }
+            }
+        ]
+    });
+</script>
+</body>
+</html>
