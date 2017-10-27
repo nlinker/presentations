@@ -58,25 +58,13 @@
         <section data-markdown="">
             <script type="text/template">
                 ### Classification
-                1. _Ephemeral_ - changes to DS destroy all past info
+                1. _Ephemeral_ - changes to the DS destroy all past info
                 2. _Partial persistence_ - changes to the most recent version, query to all past versions
                 3. _Full persistence_ - changes to any version allowed, version tree
                 4. _Confluent persistence_ - versions form arbitrary DAG
                 5. _Functional_ - data structure immutable
 
                 Q: Is it true 5 => 2, 3, 4?
-            </script>
-        </section>
-
-        <section data-markdown="">
-            <script type="text/template">
-                ### Terminology notes
-                1. Trie [`trai]
-                2. Prefix tree, suffix tree, Patricia tree<br />
-                _Practical Algorithm to Retrieve Information Coded in Alphanumeric, Donald R. Morrison, 1968_
-                3. Radix tree
-                4. Double-array trie
-                5. HAT-trie (also array-based, cache friendly)
             </script>
         </section>
 
@@ -130,6 +118,18 @@
 
         <section data-markdown="">
             <script type="text/template">
+                ### Terminology notes
+                1. Trie [`trai]
+                2. Prefix tree, suffix tree, Patricia tree<br />
+                _Practical Algorithm to Retrieve Information Coded in Alphanumeric, Donald R. Morrison, 1968_
+                3. Radix tree
+                4. Double-array trie
+                5. HAT-trie (also array-based, cache friendly)
+            </script>
+        </section>
+
+        <section data-markdown="">
+            <script type="text/template">
                 ### Double-array trie, step 1
                 <img src="img/ads-07-the-example-1.png"/>
             </script>
@@ -143,22 +143,7 @@
                 ### Double-array trie, step 2
                 Trie as DFA, transition table
 
-                |    | #  | a  | b  | c |
-                |----|----|----|----|---|
-                | 1  |    | 3  |    |   |
-                | 2  |    |    |    |   |
-                | 3  |    | 4  | 5  |   |
-                | 4  |    | 6  | 7  |   |
-                | 5  | 8  |    | 10 |   |
-                | 6  |    |    |    | 9 |
-                | 7  | 13 |    |    |   |
-                | 8  |    |    |    |   |
-                | 9  | 2  |    |    |   |
-                | 10 | 11 | 12 |    |   |
-                | 11 |    |    |    |   |
-                | 12 | 14 |    |    |   |
-                | 13 |    |    |    |   |
-                | 14 |    |    |    |   |
+                <img src="img/ads-07-transition-table.png"/>
             </script>
         </section>
 
