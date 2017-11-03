@@ -373,18 +373,18 @@
 
                 ```haskell
                 data Color = R | B
-                data Tree a = E | T Color (Tree a) a (Tree a)
+                data Tree t = E | T Color (Tree t) t (Tree t)
 
-                insert :: Ord a => a -> Tree a -> Tree a
-                insert x t =
-                  let T _ a y b = ins t in
+                insert :: Ord t => t -> Tree t -> Tree t
+                insert x tree =
+                  let T _ a y b = ins tree in
                   T B a y b
                   where
-                    ins E          =  T R E x E
+                    ins E         = T R E x E
                     ins s@(T col a y b)
-                      | x < y      =  balance col (ins a) y b
-                      | x > y      =  balance col a y (ins b)
-                      | otherwise  =  s
+                      | x < y     = balance col (ins a) y b
+                      | x > y     = balance col a y (ins b)
+                      | otherwise = s
                 ```
             </script>
         </section>
