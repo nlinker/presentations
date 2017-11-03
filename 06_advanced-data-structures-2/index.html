@@ -79,11 +79,21 @@
                 _Chris Okasaki "Purely functional data structures"_
             </script>
         </section>
-
+        <section data-markdown="">
+            <script type="text/template">
+                ### Time travel
+                [Elm Time-travel Debugger](http://debug.elm-lang.org/edit/Stamps.elm)
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/RUeLd7T7Xi4" frameborder="0"
+                        allowfullscreen></iframe>
+            </script>
+        </section>
 
         <section data-markdown="">
             <script type="text/template">
                 ## Functional list
+                ```
+                data List a = Nil | Cons a (List a)
+                ```
             </script>
         </section>
         <section data-markdown="" data-transition="none">
@@ -96,6 +106,7 @@
                 let x3 = "f" : x2
                 let x4 = delete "c" x1
                 ```
+                <img height="400" src="img/ads-02-stack-0.png"/>
             </script>
         </section>
         <section data-markdown="" data-transition="none">
