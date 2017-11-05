@@ -103,7 +103,7 @@
                 let x0 = ["c", "b", "a"]
                 let x1 = "d" : x0
                 let x2 = "e" : x0
-                let x3 = "f" : x2
+                let x3 = "f" : x1
                 let x4 = delete "c" x1
                 ```
                 <img height="400" src="img/ads-02-stack-0.png"/>
@@ -116,7 +116,7 @@
                 let x0 = ["c", "b", "a"]
                 let x1 = "d" : x0
                 let x2 = "e" : x0
-                let x3 = "f" : x2
+                let x3 = "f" : x1
                 let x4 = delete "c" x1
                 ```
                 <img height="400" src="img/ads-02-stack-1.png"/>
@@ -130,7 +130,7 @@
                 let x0 = ["c", "b", "a"]
                 let x1 = "d" : x0
                 let x2 = "e" : x0
-                let x3 = "f" : x2
+                let x3 = "f" : x1
                 let x4 = delete "c" x1
                 ```
                 <img height="400" src="img/ads-02-stack-2.png"/>
@@ -144,7 +144,7 @@
                 let x0 = ["c", "b", "a"]
                 let x1 = "d" : x0
                 let x2 = "e" : x0
-                let x3 = "f" : x2
+                let x3 = "f" : x1
                 let x4 = delete "c" x1
                 ```
                 <img height="400" src="img/ads-02-stack-3.png"/>
@@ -158,7 +158,7 @@
                 let x0 = ["c", "b", "a"]
                 let x1 = "d" : x0
                 let x2 = "e" : x0
-                let x3 = "f" : x2
+                let x3 = "f" : x1
                 let x4 = delete "c" x1
                 ```
                 <img height="400" src="img/ads-02-stack-4.png"/>
@@ -373,9 +373,9 @@
 
                 ```haskell
                 data Color = R | B
-                data Tree t = E | T Color (Tree t) t (Tree t)
+                data Tree e = E | T Color (Tree e) e (Tree e)
 
-                insert :: Ord t => t -> Tree t -> Tree t
+                insert :: Ord e => e -> Tree e -> Tree e
                 insert x tree =
                   let T _ a y b = ins tree in
                   T B a y b
