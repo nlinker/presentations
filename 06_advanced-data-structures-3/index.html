@@ -185,6 +185,15 @@
         </section>
         <section data-markdown="" data-transition="none">
             <script type="text/template">
+                ### Finger tree
+
+                Real-life example :-)
+
+                <img src="img/ads-04-tree13.svg" />
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
                 ### Finger tree, prepend
                 ```haskell
                 prepend x Empty = Single x
@@ -221,13 +230,13 @@
 
                 Monoid examples:
 
-                1. Numbers and `(+)`
-                1. Numbers and `(*)`
-                1. Intervals and `(:)`
-                1. Strings and concatenation
-                1. Lists and concatenation
-                1. Sorted lists and merge
-                1. Hash maps, union
+                1. Numbers, `(+)` and 0
+                1. Numbers, `(*)` and 1
+                1. Intervals, `(:)` and `(0,0]`
+                1. Strings, concatenation and `""`
+                1. Lists, concatenation and `[]`
+                1. Sorted lists, merge and `[]`
+                1. Hash maps, union (?) and `{}`
             </script>
         </section>
         <section data-markdown="" data-transition="none">
@@ -258,19 +267,163 @@
             </script>
         </section>
         <section data-markdown="" data-transition="none">
-            <script type="text/template">
-                ### Finger tree, complexity
+            <div font-size="80%">
+                <script type="text/template">
+                    ### Finger tree, complexity
 
-                |  operations   | Finger trees | 2-3 tree | List       |
-                |---------------|--------------|----------|------------|
-                | app/prepend   | O(1)         | O(log n) | O(1), O(n) |
-                | head, last    | O(1)         | O(log n) | O(1), O(n) |
-                | concat        | do this      | O(log n) | O(n)       |
-                | split         | do this      | O(log n) | O(n)       |
-                | index         | do this      | O(log n) | O(n)       |
-                <!--O(log min(l1, l2))-->
-                <!--O(log min(n, l-n))-->
-                <!--O(log n)-->
+                    |  operations | Finger trees     | 2-3 tree | List      |
+                    |-------------|------------------|---------|------------|
+                    | app/prepend | O(1)             | O(logn) | O(1)/O(n)  |
+                    | head/last   | O(1)             | O(logn) | O(1)/O(n)  |
+                    | concat      | O(log(min n1 n2))| O(logn) | O(n)       |
+                    | split       | O(log(min i n-i))| O(logn) | O(n)       |
+                    | index       | O(log n)         | O(logn) | O(n)       |
+                </script>
+            </div>
+        </section>
+        <!-- ================== B-trees ================== -->
+        <section data-markdown="">
+            <script type="text/template">
+                ### B-tree
+                0. Order `m`, the best if `m` odd
+                1. Every node has at most `m` children
+                2. The root has at least two children, if not leaf
+                3. A non-leaf node with `k` children contains `k-1` keys
+                4. Every non-leaf node (except root) has at least `ceil(m/2)` children
+                5. All leaves appear on the same level
+            </script>
+        </section>
+        <section data-markdown="">
+            <script type="text/template">
+                ### B-tree
+
+                Example, (order 4, not the best)
+
+                <img src="img/ads-06-btree-example.png" />
+            </script>
+        </section>
+        <section data-markdown="">
+            <script type="text/template">
+                ### B-tree, insertion
+                0. Find the leaf node where the item should be inserted
+                1. If the leaf node can accomodate another item
+                (it has no more than `m-1` items), insert there (order!)
+                2. If the leaf node is full, split the node int two: (smaller half, larger half).
+                Promote the median to the parent node. Go on recursively.
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### B-tree, insertion 0
+
+                C N G A +H
+
+                <img src="img/ads-06-btree-insert-0.png" />
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### B-tree, insertion 1
+
+                C N G A H +E K Q
+
+                <img src="img/ads-06-btree-insert-1.png" />
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### B-tree, insertion 2
+
+                C N G A H E K Q +M
+
+                <img src="img/ads-06-btree-insert-2.png" />
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### B-tree, insertion 3
+
+                C N G A H E K Q +F W L T
+
+                <img src="img/ads-06-btree-insert-3.png" />
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### B-tree, insertion 4
+
+                C N G A H E K Q M F W L T +Z
+
+                <img src="img/ads-06-btree-insert-4.png" />
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### B-tree, insertion 5
+
+                C N G A H E K Q M F W L T Z +D P R X Y
+
+                <img src="img/ads-06-btree-insert-5.png" />
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### B-tree, insertion 6
+
+                C N G A H E K Q M F W L T Z D P R X Y +S
+
+                <img src="img/ads-06-btree-insert-6.png" />
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### B-tree, insertion 7
+
+                C N G A H E K Q M F W L T Z D P R X Y S
+
+                <img src="img/ads-06-btree-insert-7.png" />
+            </script>
+        </section>
+        <section data-markdown="">
+            <script type="text/template">
+                ### B-tree, deletion
+
+                1. If it is leaf node and after the deletion invariant preserves do it
+                2. Grab the elements from the root and siblings and merge if necessary,
+                so the invariant is preserved. There are 3 cases:
+                    - The predecessor child has enough keys, move key
+                    - The successor child has enough keys, move key
+                    - Both children have too few keys, merge them
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### B-tree, deletion
+
+                C N G A H E K Q M F W L T Z D P R X Y S -H T
+
+                <img src="img/ads-06-btree-insert-7.png" />
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### B-tree, deletion
+
+                C N G A E K Q M F W L Z D P R X Y S
+
+                <img src="img/ads-06-btree-x-delete-1.png"/>
+            </script>
+        </section>
+        <section data-markdown="">
+            <script type="text/template">
+                ### B+-tree
+
+                1. A modification suitable to keep index in
+                2. Only leaf node contain the data
+                3. `B*-tree` all leaf nodes orgainzed in list for scan
+                4. Good for pagination and keep on the disk
+
+                <img height="300" src="img/ads-07-b+tree-an-overview.png"/>
             </script>
         </section>
 
@@ -294,7 +447,7 @@
 
                 - Task: search everything in `[31,92]`
 
-                <img src="img/ads-06-1d-interval-search-1.png">
+                <img src="img/ads-08-1d-interval-search-1.png">
             </script>
         </section>
         <section data-markdown="" data-transition="none">
@@ -303,7 +456,7 @@
 
                 - Task: search everything in `[31,92]`
 
-                <img src="img/ads-06-1d-interval-search-2.png">
+                <img src="img/ads-08-1d-interval-search-2.png">
             </script>
         </section>
         <section data-markdown="" data-transition="none">
@@ -312,7 +465,7 @@
 
                 - Task: search everything in `[31,92]`
 
-                <img src="img/ads-06-1d-interval-search-3.png">
+                <img src="img/ads-08-1d-interval-search-3.png">
             </script>
         </section>
         <section data-markdown="" data-transition="none">
@@ -321,7 +474,7 @@
 
                 - Task: search everything in `[31,92]`
 
-                <img src="img/ads-06-1d-interval-search-4.png">
+                <img src="img/ads-08-1d-interval-search-4.png">
             </script>
         </section>
         <section data-markdown="" data-transition="none">
@@ -330,7 +483,7 @@
 
                 - Task: search everything in `[61,92]` (what if `63`?)
 
-                <img src="img/ads-06-1d-interval-search-5.png">
+                <img src="img/ads-08-1d-interval-search-5.png">
 
             </script>
         </section>
@@ -339,7 +492,7 @@
                 ### 2d search
 
                 Given a rectangle, how to find all the elements in it?
-                <img src="img/ads-07-2d-space.png">
+                <img src="img/ads-09-2d-space.png">
 
                 _Why not just use the orthogonal grid?_
             </script>
@@ -350,7 +503,7 @@
 
                 Real objects have very non-uniform distribution.
 
-                <img src="img/ads-08-milky-way.jpg">
+                <img src="img/ads-10-milky-way.jpg">
             </script>
         </section>
         <section data-markdown="" data-transition="none">
@@ -360,7 +513,7 @@
                 _The idea_: split the point set alternatingly by
                 x-coordinate and by y-coordinate.
 
-                <img height="400" src="img/ads-09-splitting-plane-1.png" />
+                <img height="400" src="img/ads-11-splitting-plane-1.png" />
             </script>
         </section>
         <section data-markdown="" data-transition="none">
@@ -370,7 +523,7 @@
                 _The idea_: split the point set alternatingly by
                 x-coordinate and by y-coordinate.
 
-                <img height="400" src="img/ads-09-splitting-plane-2.png" />
+                <img height="400" src="img/ads-11-splitting-plane-2.png" />
 
             </script>
         </section>
@@ -382,7 +535,7 @@
 
                 - _Question_: how does the search is performed?
 
-                <img height="350" src="img/ads-09-splitting-plane-3.png" />
+                <img height="350" src="img/ads-11-splitting-plane-3.png" />
 
             </script>
         </section>
@@ -392,7 +545,7 @@
 
                 Query is given by a box.
 
-                <img src="img/ads-10-3d-tree-1.png" />
+                <img src="img/ads-12-3d-tree-1.png" />
             </script>
         </section>
         <section data-markdown="" data-transition="none">
@@ -401,7 +554,7 @@
 
                 The idea is the same as for 2d-tree.
 
-                <img src="img/ads-10-3d-tree-2.png" />
+                <img src="img/ads-12-3d-tree-2.png" />
             </script>
         </section>
         <section data-markdown="" data-transition="none">
@@ -410,7 +563,7 @@
 
                 _Question_: how does the search is performed?
 
-                <img height="400" src="img/ads-10-3d-tree-3.png" />
+                <img height="400" src="img/ads-12-3d-tree-3.png" />
             </script>
         </section>
         <section data-markdown="" data-transition="none">

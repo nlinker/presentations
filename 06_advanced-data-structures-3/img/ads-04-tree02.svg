@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="US-ASCII" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="26" height="48" xmlns="http://www.w3.org/2000/svg" version="1.1"><g stroke="black" stroke-width="1"><g transform="translate(13,14)"><line x1="0" y1="0" x2="0" y2="20"/><g transform="translate(0,20)"><g fill="#00f"><rect x="-2" y="-2" width="4" height="4"/></g></g><g fill="#f00"><circle r="3"/></g></g></g></svg>
+<svg width="26" height="48" xmlns="http://www.w3.org/2000/svg" version="1.1"><g stroke="white" stroke-width="1"><g transform="translate(13,14)"><line x1="0" y1="0" x2="0" y2="20"/><g transform="translate(0,20)"><g fill="#00f"><rect x="-2" y="-2" width="4" height="4"/></g></g><g fill="#f00"><circle r="3"/></g></g></g></svg>
