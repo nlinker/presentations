@@ -420,10 +420,11 @@
 
                 1. A modification suitable to keep index in
                 2. Only leaf node contain the data
-                3. `B*-tree` all leaf nodes orgainzed in list for scan
+                3. All nodes on the same level orgainzed in list for scan
                 4. Good for pagination and keep on the disk
+                5. [B+tree in InnoDB with pictures](https://blog.jcole.us/2013/01/10/btree-index-structures-in-innodb/)
 
-                <img height="300" src="img/ads-07-b+tree-an-overview.png"/>
+                <img height="200" src="img/ads-07-bplus-tree-an-overview.png"/>
             </script>
         </section>
 
@@ -443,9 +444,21 @@
         </section>
         <section data-markdown="" data-transition="none">
             <script type="text/template">
+                ### Interval search, 0
+
+                - Tree invariant: each non-leaf node contains the exact maximum in the left subtree.
+                - Hence the root value `49` shows the following:
+                    - the left subtree contains all x<sub>i</sub> ≤ `49`
+                    - the right subtree contains all x<sub>i</sub> > `49`
+
+                <img height="200" src="img/ads-08-1d-interval-search-1.png">
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
                 ### Interval search, 1
 
-                - Task: search everything in `[31,92]`
+                - Task: search everything in `[29,92]`
 
                 <img src="img/ads-08-1d-interval-search-1.png">
             </script>
@@ -454,7 +467,7 @@
             <script type="text/template">
                 ### Interval search, 2
 
-                - Task: search everything in `[31,92]`
+                - Task: search everything in `[29,92]`
 
                 <img src="img/ads-08-1d-interval-search-2.png">
             </script>
