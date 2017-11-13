@@ -281,23 +281,26 @@
                 </script>
             </div>
         </section>
+
         <!-- ================== B-trees ================== -->
         <section data-markdown="">
             <script type="text/template">
                 ### B-tree
-                0. Order `m`, the best if `m` odd
+                1. Order `m`, `m-1` keys, the best if `m-1` even
                 1. Every node has at most `m` children
-                2. The root has at least two children, if not leaf
-                3. A non-leaf node with `k` children contains `k-1` keys
-                4. Every non-leaf node (except root) has at least `ceil(m/2)` children
-                5. All leaves appear on the same level
+                1. Every non-leaf node (except root) has at least `ceil(m/2)` children
+                1. The root has at least two children, if not a leaf node
+                1. A non-leaf node with `k` children contains `k-1` keys
+                1. All leaves appear on the same level
             </script>
         </section>
         <section data-markdown="">
             <script type="text/template">
                 ### B-tree
 
-                Example, (order 4, not the best)
+                Example,
+                - order 4, maximum 3 keys in a node
+                - not the best since it is odd :)
 
                 <img src="img/ads-06-btree-example.png" />
             </script>
@@ -583,8 +586,13 @@
             <script type="text/template">
                 ### Homework
 
-                - "Tricky B-tree exercise"
-                - "Tricky spatial tree exercise"
+                - B-tree: remove `Q` from the tree on the picture 1
+                - 2d-tree: what if points are moved? Find the worst case, when the small data
+                change causes large tree change (let the tree contain 4 points).
+                - How do you build a spatial tree according to the picture 2
+
+                <img height="220" src="img/ads-06-btree-x-delete-1.png"/>
+                <img height="220" src="img/ads-13-circle.png" />
             </script>
         </section>
 
