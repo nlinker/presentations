@@ -57,40 +57,10 @@
 
         <section data-markdown="">
             <script type="text/template">
-                ### Homework
-                ```haskell
-                λ> mkFt [1..5]
-                Deep (Sum {getSum = 5}) (Four 5 4 3 2) Empty (One 1)
-
-                λ> mkFt [1..6]
-                Deep (Sum {getSum = 6})
-                    (Two 6 5)
-                    (Single (Node3 (Sum {getSum = 3}) 4 3 2))
-                    (One 1)
-
-                λ> mkFt [1..8]
-                Deep (Sum {getSum = 8})
-                    (Four 8 7 6 5)
-                    (Single (Node3 (Sum {getSum = 3}) 4 3 2))
-                    (One 1)
-
-                λ> mkFt [1..9]
-                Deep (Sum {getSum = 9})
-                    (Two 9 8)
-                    (Deep (Sum {getSum = 6})
-                        (One (Node3 (Sum {getSum = 3}) 7 6 5))
-                        Empty
-                        (One (Node3 (Sum {getSum = 3}) 4 3 2)))
-                    (One 1)
-                ```
-            </script>
-        </section>
-
-        <section data-markdown="">
-            <script type="text/template">
                 ### Other data structures
                 1. Persistent union-find
-                2. Bloom and Cuckoo filters
+                1. Heaps, Binomial and Fibonacci heaps
+                1. Bloom and Cuckoo filters
             </script>
         </section>
 
@@ -123,29 +93,32 @@
             <script type="text/template">
                 ### Imperative Union-find
 
-                Optimizations:
-
-                `1.` Path compression
+                `1.` Path compression optimization
 
                 ```scala
-                def find(x) = {
-                    if (parent[x] != x)
-                        parent[x] = find(parent[x])
-                    parent[x]
-                }
+                def find(x) =
+                  if (parent[x] != x)
+                    parent[x] = find (parent[x])
+                  parent[x]
                 ```
-                <img height="300" src="img/ads-03-uf3_path_compression.png" />
+                <img height="250" src="img/ads-03-uf3_path_compression.png" />
             </script>
         </section>
         <section data-markdown="">
             <script type="text/template">
                 ### Imperative Union-find
 
-                Optimizations:
+                `2.` Rank optimization
 
-                `2.` Rank
+                Rank is approximation of the size of the class.
+                ```scala
+                if (rank[x_root] > rank[y_root])
+                  parent[y_root] = x_root
+                else
+                  parent[x_root] = y_root
+                ```
 
-                <img height="300" src="img/ads-03-uf4_union_by_rank.png" />
+                <img height="280" src="img/ads-03-uf4_union_by_rank.png" />
             </script>
         </section>
         <section data-markdown="">
@@ -157,19 +130,19 @@
                 `2.` Rank
 
                 ```scala
-                def union(x, y) = {
-                    val x_root = find(x)
-                    val y_root = find(y)
-                    if (x_root == y_root)
-                        return x_root
-                    if (rank[x_root] > rank[y_root])
-                        parent[y_root] = x_root
-                    else {
-                        parent[x_root] = y_root
-                        if rank[x_root] == rank[y_root]
-                            rank[y_root] = rank[y_root] + 1
-                    }
-                }
+                def union (x, y) =
+                  val x_root = find(x)
+                  val y_root = find(y)
+                  if (x_root == y_root)
+                    return x_root
+                  /// from the previous slide ///
+                  if (rank[x_root] > rank[y_root])
+                    parent[y_root] = x_root
+                  else
+                    parent[x_root] = y_root
+                  ///////////////////////////////
+                  if (rank[x_root] == rank[y_root])
+                    rank[y_root] = rank[y_root] + 1
                 ```
             </script>
         </section>
@@ -178,35 +151,62 @@
                 ### Persistent Union-find
 
                 ```scala
-                trait UnionFind
-
-                def create(n: Int): UnionFind = ???
-                def union(uf: UnionFind, x: Int, y: Int): UnionFind = ???
-                def find(uf: UnionFind, x: Int): Int = ???
+                class UnionFind {
+                  def create(n): UnionFind
+                  def union(this, x, y): UnionFind
+                  def find(this, x): Int
+                }
                 ```
                 Persistent array
                 ```scala
-                trait PArray
-
-                def create(n: Int, e: Int): PArray = ???
-                def set(arr: PArray, i: Int, x: Int): PArray = ???
-                def get(arr: PArray, i: Int): Int = ???
-                def reroot(arr: PArray): Unit = ???
+                class PArray {
+                  def create(n, e): PArray
+                  def set(this, i, x): PArray
+                  def get(this, i): Int
+                  def reroot(this): Unit
+                }
                 ```
+            </script>
+        </section>
+        <section data-markdown="">
+            <script type="text/template">
+                ### Persistent array, idea
+                1. Use a usual array for the last version
+                2. Indirections for previous versions
+                3. Rerooting
+                4. `PArray` is a mutable pointer to one of...
+
+                ```haskell
+                type PArray a = IORef (AData a)
+                data AData a = Arr (IOArray Int a)   -- current array, or
+                             | Diff Int a (PArray a) -- difference list
+                ```
+
+                <img height="160" src="img/ads-04-parray1.png" />
+                <img height="160" src="img/ads-04-parray2.png" />
             </script>
         </section>
         <section data-markdown="">
             <script type="text/template">
                 ### Persistent array
 
-                Idea:
-                1. Use a usual array for the last version
-                2. Indirections for previous versions
-                3. Rerooting
-                4. PArray is either Arr or Diff
+                `reroot`
 
-                <img height="160" src="img/ads-04-parray1.png" />
-                <img height="160" src="img/ads-04-parray2.png" />
+                ```scala
+                def reroot(arr1: PArray): Unit = {
+                  arr1 match
+                    Arr(a) => ()
+                    Diff(i, val, arr2) =>
+                      reroot(arr2)
+                      arr2 match
+                        Arr(a)  =>
+                          oldVal = a[i]
+                          a[i] = val
+                          arr1 = Arr(a) /// !!!
+                          arr2 = Diff(i, oldVal, arr)
+                        Diff(_,_,_) => error("Invariant violation")
+                }
+                ```
             </script>
         </section>
         <section data-markdown="">
@@ -217,15 +217,13 @@
 
                 ```scala
                 def get(arr: PArray, i: Int): Int = {
-                  arr match {
-                    case Arr a => a(i)
-                    case Diff _ =>
+                  arr match
+                    Arr(a)  => a[i]
+                    Diff(_,_,_) =>
                       reroot(arr)
-                      arr match {
-                        Arr a => a(i)
-                        Diff _ => error("Invariant violation")
-                      }
-                  }
+                      arr match
+                        Arr(a) => a[i]
+                        Diff(_,_,_) => error("Invariant violation")
                 }
                 ```
             </script>
@@ -237,16 +235,15 @@
                 `set`
 
                 ```scala
-                def set(arr: PArray, i: Int, x: Int): Int = {
-                  arr match {
-                    reroot(arr)
-                    case Arr a =>
-                      val old = a(i)
+                def set(arr: PArray, i: Int, x: Int): PArray = {
+                  arr match
+                    case Arr(a) =>
+                      reroot(arr)
+                      old = a(i)
                       a(i) = x
-                      Diff(i, old, arr)
-                    case Diff _ =>
-                      Diff(i, x, arr)
-                  }
+                      arr = Diff(i, old, arr)
+                    case Diff(_,_,_) =>
+                      arr = Diff(i, x, arr)
                 }
                 ```
             </script>
@@ -266,6 +263,29 @@
                 | Naïve      | 37.50    | 63.80     | > 600.0   |
             </script>
         </section>
+
+        <!-- ================== Heaps ================== -->
+        <section data-markdown="">
+            <script type="text/template">
+                ### Priority queue applications
+
+                - A* search
+                - Heapsort
+                - Online median
+                - Huffman encoding
+                - Prim’s MST algorithm
+                - Discrete event-driven simulation
+                - Network bandwidth management
+                - Dijkstra’s shortest-paths algorithm
+            </script>
+        </section>
+        <section data-markdown="">
+            <script type="text/template">
+                ### Heap
+
+            </script>
+        </section>
+
 
         <!-- ================== Bloom and Cuckoo filter ================== -->
         <section data-markdown="">

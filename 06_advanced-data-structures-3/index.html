@@ -42,8 +42,9 @@
 <body>
 <div class="reveal">
     <div class="slides">
+
         <!-------------------------------------------------------------------------------------------------->
-        <section data-markdown="" data-background="img/ads-00-background.png">
+        <section data-markdown data-background="img/ads-00-background.png">
             <script type="text/template">
                 # Advanced data structures
                 ## part 3
@@ -55,7 +56,7 @@
             </script>
         </section>
 
-        <section data-markdown="">
+        <section data-markdown>
             <script type="text/template">
                 ### Persistent and geometric data structures
                 1. Finger tree
@@ -65,7 +66,7 @@
         </section>
 
         <!-- ================== finger tree ================== -->
-        <section data-markdown="">
+        <section data-markdown>
             <script type="text/template">
                 ### Finger tree
                 1. An incredibly elegant and efficient data structure
@@ -78,7 +79,7 @@
                 - [Implementing Doubly Linked Lists in Haskell (youtube)](https://www.youtube.com/watch?v=-HZ4bo_USvE&t=7s)
             </script>
         </section>
-        <section data-markdown="">
+        <section data-markdown>
             <script type="text/template">
                 ### Functional deque
 
@@ -86,7 +87,7 @@
                 <img height="400" src="img/ads-02-deque-4.png"/>
             </script>
         </section>
-        <section data-markdown="">
+        <section data-markdown>
             <script type="text/template">
                 ### Functional deque
 
@@ -95,7 +96,7 @@
                 <img height="400" src="img/ads-02-grumpy-cat-no-dllist.jpg"/>
             </script>
         </section>
-        <section data-markdown="" data-transition="none">
+        <section data-markdown data-transition="none">
             <script type="text/template">
                 ### Balanced 2-3-4 tree
 
@@ -105,43 +106,43 @@
                 <img height="400" src="img/ads-03-finger-tree-0.png" />
             </script>
         </section>
-        <section data-markdown="" data-transition="none">
+        <section data-markdown data-transition="none">
             <script type="text/template">
                 ### Building finger tree 1
                 <img height="500" src="img/ads-03-finger-tree-1.png" />
             </script>
         </section>
-        <section data-markdown="" data-transition="none">
+        <section data-markdown data-transition="none">
             <script type="text/template">
                 ### Building finger tree 2
                 <img height="500" src="img/ads-03-finger-tree-2.png" />
             </script>
         </section>
-        <section data-markdown="" data-transition="none">
+        <section data-markdown data-transition="none">
             <script type="text/template">
                 ### Building finger tree 3
                 <img height="500" src="img/ads-03-finger-tree-3.png" />
             </script>
         </section>
-        <section data-markdown="" data-transition="none">
+        <section data-markdown data-transition="none">
             <script type="text/template">
                 ### Building finger tree 4
                 <img height="500" src="img/ads-03-finger-tree-4.png" />
             </script>
         </section>
-        <section data-markdown="" data-transition="none">
+        <section data-markdown data-transition="none">
             <script type="text/template">
                 ### Building finger tree 5
                 <img height="500" src="img/ads-03-finger-tree-5.png" />
             </script>
         </section>
-        <section data-markdown="" data-transition="none">
+        <section data-markdown data-transition="none">
             <script type="text/template">
                 ### Building finger tree 6
                 <img height="500" src="img/ads-03-finger-tree-6.png" />
             </script>
         </section>
-        <section data-markdown="" data-transition="none">
+        <section data-markdown data-transition="none">
             <script type="text/template">
                 ### Finger tree
                 ```haskell
@@ -205,6 +206,34 @@
             </script>
         </section>
 
+        <section id="small-ft">
+            <h2>Small Examples</h2>
+            <pre class="fragment"><code class="haskell" data-trim data-noescape>
+λ> mkFt [1..5]
+Deep (Sum 5) (Four 5 4 3 2) Empty (One 1)
+            </code></pre>
+            <pre class="fragment"><code class="haskell" data-trim data-noescape>
+λ> mkFt [1..6]
+Deep (Sum 6) (Two 6 5) (Single (Node3 (Sum 3) 4 3 2)) (One 1)
+            </code></pre>
+            <pre class="fragment"><code class="haskell" data-trim data-noescape>
+λ> mkFt [1..8]
+Deep (Sum 8)
+(Four 8 7 6 5)
+    (Single (Node3 (Sum 3) 4 3 2))
+(One 1)
+            </code></pre>
+            <pre class="fragment"><code class="haskell" data-trim data-noescape>
+λ> mkFt [1..9]
+Deep (Sum 9)
+(Two 9 8)
+    (Deep (Sum 6)
+    (One (Node3 (Sum 3) 7 6 5))
+        Empty
+    (One (Node3 (Sum 3) 4 3 2)))
+(One 1)
+            </code></pre>
+        </section>
 
         <section data-markdown="" data-transition="none">
             <script type="text/template">
@@ -267,6 +296,7 @@
                 <img height="400" src="img/ads-05-tree-annotation-size.png" />
             </script>
         </section>
+
         <section data-markdown="" data-transition="none">
             <div font-size="80%">
                 <script type="text/template">
