@@ -96,10 +96,11 @@
                 `1.` Path compression optimization
 
                 ```scala
-                def find(x) =
+                def find(x) = {
                   if (parent[x] != x)
                     parent[x] = find (parent[x])
                   parent[x]
+                }
                 ```
                 <img height="250" src="img/ads-03-uf3_path_compression.png" />
             </script>
@@ -130,7 +131,7 @@
                 `2.` Rank
 
                 ```scala
-                def union (x, y) =
+                def union (x, y) = }
                   val x_root = find(x)
                   val y_root = find(y)
                   if (x_root == y_root)
@@ -143,6 +144,7 @@
                   ///////////////////////////////
                   if (rank[x_root] == rank[y_root])
                     rank[y_root] = rank[y_root] + 1
+                }
                 ```
             </script>
         </section>
@@ -386,7 +388,7 @@
                 |Extract-min  |  `O(log n)`  | `O(log n)`  |
                 |Decrease-key |  `O(log n)`  | `O(log n)`  |
                 |Delete       |  `O(log n)`  | `O(log n)`  |
-                |Merge        |  `O(n)`      | `O(1)*`      |
+                |Merge        |  `O(n)`      | `O(1)*`     |
                 |Find-min     |  `O(1)`      | `O(1)`      |
 
                 - `*` amortized
@@ -396,13 +398,121 @@
             <script type="text/template">
                 ### Fibonacci heap
 
-                - Like the binomial heap, a Fibonacci heap is a collection of heap-ordered trees.
+                - Like the binomial heap, a Fibonacci heap is a collection of heap-ordered trees
                 - However _not_ binomial trees
-                - Fibonacci sequence is used in the complexity analysis of its operations.
+                - Fibonacci sequence is used in the complexity analysis of its operations
+                - All operation are trivial except `Delete-Min` and `Decrease-Key`
+            </script>
+        </section>
+        <section data-markdown data-transition="none">
+            <script type="text/template">
+                ### Fibonacci heap, delete-min
 
+                - Delete min and concatenate its children into root list
+                - Consolidate trees so that no two roots have same order
+
+                <img height=400" src="img/ads-08-fibonacci-heap-delete-min-1.png" />
+            </script>
+        </section>
+        <section data-markdown data-transition="none">
+            <script type="text/template">
+                ### Fibonacci heap, delete-min
+
+                - Delete min and concatenate its children into root list
+                - Consolidate trees so that no two roots have same order
+
+                <img height=400" src="img/ads-08-fibonacci-heap-delete-min-2.png" />
+            </script>
+        </section>
+        <section data-markdown data-transition="none">
+            <script type="text/template">
+                ### Fibonacci heap, delete-min
+
+                - Delete min and concatenate its children into root list
+                - Consolidate trees so that no two roots have same order
+
+                <img height=400" src="img/ads-08-fibonacci-heap-delete-min-3.png" />
+            </script>
+        </section>
+        <section data-markdown data-transition="none">
+            <script type="text/template">
+                ### Fibonacci heap, delete-min
+
+                - Delete min and concatenate its children into root list
+                - Consolidate trees so that no two roots have same order
+
+                <img height=400" src="img/ads-08-fibonacci-heap-delete-min-4.png" />
+            </script>
+        </section>
+        <section data-markdown data-transition="none">
+            <script type="text/template">
+                ### Fibonacci heap, delete-min
+
+                - Delete min and concatenate its children into root list
+                - Consolidate trees so that no two roots have same order
+
+                <img height=400" src="img/ads-08-fibonacci-heap-delete-min-5.png" />
+            </script>
+        </section>
+        <section data-markdown data-transition="none">
+            <script type="text/template">
+                ### Fibonacci heap, delete-min
+
+                - Delete min and concatenate its children into root list
+                - Consolidate trees so that no two roots have same order
+
+                <img height=400" src="img/ads-08-fibonacci-heap-delete-min-6.png" />
+            </script>
+        </section>
+        <section data-markdown data-transition="none">
+            <script type="text/template">
+                ### Fibonacci heap, delete-min
+
+                - Delete min and concatenate its children into root list
+                - Consolidate trees so that no two roots have same order
+
+                <img height=400" src="img/ads-08-fibonacci-heap-delete-min-7.png" />
+            </script>
+        </section>
+        <section data-markdown data-transition="none">
+            <script type="text/template">
+                ### Fibonacci heap, delete-min
+
+                - Delete min and concatenate its children into root list
+                - Consolidate trees so that no two roots have same order
+
+                <img height=400" src="img/ads-08-fibonacci-heap-delete-min-8.png" />
+            </script>
+        </section>
+        <section data-markdown data-transition="none">
+            <script type="text/template">
+                ### Fibonacci heap, delete-min
+
+                - Delete min and concatenate its children into root list
+                - Consolidate trees so that no two roots have same order
+
+                <img height=400" src="img/ads-08-fibonacci-heap-delete-min-9.png" />
+            </script>
+        </section>
+        <section data-markdown data-transition="none">
+            <script type="text/template">
+                ### Fibonacci heap
+
+                - Theoretically is the best, but practically is not cache-friendly
+                - So there are better variants like `Pairing heap` and `Brodal heap`
+
+                | Op          | Binomial heap| Fibonacci    | Brodal heap |
+                |-------------|--------------|--------------|-------------|
+                |Insert       |  `O(1)*`     |  `O(1)`      |  `O(1)`     |
+                |Extract-min  |  `O(log n)`  |  `O(log n)*` |  `O(log n)` |
+                |Decrease-key |  `O(log n)`  |  `O(1)*`     |  `O(1)`     |
+                |Delete       |  `O(log n)`  |  `O(1)`      |  `O(1)`     |
+                |Merge        |  `O(1)*`     |  `O(1)`      |  `O(1)`     |
+                |Find-min     |  `O(1)`      |  `O(1)`      |  `O(1)`     |
 
             </script>
         </section>
+
 
 
 
