@@ -267,6 +267,11 @@
         <!-- ================== Heaps ================== -->
         <section data-markdown="">
             <script type="text/template">
+                ### Priority queues or heaps
+            </script>
+        </section>
+        <section data-markdown="">
+            <script type="text/template">
                 ### Priority queue applications
 
                 - A* search
@@ -283,8 +288,122 @@
             <script type="text/template">
                 ### Heap
 
+                - Take nodes in level order (here indices start at 1)
+                - Parent node of the `k`th node is `floor(k/2)`
+                - Children of node `k` are `2k` and `2k+1`
+
+                <img height="400" src="img/ads-05-binary-heap.png"/>
             </script>
         </section>
+        <section data-markdown data-transition="none">
+            <script type="text/template">
+                ### Heap: insert
+
+                - Add new node to the end
+                - "Bubble up" until the heap invariant satisfied
+
+                <img height="200" src="img/ads-05-binary-heap-insert-1.png"/>
+                <img height="200" src="img/ads-05-binary-heap-insert-2.png"/>
+            </script>
+        </section>
+        <section data-markdown data-transition="none">
+            <script type="text/template">
+                ### Heap: extract minimum
+
+                - Exchange root with the last element
+                - "Sink down", swap with smaller child until normalizes
+
+                <img height="400" src="img/ads-05-binary-heap-extract-min.png"/>
+            </script>
+        </section>
+        <section data-markdown data-transition="none">
+            <script type="text/template">
+                ### Heap: decrease a key
+
+                - Exchange the element with the last node
+                - Swim up until the order is restored
+
+                <img height="400" src="img/ads-05-binary-heap-decrease-a-key.png"/>
+            </script>
+        </section>
+        <section data-markdown data-transition="none">
+            <script type="text/template">
+                ### Heap: other operations
+
+                - Find minimum, Merge two heaps, Delete node, "Heapify" n elements
+
+                | Op          | List   | Binary heap  |
+                |-------------|--------|--------------|
+                |Insert       | `O(1)` |  `O(log n)`  |
+                |Extract-min  | `O(n)` |  `O(log n)`  |
+                |Decrease-key | `O(1)` |  `O(log n)`  |
+                |Delete       | `O(1)` |  `O(log n)`  |
+                |Merge        | `O(1)` |  `O(n)`      |
+                |Find-min     | `O(n)` |  `O(1)`      |
+            </script>
+        </section>
+        <section data-markdown data-transition="none">
+            <script type="text/template">
+                ### Binomial tree
+
+                Defined recursively:
+                - Order 0: single node
+                - Order k: two binomial trees linked together
+
+                <img height="350" src="img/ads-06-binomial-trees.png"/>
+            </script>
+        </section>
+        <section data-markdown data-transition="none">
+            <script type="text/template">
+                ### Binomial heap
+
+                The forest of binomial trees. For each `k`, `Bk` either exists
+                in one instance or doesn't exist at all.
+
+                <img height="350" src="img/ads-06-binomial-heap.png"/>
+            </script>
+        </section>
+        <section data-markdown data-transition="none">
+            <script type="text/template">
+                ### Binomial heap
+
+                - More efficient merge operation
+                - Extract-min: delete root, merge
+                - Insert: add single node, merge
+                - Decrease-key: swim up whole sub-tree
+                - Delete: decrease-key `-∞`, then extract-min
+
+                <img height="300" src="img/ads-06-binomial-heap-extract-min.png"/>
+            </script>
+        </section>
+        <section data-markdown data-transition="none">
+            <script type="text/template">
+                ### Binomial heap, timings
+
+                | Op          | Binary heap  |Binomial heap|
+                |-------------|--------------|-------------|
+                |Insert       |  `O(log n)`  | `O(1)*`     |
+                |Extract-min  |  `O(log n)`  | `O(log n)`  |
+                |Decrease-key |  `O(log n)`  | `O(log n)`  |
+                |Delete       |  `O(log n)`  | `O(log n)`  |
+                |Merge        |  `O(n)`      | `O(1)*`      |
+                |Find-min     |  `O(1)`      | `O(1)`      |
+
+                - `*` amortized
+            </script>
+        </section>
+        <section data-markdown data-transition="none">
+            <script type="text/template">
+                ### Fibonacci heap
+
+                - Like the binomial heap, a Fibonacci heap is a collection of heap-ordered trees.
+                - However _not_ binomial trees
+                - Fibonacci sequence is used in the complexity analysis of its operations.
+
+
+            </script>
+        </section>
+
 
 
         <!-- ================== Bloom and Cuckoo filter ================== -->
