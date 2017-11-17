@@ -42,6 +42,7 @@
 <body>
 <div class="reveal">
     <div class="slides">
+
         <!-------------------------------------------------------------------------------------------------->
         <section data-markdown="" data-background="img/ads-00-background.png">
             <script type="text/template">
@@ -365,18 +366,17 @@
                 <img height="350" src="img/ads-06-binomial-heap.png"/>
             </script>
         </section>
-        <section data-markdown data-transition="none">
-            <script type="text/template">
-                ### Binomial heap
+        <section data-transition="none">
+            <h3>Binomial heap</h3>
+            <ul style="font-size:large">
+                <li>More efficient merge operation</li>
+                <li>Extract-min: delete root, merge</li>
+                <li>Insert: add single node, merge</li>
+                <li>Decrease-key: swim up whole sub-tree</li>
+                <li>Delete: decrease-key (-∞), then extract-min</li>
+            </ul>
 
-                - More efficient merge operation
-                - Extract-min: delete root, merge
-                - Insert: add single node, merge
-                - Decrease-key: swim up whole sub-tree
-                - Delete: decrease-key `-∞`, then extract-min
-
-                <img height="300" src="img/ads-06-binomial-heap-extract-min.png"/>
-            </script>
+            <img height="350" src="img/ads-06-binomial-heap-extract-min.png"/>
         </section>
         <section data-markdown data-transition="none">
             <script type="text/template">
@@ -402,6 +402,8 @@
                 - However _not_ binomial trees
                 - Fibonacci sequence is used in the complexity analysis of its operations
                 - All operation are trivial except `Delete-Min` and `Decrease-Key`
+
+                <img height="150" src="img/ads-07-fibonacci-heap-trees.png"/>
             </script>
         </section>
         <section data-markdown data-transition="none">
@@ -411,7 +413,7 @@
                 - Delete min and concatenate its children into root list
                 - Consolidate trees so that no two roots have same order
 
-                <img height=400" src="img/ads-08-fibonacci-heap-delete-min-1.png" />
+                <img src="img/ads-08-fibonacci-heap-delete-min-1.png" />
             </script>
         </section>
         <section data-markdown data-transition="none">
@@ -421,7 +423,7 @@
                 - Delete min and concatenate its children into root list
                 - Consolidate trees so that no two roots have same order
 
-                <img height=400" src="img/ads-08-fibonacci-heap-delete-min-2.png" />
+                <img src="img/ads-08-fibonacci-heap-delete-min-2.png" />
             </script>
         </section>
         <section data-markdown data-transition="none">
@@ -431,7 +433,7 @@
                 - Delete min and concatenate its children into root list
                 - Consolidate trees so that no two roots have same order
 
-                <img height=400" src="img/ads-08-fibonacci-heap-delete-min-3.png" />
+                <img src="img/ads-08-fibonacci-heap-delete-min-3.png" />
             </script>
         </section>
         <section data-markdown data-transition="none">
@@ -441,7 +443,7 @@
                 - Delete min and concatenate its children into root list
                 - Consolidate trees so that no two roots have same order
 
-                <img height=400" src="img/ads-08-fibonacci-heap-delete-min-4.png" />
+                <img src="img/ads-08-fibonacci-heap-delete-min-4.png" />
             </script>
         </section>
         <section data-markdown data-transition="none">
@@ -451,7 +453,7 @@
                 - Delete min and concatenate its children into root list
                 - Consolidate trees so that no two roots have same order
 
-                <img height=400" src="img/ads-08-fibonacci-heap-delete-min-5.png" />
+                <img src="img/ads-08-fibonacci-heap-delete-min-5.png" />
             </script>
         </section>
         <section data-markdown data-transition="none">
@@ -461,7 +463,7 @@
                 - Delete min and concatenate its children into root list
                 - Consolidate trees so that no two roots have same order
 
-                <img height=400" src="img/ads-08-fibonacci-heap-delete-min-6.png" />
+                <img src="img/ads-08-fibonacci-heap-delete-min-6.png" />
             </script>
         </section>
         <section data-markdown data-transition="none">
@@ -471,7 +473,7 @@
                 - Delete min and concatenate its children into root list
                 - Consolidate trees so that no two roots have same order
 
-                <img height=400" src="img/ads-08-fibonacci-heap-delete-min-7.png" />
+                <img src="img/ads-08-fibonacci-heap-delete-min-7.png" />
             </script>
         </section>
         <section data-markdown data-transition="none">
@@ -481,40 +483,42 @@
                 - Delete min and concatenate its children into root list
                 - Consolidate trees so that no two roots have same order
 
-                <img height=400" src="img/ads-08-fibonacci-heap-delete-min-8.png" />
+                <img src="img/ads-08-fibonacci-heap-delete-min-8.png" />
             </script>
         </section>
         <section data-markdown data-transition="none">
             <script type="text/template">
                 ### Fibonacci heap, delete-min
 
-                - Delete min and concatenate its children into root list
-                - Consolidate trees so that no two roots have same order
-
-                <img height=400" src="img/ads-08-fibonacci-heap-delete-min-9.png" />
+                - Then merge 41 and 18 etc...
+                <img src="img/ads-08-fibonacci-heap-delete-min-9.png" />
             </script>
         </section>
         <section data-markdown data-transition="none">
             <script type="text/template">
                 ### Fibonacci heap
 
-                - Theoretically is the best, but practically is not cache-friendly
-                - So there are better variants like `Pairing heap` and `Brodal heap`
+                - Theoretically Fibonacci heap is the best
+                - But practically is not cache-friendly
+                - Further improvements: `Pairing heap` and `Brodal heap`
+                - There is [Brodal-Okasaki purely functional variant](http://www.brics.dk/RS/96/37/BRICS-RS-96-37.pdf)
 
-                | Op          | Binomial heap| Fibonacci    | Brodal heap |
-                |-------------|--------------|--------------|-------------|
-                |Insert       |  `O(1)*`     |  `O(1)`      |  `O(1)`     |
-                |Extract-min  |  `O(log n)`  |  `O(log n)*` |  `O(log n)` |
-                |Decrease-key |  `O(log n)`  |  `O(1)*`     |  `O(1)`     |
-                |Delete       |  `O(log n)`  |  `O(1)`      |  `O(1)`     |
-                |Merge        |  `O(1)*`     |  `O(1)`      |  `O(1)`     |
-                |Find-min     |  `O(1)`      |  `O(1)`      |  `O(1)`     |
+                <img src="img/ads-08-time-complexity-summary-heaps.png"/>
 
             </script>
         </section>
+        <section data-markdown data-transition="none">
+            <script type="text/template">
+                ### Heaps, Good tutorials
 
+                With nice animated explanations
 
-
+                - [Binary heap](http://www.growingwiththeweb.com/data-structures/binary-heap/overview/)
+                - [Binomial heap](http://www.growingwiththeweb.com/data-structures/binomial-heap/overview/)
+                - [Fibonacci heap](http://www.growingwiththeweb.com/data-structures/fibonacci-heap/overview/)
+                - [Fibonacci heap visualization](http://cs.usfca.edu/~galles/JavascriptVisual/FibonacciHeap.html)
+            </script>
+        </section>
 
         <!-- ================== Bloom and Cuckoo filter ================== -->
         <section data-markdown="">
@@ -522,12 +526,13 @@
                 ### Bloom filters
 
                 - Probabilistic data structure
-                    1. if the element exists, then return true
-                    1. if it does not exist, than return maybe true
+                    1. if the element exists, then returns maybe true
+                    1. if it does not exist, than returns false
+                - _False Positive Probability_ = _FPP_
 
                 ```scala
                 def put(k: Key): Unit
-                def get(k: Key): Bool
+                def contains(k: Key): Bool
                 ```
             </script>
         </section>
@@ -547,7 +552,6 @@
                 - `n` is the size of the input set
                 - `m` is the size of the Bloom filter in bits
 
-                Bits per element vs. false positive probability
                 <img height="300" src="img/ads-09-bloom-filter-congraph.png" />
             </script>
         </section>
@@ -579,13 +583,6 @@
                 1. new inserted values displace old ones
                 1. supports `delete` as well
 
-            </script>
-        </section>
-        <section data-markdown="" data-transition="none">
-            <script type="text/template">
-                ### Cuckoo filters
-                Cuckoo hashing, general idea
-                <img src="img/ads-10-cuckoo-general-1.png" alt="">
             </script>
         </section>
         <section data-markdown="" data-transition="none">
@@ -641,7 +638,13 @@
 
         <section data-markdown="">
             <script type="text/template">
-                ### Useful links
+                ### Thank you for your kind attention.
+            </script>
+        </section>
+
+        <section data-markdown="">
+            <script type="text/template">
+                ### Links
 
                 #### MUST SEE!
                 - [Erik Demaine, 6.851: Advanced Data Structures](http://courses.csail.mit.edu/6.851/spring12/lectures/)
