@@ -411,95 +411,130 @@
                 ### Fibonacci heap, delete-min
 
                 - Delete min and concatenate its children into root list
-                - Consolidate trees so that no two roots have same order
+                - Consolidate trees: no two roots have the same rank
 
-                <img src="img/ads-08-fibonacci-heap-delete-min-1.png" />
+                <img height="540" src="img/ads-08-fibonacci-heap-delete-min-01.png" />
             </script>
         </section>
         <section data-markdown data-transition="none">
             <script type="text/template">
                 ### Fibonacci heap, delete-min
 
-                - Delete min and concatenate its children into root list
-                - Consolidate trees so that no two roots have same order
-
-                <img src="img/ads-08-fibonacci-heap-delete-min-2.png" />
+                - Enumerate all trees
+                - ...
+                <img height="540" src="img/ads-08-fibonacci-heap-delete-min-02.png" />
             </script>
         </section>
         <section data-markdown data-transition="none">
             <script type="text/template">
                 ### Fibonacci heap, delete-min
 
-                - Delete min and concatenate its children into root list
-                - Consolidate trees so that no two roots have same order
-
-                <img src="img/ads-08-fibonacci-heap-delete-min-3.png" />
+                - The array contains pointer to the tree index' rank
+                <img src="img/ads-08-fibonacci-heap-delete-min-03.png" />
             </script>
         </section>
         <section data-markdown data-transition="none">
             <script type="text/template">
                 ### Fibonacci heap, delete-min
 
-                - Delete min and concatenate its children into root list
-                - Consolidate trees so that no two roots have same order
-
-                <img src="img/ads-08-fibonacci-heap-delete-min-4.png" />
+                - Set the pointer to the tree of the rank 2
+                <img src="img/ads-08-fibonacci-heap-delete-min-04.png" />
             </script>
         </section>
         <section data-markdown data-transition="none">
             <script type="text/template">
                 ### Fibonacci heap, delete-min
 
-                - Delete min and concatenate its children into root list
-                - Consolidate trees so that no two roots have same order
-
-                <img src="img/ads-08-fibonacci-heap-delete-min-5.png" />
+                - Set the pointer to the tree of the rank 0
+                <img src="img/ads-08-fibonacci-heap-delete-min-05.png" />
             </script>
         </section>
         <section data-markdown data-transition="none">
             <script type="text/template">
                 ### Fibonacci heap, delete-min
 
-                - Delete min and concatenate its children into root list
-                - Consolidate trees so that no two roots have same order
-
-                <img src="img/ads-08-fibonacci-heap-delete-min-6.png" />
+                - We already have tree of rank 0, merge trees 17 and 23
+                <img src="img/ads-08-fibonacci-heap-delete-min-06.png" />
             </script>
         </section>
         <section data-markdown data-transition="none">
             <script type="text/template">
                 ### Fibonacci heap, delete-min
 
-                - Delete min and concatenate its children into root list
-                - Consolidate trees so that no two roots have same order
-
-                <img src="img/ads-08-fibonacci-heap-delete-min-7.png" />
+                - We already have tree of rank 1, merge trees 7 and 17
+                <img src="img/ads-08-fibonacci-heap-delete-min-07.png" />
             </script>
         </section>
         <section data-markdown data-transition="none">
             <script type="text/template">
                 ### Fibonacci heap, delete-min
 
-                - Delete min and concatenate its children into root list
-                - Consolidate trees so that no two roots have same order
-
-                <img src="img/ads-08-fibonacci-heap-delete-min-8.png" />
+                - We already have tree of rank 2, merge trees 7 and 24
+                <img src="img/ads-08-fibonacci-heap-delete-min-08.png" />
             </script>
         </section>
         <section data-markdown data-transition="none">
             <script type="text/template">
                 ### Fibonacci heap, delete-min
 
-                - Then merge 41 and 18 etc...
-                <img src="img/ads-08-fibonacci-heap-delete-min-9.png" />
+                - Set the pointer to the brand new tree of rank 3
+                <img src="img/ads-08-fibonacci-heap-delete-min-09.png" />
+            </script>
+        </section>
+        <section data-markdown data-transition="none">
+            <script type="text/template">
+                ### Fibonacci heap, delete-min
+
+                - Set the pointer to the tree of rank 1
+                <img src="img/ads-08-fibonacci-heap-delete-min-10.png" />
+            </script>
+        </section>
+        <section data-markdown data-transition="none">
+            <script type="text/template">
+                ### Fibonacci heap, delete-min
+
+                - Set the pointer to the tree of rank 0
+                <img src="img/ads-08-fibonacci-heap-delete-min-11.png" />
+            </script>
+        </section>
+        <section data-markdown data-transition="none">
+            <script type="text/template">
+                ### Fibonacci heap, delete-min
+
+                - We already have tree of rank 1, merge 41 and 18
+                <img src="img/ads-08-fibonacci-heap-delete-min-12.png" />
+            </script>
+        </section>
+        <section data-markdown data-transition="none">
+            <script type="text/template">
+                ### Fibonacci heap, delete-min
+
+                - ... done
+                <img src="img/ads-08-fibonacci-heap-delete-min-13.png" />
+            </script>
+        </section>
+        <section data-markdown data-transition="none">
+            <script type="text/template">
+                ### Fibonacci heap, delete-min
+
+                - Set the pointer to the brand new tree of rank 1 (why?)
+                <img src="img/ads-08-fibonacci-heap-delete-min-14.png" />
+            </script>
+        </section>
+        <section data-markdown data-transition="none">
+            <script type="text/template">
+                ### Fibonacci heap, delete-min
+
+                - The merge finished
+                <img src="img/ads-08-fibonacci-heap-delete-min-15.png" />
             </script>
         </section>
         <section data-markdown data-transition="none">
             <script type="text/template">
                 ### Fibonacci heap
 
-                - Theoretically Fibonacci heap is the best
-                - But practically is not cache-friendly
+                - `Decrease-key` requires to [mark nodes when cutting nodes children](https://stackoverflow.com/a/13535111/5066426)
+                - Theoretically Fibonacci heap is the best, not cache-friendly
                 - Further improvements: `Pairing heap` and `Brodal heap`
                 - There is [Brodal-Okasaki purely functional variant](http://www.brics.dk/RS/96/37/BRICS-RS-96-37.pdf)
 
