@@ -73,7 +73,8 @@
                 2. Other classification problems
                 3. Naïve persistent implementation is very inefficient
                 ----
-                - [Conchon, Filli&#226;tre _A Persistent Union-Find Data Structure_](https://www.lri.fr/~filliatr/ftp/publis/puf-wml07.pdf)
+                - [Conchon, Filli&#226;tre _A Persistent Union-Find Data Structure_](https://www.lri.fr/~filliatr/ftp/publis/puf-wml07.pdf),
+                [locally](pdf/puf-wml07.pdf)
                 - [Imperative Disjoint-set data structure](https://en.wikipedia.org/wiki/Disjoint-set_data_structure)
                 - [Kruskal’s MST & Union-Find](https://www.cs.cmu.edu/~ckingsf/class/02713-s13/lectures/lec03-othermst.pdf)
                 - [Haskell disjoint-sets](https://github.com/myegorov/disjoint-sets)
@@ -411,9 +412,9 @@
                 ### Fibonacci heap, delete-min
 
                 - Delete min and concatenate its children into root list
-                - Consolidate trees: no two roots have the same rank
+                - Consolidate trees: no two roots have the same order
 
-                <img height="540" src="img/ads-08-fibonacci-heap-delete-min-01.png" />
+                <img src="img/ads-08-fibonacci-heap-delete-min-01.png" />
             </script>
         </section>
         <section data-markdown data-transition="none">
@@ -422,14 +423,14 @@
 
                 - Enumerate all trees
                 - ...
-                <img height="540" src="img/ads-08-fibonacci-heap-delete-min-02.png" />
+                <img src="img/ads-08-fibonacci-heap-delete-min-02.png" />
             </script>
         </section>
         <section data-markdown data-transition="none">
             <script type="text/template">
                 ### Fibonacci heap, delete-min
 
-                - The array contains pointer to the tree index' rank
+                - The array contains pointer to the tree index' order
                 <img src="img/ads-08-fibonacci-heap-delete-min-03.png" />
             </script>
         </section>
@@ -437,7 +438,7 @@
             <script type="text/template">
                 ### Fibonacci heap, delete-min
 
-                - Set the pointer to the tree of the rank 2
+                - Set the pointer to the tree of the order 2
                 <img src="img/ads-08-fibonacci-heap-delete-min-04.png" />
             </script>
         </section>
@@ -445,7 +446,7 @@
             <script type="text/template">
                 ### Fibonacci heap, delete-min
 
-                - Set the pointer to the tree of the rank 0
+                - Set the pointer to the tree of the order 0
                 <img src="img/ads-08-fibonacci-heap-delete-min-05.png" />
             </script>
         </section>
@@ -453,7 +454,7 @@
             <script type="text/template">
                 ### Fibonacci heap, delete-min
 
-                - We already have tree of rank 0, merge trees 17 and 23
+                - Already have tree of order 0, merge trees 17 and 23
                 <img src="img/ads-08-fibonacci-heap-delete-min-06.png" />
             </script>
         </section>
@@ -461,7 +462,7 @@
             <script type="text/template">
                 ### Fibonacci heap, delete-min
 
-                - We already have tree of rank 1, merge trees 7 and 17
+                - We already have tree of order 1, merge trees 7 and 17
                 <img src="img/ads-08-fibonacci-heap-delete-min-07.png" />
             </script>
         </section>
@@ -469,7 +470,7 @@
             <script type="text/template">
                 ### Fibonacci heap, delete-min
 
-                - We already have tree of rank 2, merge trees 7 and 24
+                - We already have tree of order 2, merge trees 7 and 24
                 <img src="img/ads-08-fibonacci-heap-delete-min-08.png" />
             </script>
         </section>
@@ -477,7 +478,7 @@
             <script type="text/template">
                 ### Fibonacci heap, delete-min
 
-                - Set the pointer to the brand new tree of rank 3
+                - Set the pointer to the brand new tree of order 3
                 <img src="img/ads-08-fibonacci-heap-delete-min-09.png" />
             </script>
         </section>
@@ -485,7 +486,7 @@
             <script type="text/template">
                 ### Fibonacci heap, delete-min
 
-                - Set the pointer to the tree of rank 1
+                - Set the pointer to the tree of order 1
                 <img src="img/ads-08-fibonacci-heap-delete-min-10.png" />
             </script>
         </section>
@@ -493,7 +494,7 @@
             <script type="text/template">
                 ### Fibonacci heap, delete-min
 
-                - Set the pointer to the tree of rank 0
+                - Set the pointer to the tree of order 0
                 <img src="img/ads-08-fibonacci-heap-delete-min-11.png" />
             </script>
         </section>
@@ -501,7 +502,7 @@
             <script type="text/template">
                 ### Fibonacci heap, delete-min
 
-                - We already have tree of rank 1, merge 41 and 18
+                - We already have tree of order 1, merge 41 and 18
                 <img src="img/ads-08-fibonacci-heap-delete-min-12.png" />
             </script>
         </section>
@@ -517,7 +518,7 @@
             <script type="text/template">
                 ### Fibonacci heap, delete-min
 
-                - Set the pointer to the brand new tree of rank 1 (why?)
+                - Set pointer to the brand new tree of order 1 (why?)
                 <img src="img/ads-08-fibonacci-heap-delete-min-14.png" />
             </script>
         </section>
@@ -533,9 +534,9 @@
             <script type="text/template">
                 ### Fibonacci heap
 
-                - `Decrease-key` requires to [mark nodes when cutting nodes children](https://stackoverflow.com/a/13535111/5066426)
-                - Theoretically Fibonacci heap is the best, not cache-friendly
-                - Further improvements: `Pairing heap` and `Brodal heap`
+                - `Decrease-key` requires to [mark nodes](https://stackoverflow.com/a/13535111/5066426)
+                - In theory Fibonacci best, but not cache-obvious
+                - Further improvements: Pairing and Brodal heaps
                 - There is [Brodal-Okasaki purely functional variant](http://www.brics.dk/RS/96/37/BRICS-RS-96-37.pdf)
 
                 <img src="img/ads-08-time-complexity-summary-heaps.png"/>
@@ -552,6 +553,11 @@
                 - [Binomial heap](http://www.growingwiththeweb.com/data-structures/binomial-heap/overview/)
                 - [Fibonacci heap](http://www.growingwiththeweb.com/data-structures/fibonacci-heap/overview/)
                 - [Fibonacci heap visualization](http://cs.usfca.edu/~galles/JavascriptVisual/FibonacciHeap.html)
+
+                Just presentation pdfs
+                - [One](pdf/AA_fibonacci-heap.pdf) [two](pdf/Binomial-Fibonacci-heaps.pdf)
+                [three](pdf/L22binomialfibonacciheaps.pdf) [four](pdf/sub-Fibonacci-Heaps.pdf)
+
             </script>
         </section>
 
