@@ -21,22 +21,6 @@
         document.getElementsByTagName('head')[0].appendChild(link);
     </script>
     <style>
-        .info {
-            display: inline-block;
-        }
-
-        .textclass {
-            float: left;
-            width: 500px;
-            height: 227px;
-            line-height: 227px;
-        }
-
-        .imageclass {
-            float: right;
-            width: 200px;
-            height: 227px;
-        }
     </style>
 </head>
 <body>
@@ -44,23 +28,305 @@
     <div class="slides">
 
 <!-------------------------------------------------------------------------------------------------->
-<section data-markdown="" data-background="img/00-background.jpg"><script type="text/template">
-    ## Зачем нам нужно ФП?
-    <div class="fragment fade-up info">
-        <span class="textclass">Nick Linker</span>
-        <img class="imageclass" src="img/01-issart-logo.png"/>
-    </div>
 
-</script></section>
-<section data-markdown=""><script type="text/template">
-    ### Other data structures
+        <section data-markdown="" data-background="img/00-background.jpg">
+            <script type="text/template">
+                ## Зачем нам нужно ФП?
+                <div class="fragment fade-up info">
+                    <span class="textclass">Nick Linker</span>
+                    <img class="imageclass" src="img/01-issart-logo.png"/>
+                </div>
+            </script>
+        </section>
+        <section data-markdown="">
+            <script type="text/template">
+                ### Скромный слайд
 
-</script></section>
-<section data-markdown=""><script type="text/template">
-    ### Questions?
-    <img height="550" src="img/19-philosoraptor-root-of-all-evil.jpg"/>
+                - занимаюсь разработкой программного обеспечения N лет
+                - в-основном, бэкенд
+                - сталкивался с разными задачами, от оконных библиотек до бигдаты
+                - попутно изучил много языков программирования
+            </script>
+        </section>
+        <section data-markdown="">
+            <script type="text/template">
+                ### Так зачем ФП?
 
-</script></section>
+                - Тестирование и отладка
+                - Параллелизм и конкуррентность
+                - Ленивые вычисления
+                - Горячая замена кода
+                - Компилятору легче
+                - Программисту часто тоже легче
+            </script>
+        </section>
+        <section data-markdown="">
+            <script type="text/template">
+                ### Что такое ФП?
+
+                1. Неизменяемые значения и структуры данных
+                2. Чистые функций и изоляция побочных эффектов
+                3. Функции как значения и композиция функций
+
+                Применимо в любом языке <br/>
+                (но ФЯ делают это _удобным_)
+            </script>
+        </section>
+
+        <section data-markdown="" data-background="img/02-ripley-alien-3.jpg">
+            <script type="text/template">
+                ## Неизменяемые данные
+            </script>
+        </section>
+        <section>
+            <h3>Изменяемые объекты</h3>
+            <pre><code class="python" data-trim data-noescape>
+kane = {'name':'Kane', 'health':'normal'}
+dallas = {'name':'Dallas', 'health':'normal'}
+lambert = {'name':'Lambert', 'health':'normal'}
+group1 = [kane, dallas, lambert]
+
+explore_the_object(group1)
+
+print(group1)
+            </code></pre>
+            <pre class="fragment"><code class="python" data-trim data-noescape>
+# [ {'name': 'Kane', 'health': 'infected!'},  !!!!!
+#   {'name': 'Dallas', 'health': 'normal'},
+#   {'name': 'Lambert', 'health': 'normal'} ]
+            </code></pre>
+            <pre class="fragment"><code class="python" data-trim data-noescape>
+def explore_the_object(group):
+    group[0]['health'] = 'infected!'
+            </code></pre>
+        </section>
+        <section data-markdown="">
+            <script type="text/template">
+                ### и драматические последствия
+                <img height="500" src="img/02-chestburster-kane-alien.jpg" />
+            </script>
+        </section>
+        <section data-markdown="">
+            <script type="text/template">
+                ### А как надо?
+
+                ```python
+                def explore_the_object_purely(group):
+                    clones = copy.deepcopy(group)
+                    clones[0]['health'] = 'infected!'
+                    return clones
+                ```
+                ```python
+                group2 = explore_the_object_purely(group1)
+
+                print(group1)  # .. 'health': 'normal'
+                print(group2) # .. 'health': 'infected!'
+                ```
+                И мы можем что-то делать с group1 и group2
+            </script>
+        </section>
+        <section data-markdown="">
+            <script type="text/template">
+                ### Возникающие вопросы
+
+                - А deepcopy же дорого чтобы менять 1 поле?
+                - А что если у меня какая-то большая структура данных?
+                - А если Rajnesh всё-равно меняет мои списки?
+                - А как переходить от изменяемых к неизменяемым объектам?
+            </script>
+        </section>
+        <section data-markdown="">
+            <script type="text/template">
+                ### Некоторые из ответов
+
+                - Deepcopy дорого? - применяйте специальные функциональные структуры данных
+                - Большая структура данных? - собирайте изменения в батч
+                - Rajnesh меняет списки? - учить Rajnesh-а, проводить ревью кода
+                - Переход? - постепенно, начиная с самых маленьких классов
+            </script>
+        </section>
+        <section data-markdown="" data-background="img/03-ripley-cat-alien.jpg">
+            <script type="text/template">
+                ### Функциональные структуры данных
+
+                - Книга Крис Окасаки "Структуры данных"
+                - <a href="https://blog.acolyer.org/2015/11/27/hamt/">Статья Адриана Optimizing HAMT for JVM</a>
+                - Read-only врапперы (доступны практически везде под именем immutable, frozen, readonly)
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### Изменение неизменяемого, 1
+                1. Переиспользование как можно больше
+                2. Копирование пути
+
+                <img height="400" src="img/04-tree-1.png"/>
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### Изменение неизменяемого, 2
+                1. Переиспользование как можно больше
+                2. Копирование пути
+
+                <img height="400" src="img/04-tree-2.png"/>
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### Изменение неизменяемого, 3
+                1. Переиспользование как можно больше
+                2. Копирование пути
+
+                <img height="400" src="img/04-tree-3.png">
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### Изменение неизменяемого, 4
+                1. Переиспользование как можно больше
+                2. Копирование пути
+
+                <img height="400" src="img/04-tree-4.png">
+            </script>
+        </section>
+
+        <section data-markdown="" data-background="img/05-alien-ash.png">
+            <script type="text/template">
+                ## Чистые функции
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### Вернёмся к примеру выше
+
+                Функция с эффектами:
+                ```python
+                def explore_the_object(group):
+                    group[0]['health'] = 'infected!'
+                ```
+                Чистая функция:
+                ```python
+                def explore_the_object_purely(group):
+                    clones = copy.deepcopy(group)
+                    clones[0]['health'] = 'infected!'
+                    return clones
+                ```
+            </script>
+        </section>
+
+
+
+        <!--<section data-markdown="">-->
+            <!--<script type="text/template">-->
+                <!--### Функции как значения-->
+
+                <!--<div>-->
+                    <!--<video style="width: 40%; height: 40%;"-->
+                           <!--src="https://media1.giphy.com/media/l0Iy1DPCfobWsxOco/giphy.mp4"-->
+                           <!--poster="https://media1.giphy.com/media/l0Iy1DPCfobWsxOco/giphy_s.gif"-->
+                           <!--autoplay="" loop="" playsinline=""></video>-->
+                <!--</div>-->
+
+
+            <!--</script>-->
+        <!--</section>-->
+
+        <!--<section data-markdown="">-->
+            <!--<script type="text/template">-->
+                <!--### Чистые функции-->
+
+                <!-- - детерминированная от своих аргументов-->
+                <!-- - без _видимых_ побочных эффектов-->
+            <!--</script>-->
+        <!--</section>-->
+
+
+
+
+        <!--<section data-markdown="">-->
+            <!--<script type="text/template">-->
+                <!--### Questions?-->
+                <!--<img height="550" src="img/19-philosoraptor-root-of-all-evil.jpg"/>-->
+            <!--</script>-->
+        <!--</section>-->
+        <section data-markdown="">
+            <script type="text/template">
+                ## Дополнительный загруз
+            </script>
+        </section>
+        <section data-markdown="">
+            <script type="text/template">
+                ### Изменение неизменяемого, Javascript
+
+                ```javascript
+                function updateState0(state, action) {
+                    state.login.loggedInUser = undefined
+                    state.login.loggingIn = {user:action.user,drn:action.drn}
+                    state.login.loggingOut = undefined
+                }
+                ```
+                ```javascript
+                function updateState(state, action) {
+                    return {
+                        ...state,
+                        login: {
+                            loggedInUser: undefined,
+                            loggingIn: {user: action.user, drn: action.drn},
+                            loggingOut: undefined,
+                        }
+                    }
+                }
+                ```
+            </script>
+        </section>
+        <section data-markdown="">
+            <script type="text/template">
+                ### Изменение неизменяемого, Scala
+
+                ```scala
+                def updateState0(state: State, action: Action): Unit = {
+                    state.login.loggedInUser = None
+                    state.login.loggedInUser = Some(action.user, action.dur)
+                    state.login.loggedInUser = None
+                }
+                ```
+                ```scala
+                def updateState(state: State, action: Action): State = {
+                  state.copy(
+                    login = state.login.copy(
+                      loggedInUser = None,
+                      loggingIn = Some(action.user, action.dur),
+                      loggingOut = None
+                    )
+                  )
+                ```
+            </script>
+        </section>
+        <section data-markdown="">
+            <script type="text/template">
+                ### Изменение неизменяемого, Kotlin
+
+                ```kotlin
+                fun updateState0(state: State, action: Action) {
+                    state.login.loggedInUser = null
+                    state.login.loggedInUser = Pair(action.user, action.dur)
+                    state.login.loggedInUser = null
+                }
+                ```
+                ```kotlin
+                fun updateState(state: State, action: Action): State {
+                  return state.copy(
+                    login = state.login.copy(
+                      loggedInUser = None,
+                      loggingIn = Some(action.user, action.dur),
+                      loggingOut = None
+                    )
+                  )
+                ```
+            </script>
+        </section>
+
 <!-------------------------------------------------------------------------------------------------->
 
     </div>
