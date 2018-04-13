@@ -21,6 +21,22 @@
         document.getElementsByTagName('head')[0].appendChild(link);
     </script>
     <style>
+        .info {
+            display: inline-block;
+        }
+
+        .textclass {
+            float: left;
+            width: 500px;
+            height: 227px;
+            line-height: 227px;
+        }
+
+        .imageclass {
+            float: right;
+            width: 200px;
+            height: 227px;
+        }
     </style>
 </head>
 <body>
@@ -116,6 +132,7 @@ def explore_the_object(group):
                     clones[0]['health'] = 'infected!'
                     return clones
                 ```
+                Теперь `explore_the_object_purely` является чистой и не ломает `group1`
                 ```python
                 group2 = explore_the_object_purely(group1)
 
@@ -194,6 +211,24 @@ def explore_the_object(group):
         <section data-markdown="" data-background="img/05-alien-ash.png">
             <script type="text/template">
                 ## Чистые функции
+            </script>
+        </section>
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### Вернёмся к примеру выше
+
+                Функция с эффектами:
+                ```python
+                def explore_the_object(group):
+                    group[0]['health'] = 'infected!'
+                ```
+                Чистая функция:
+                ```python
+                def explore_the_object_purely(group):
+                    clones = copy.deepcopy(group)
+                    clones[0]['health'] = 'infected!'
+                    return clones
+                ```
             </script>
         </section>
         <section data-markdown="" data-transition="none">
