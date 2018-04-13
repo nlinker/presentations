@@ -213,81 +213,140 @@ def explore_the_object(group):
                 ## Чистые функции
             </script>
         </section>
-        <section data-markdown="" data-transition="none">
-            <script type="text/template">
-                ### Вернёмся к примеру выше
-
-                Функция с эффектами:
-                ```python
-                def explore_the_object(group):
-                    group[0]['health'] = 'infected!'
-                ```
-                Чистая функция:
-                ```python
-                def explore_the_object_purely(group):
-                    clones = copy.deepcopy(group)
-                    clones[0]['health'] = 'infected!'
-                    return clones
-                ```
-            </script>
-        </section>
-        <section data-markdown="" data-transition="none">
-            <script type="text/template">
-                ### Вернёмся к примеру выше
-
-                Функция с эффектами:
-                ```python
-                def explore_the_object(group):
-                    group[0]['health'] = 'infected!'
-                ```
-                Чистая функция:
-                ```python
-                def explore_the_object_purely(group):
-                    clones = copy.deepcopy(group)
-                    clones[0]['health'] = 'infected!'
-                    return clones
-                ```
-            </script>
-        </section>
-
-
-
-        <!--<section data-markdown="">-->
-            <!--<script type="text/template">-->
-                <!--### Функции как значения-->
-
-                <!--<div>-->
-                    <!--<video style="width: 40%; height: 40%;"-->
-                           <!--src="https://media1.giphy.com/media/l0Iy1DPCfobWsxOco/giphy.mp4"-->
-                           <!--poster="https://media1.giphy.com/media/l0Iy1DPCfobWsxOco/giphy_s.gif"-->
-                           <!--autoplay="" loop="" playsinline=""></video>-->
-                <!--</div>-->
-
-
-            <!--</script>-->
-        <!--</section>-->
-
-        <!--<section data-markdown="">-->
-            <!--<script type="text/template">-->
-                <!--### Чистые функции-->
-
-                <!-- - детерминированная от своих аргументов-->
-                <!-- - без _видимых_ побочных эффектов-->
-            <!--</script>-->
-        <!--</section>-->
-
-
-
-
-        <!--<section data-markdown="">-->
-            <!--<script type="text/template">-->
-                <!--### Questions?-->
-                <!--<img height="550" src="img/19-philosoraptor-root-of-all-evil.jpg"/>-->
-            <!--</script>-->
-        <!--</section>-->
         <section data-markdown="">
             <script type="text/template">
-                ## Дополнительный загруз
+                ### Вернёмся к примеру выше
+
+                Функция с эффектами:
+                ```python
+                def explore_the_object(group):
+                    group[0]['health'] = 'infected!'
+                ```
+                Чистая функция:
+                ```python
+                def explore_the_object_purely(group):
+                    clones = copy.deepcopy(group)
+                    clones[0]['health'] = 'infected!'
+                    return clones
+                ```
+            </script>
+        </section>
+        <section>
+            <h3>Ещё примерчики</h3>
+            <pre><code class="python" data-trim data-noescape>
+group = spaceship.get_names()
+def me_too(g):
+    g.append(alien) # возможны проблемы
+    return g
+            </code></pre>
+            <pre class="fragment"><code class="python" data-trim data-noescape>
+def get_names(self): # self у нас изменяемый?
+    g = []
+    for k, v in self.members.items()::
+        g.append(v['name'])
+    return g
+            </code></pre>
+            <pre class="fragment"><code class="python" data-trim data-noescape>
+def get_names(members): # нет видимых эффектов!
+    g = []
+    for k, v in members.items()::
+        g.append(v['name'])
+    return g
+            </code></pre>
+            <pre class="fragment"><code class="python" data-trim data-noescape>
+# именно так мы избавляемся от циклов
+def get_names(members):
+    return list(map(lambda v: v['name'], members.values())
+            </code></pre>
+        </section>
+        <section>
+            <h3>Больше примерчиков!</h3>
+            <pre><code class="python" data-trim data-noescape>
+def dispatch_emergency(members):
+    alive = next(filter(lambda x: x.is_alive(),
+                        members.values()), None)
+    if alive is not None:
+        msg = alive.make_message()
+        log.debug(alive + ' made the message ' + msg) # а?а?
+        send(msg)            # побочный эффект 1
+    elif len(members) == 0:
+        send('SOS')          # побочный эффект 2
+            </code></pre>
+            <pre class="fragment"><code class="python" data-trim data-noescape>
+def build_emergency_action(members):
+    alive = next(filter(lambda x: x.is_alive(),
+                        members.values()), None)
+    if alive is not None:
+        msg = alive.make_message()
+        return SendIntent(msg)      # 1
+    elif len(members) == 0:
+        return SendIntent('SOS')    # 2
+    return SendIntent(None)         # 3
+            </code></pre>
+        </section>
+        <section data-markdown="">
+            <script type="text/template">
+                ### Чем плохи эффекты?
+
+                Ради чего заниматься изоляцией побочных эффектов?
+                - они почти всегда требуют упорядочивания
+                - о них легко забыть
+                - связь между разными частями программы становится неявной
+                - сильно мешают повторному использованию
+                - сильно мешают компилятору или рантайму
+                - понижают безопасность системы (*)
+            </script>
+        </section>
+
+        <section data-markdown="" data-background="img/06-mother-computer.jpg">
+            <script type="text/template">
+                ## Функции как значения и композиция функций
+            </script>
+        </section>
+        <section data-markdown="">
+            <script type="text/template">
+                ### Функции как значения
+                ```python
+                i = 42
+                s = 'Warning!'
+                f1 = lambda x: 2 * x
+                f2 = lambda x, y: x + y + i  # Замыкание на i
+
+                def compose2(f, g):
+                    return lambda *a, **kw: f(g(*a, **kw))
+
+                f3 = compose2(f1, f2)
+
+                print(f3(1, 2)) # 90
+
+                f4 = compose2(f2, f1)
+                ```
+                map, filter, reduce, fold ..., list comprehension
+            </script>
+        </section>
+
+        <section data-markdown="">
+            <script type="text/template">
+                ### Материалы
+
+                1. <a href="https://haskell.org">haskell.org</a>
+                1. Тетрис, X-O, Жизнь, калькулятор на Haskell
+                1. Современная архитектура ФП
+                <a href="http://degoes.net/articles/modern-fp">1</a> и
+                <a href="http://degoes.net/articles/modern-fp-part-2">2</a>
+                1. Библиотеки про ФП для вашей платформы
+                1. Библиотека `Rx*` для вашей платформы
+            </script>
+        </section>
+
+        <section data-markdown="" data-transition="none">
+            <script type="text/template">
+                ## Приложение
+                <div>
+                    <video style="width: 40%; height: 40%;"
+                           src="img/alien_1.mp4"
+                           autoplay="" loop="" playsinline=""></video>
+                </div>
             </script>
         </section>
         <section data-markdown="">
@@ -296,9 +355,9 @@ def explore_the_object(group):
 
                 ```javascript
                 function updateState0(state, action) {
-                    state.login.loggedInUser = undefined
-                    state.login.loggingIn = {user:action.user,drn:action.drn}
-                    state.login.loggingOut = undefined
+                    state.login.loggedInUser= undefined
+                    state.login.loggingIn= {user:action.user, dur:action.dur}
+                    state.login.loggingOut= undefined
                 }
                 ```
                 ```javascript
@@ -307,7 +366,7 @@ def explore_the_object(group):
                         ...state,
                         login: {
                             loggedInUser: undefined,
-                            loggingIn: {user: action.user, drn: action.drn},
+                            loggingIn: {user: action.user, dur: action.dur},
                             loggingOut: undefined,
                         }
                     }
@@ -353,9 +412,9 @@ def explore_the_object(group):
                 fun updateState(state: State, action: Action): State {
                   return state.copy(
                     login = state.login.copy(
-                      loggedInUser = None,
-                      loggingIn = Some(action.user, action.dur),
-                      loggingOut = None
+                      loggedInUser = null,
+                      loggingIn = Pair(action.user, action.dur),
+                      loggingOut = null
                     )
                   )
                 ```
