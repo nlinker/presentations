@@ -320,29 +320,7 @@ def build_emergency_action(members):
 
                 print(f3(1, 2)) # 90
 
-                f4 = compose2(f2, f1)
-                ```
-                map, filter, reduce, fold ..., list comprehension
-            </script>
-        </section>
-        <section data-markdown="">
-            <script type="text/template">
-                ### Функции как значения
-
-                ```python
-                i = 42
-                s = 'Warning!'
-                f1 = lambda x: 2 * x
-                f2 = lambda x, y: x + y + i  # Замыкание на i
-
-                def compose2(f, g):
-                    return lambda *a, **kw: f(g(*a, **kw))
-
-                f3 = compose2(f1, f2)
-
-                print(f3(1, 2)) # 90
-
-                f4 = compose2(f2, f1)
+                f4 = compose2(f2, f1) # Что выдаст?
                 ```
                 map, filter, reduce, fold ..., list comprehension
             </script>
