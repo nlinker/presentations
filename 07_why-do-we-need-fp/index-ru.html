@@ -69,11 +69,11 @@
                 ### Так зачем ФП?
 
                 - Тестирование и отладка
-                - Параллелизм и конкуррентность
+                - Параллелизм и многопоточность
                 - Ленивые вычисления
-                - Горячая замена кода
                 - Компилятору легче
                 - Программисту часто тоже легче
+                - Горячая замена кода
             </script>
         </section>
         <section data-markdown="">
@@ -267,7 +267,7 @@ def dispatch_emergency(members):
                         members.values()), None)
     if alive is not None:
         msg = alive.make_message()
-        log.debug(alive + ' made the message ' + msg) # а?а?
+        log.debug(alive + ' made the message ' + msg) # Ы?
         send(msg)            # побочный эффект 1
     elif len(members) == 0:
         send('SOS')          # побочный эффект 2
@@ -278,10 +278,10 @@ def build_emergency_action(members):
                         members.values()), None)
     if alive is not None:
         msg = alive.make_message()
-        return SendIntent(msg)      # 1
+        return SendIntent(msg)      # значение 1
     elif len(members) == 0:
-        return SendIntent('SOS')    # 2
-    return SendIntent(None)         # 3
+        return SendIntent('SOS')    # значение 2
+    return SendIntent(None)         # значение 3
             </code></pre>
         </section>
         <section data-markdown="">
@@ -306,6 +306,7 @@ def build_emergency_action(members):
         <section data-markdown="">
             <script type="text/template">
                 ### Функции как значения
+
                 ```python
                 i = 42
                 s = 'Warning!'
@@ -322,6 +323,40 @@ def build_emergency_action(members):
                 f4 = compose2(f2, f1)
                 ```
                 map, filter, reduce, fold ..., list comprehension
+            </script>
+        </section>
+        <section data-markdown="">
+            <script type="text/template">
+                ### Функции как значения
+
+                ```python
+                i = 42
+                s = 'Warning!'
+                f1 = lambda x: 2 * x
+                f2 = lambda x, y: x + y + i  # Замыкание на i
+
+                def compose2(f, g):
+                    return lambda *a, **kw: f(g(*a, **kw))
+
+                f3 = compose2(f1, f2)
+
+                print(f3(1, 2)) # 90
+
+                f4 = compose2(f2, f1)
+                ```
+                map, filter, reduce, fold ..., list comprehension
+            </script>
+        </section>
+        <section data-markdown="">
+            <script type="text/template">
+                ### foldLeft и foldRight
+
+                На десерт
+
+                <img height="230" src="img/07-left-fold-transformation.png" />
+                <img height="230" src="img/07-right-fold-transformation.png" />
+
+                Если `f` хорошая, то можно эффективно распараллелить
             </script>
         </section>
 
@@ -341,7 +376,7 @@ def build_emergency_action(members):
 
         <section data-markdown="" data-transition="none">
             <script type="text/template">
-                ## Приложение
+                ## Приложение для любознательных
                 <div>
                     <video style="width: 40%; height: 40%;"
                            src="img/alien_1.mp4"
@@ -417,6 +452,24 @@ def build_emergency_action(members):
                       loggingOut = null
                     )
                   )
+                ```
+            </script>
+        </section>
+        <section data-markdown="">
+            <script type="text/template">
+                ### Изменение неизменяемого, Haskell
+
+                ```haskell
+                updateState0 = undefined
+                ```
+                ```haskell
+                -- with lens library
+                updateState :: State -> Action -> State
+                updateState state action =
+                    state ^. login
+                        & loggedInUser .~ Nothing
+                        & loggingIn .~ Just (Pair user action)
+                        & loggingOut .~ Nothing
                 ```
             </script>
         </section>
