@@ -263,7 +263,7 @@ def get_names(members):
             <h3>Больше примерчиков!</h3>
             <pre><code class="python" data-trim data-noescape>
 def dispatch_emergency(members):
-    alive = next(filter(lambda x: x.is_alive(),
+    alive = next(filter(lambda m: m.is_alive(),
                         members.values()), None)
     if alive is not None:
         msg = alive.make_message()
@@ -274,7 +274,7 @@ def dispatch_emergency(members):
             </code></pre>
             <pre class="fragment"><code class="python" data-trim data-noescape>
 def build_emergency_action(members):
-    alive = next(filter(lambda x: x.is_alive(),
+    alive = next(filter(lambda m: m.is_alive(),
                         members.values()), None)
     if alive is not None:
         msg = alive.make_message()
@@ -282,6 +282,10 @@ def build_emergency_action(members):
     elif len(members) == 0:
         return SendIntent('SOS')    # значение 2
     return SendIntent(None)         # значение 3
+            </code></pre>
+            </code></pre>
+            <pre class="fragment"><code class="python" data-trim data-noescape>
+dispatch(emergency_action) # побочный эффект `send` здесь
             </code></pre>
         </section>
         <section data-markdown="">
