@@ -242,14 +242,14 @@ def me_too(g):
             <pre class="fragment"><code class="python" data-trim data-noescape>
 def get_names(self): # self у нас изменяемый?
     g = []
-    for k, v in self.members.items()::
+    for k, v in self.members.items():
         g.append(v['name'])
     return g
             </code></pre>
             <pre class="fragment"><code class="python" data-trim data-noescape>
 def get_names(members): # нет видимых эффектов!
     g = []
-    for k, v in members.items()::
+    for k, v in members.items():
         g.append(v['name'])
     return g
             </code></pre>
