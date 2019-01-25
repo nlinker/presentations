@@ -40,6 +40,23 @@
     </style>
 </head>
 <body>
+<style>
+    .wrapper
+    {
+        width:100px;
+        height:250px;
+        position:relative;
+    }
+
+    .arrow
+    {
+        width:10px;
+        height:10px;
+        position:absolute;
+        right:0px;
+        bottom:0px;
+    }
+</style>
 <div class="reveal">
     <div class="slides">
 
@@ -47,8 +64,16 @@
 
         <section id="00" data-markdown="" data-background="img/00-background.png">
             <script type="text/template">
-                ## Как работают GAN модели?
-                <span class="textclass">Nick Linker</span>
+                <h1> Как работают GAN модели? </h1>
+
+                <div class="fragment fade-up info">
+                    <div class="wrapper">
+                        <div class="arrow">
+                            <span class="textclass">Nick Linker</span>
+                        </div>
+                    </div>
+
+                </div>
             </script>
         </section>
         <section id="01" data-markdown="">
@@ -106,45 +131,46 @@
             <script type="text/template">
                 ### GAN, функция потерь
 
-                - Первая часть: когда ошибается D на оригинальных данных
-                - Вторая часть: когда ошибается D на сгенерированных данных
+                - Первое слагаемое: когда D ошибается на оригинальных данных
+                - Второе слагаемое: когда D ошибается на сгенерированных данных
 
-
-                <img height="97" src="img/07-loss-function.png" />
+                <img height="110" src="img/07-loss-function.png" />
             </script>
         </section>
         <section id="08" data-markdown="">
             <script type="text/template">
-                ### Откуда взялся min(max(...))
+                ### Откуда взялся `min(max(...))`
 
-                TODO
+                - TODO
+                - TODO
+                - TODO
             </script>
         </section>
-        <section id="x3" data-markdown="">
-            <script type="text/template">
-                ###
-            </script>
-        </section>
-        <section id="x4" data-markdown="">
-            <script type="text/template">
-                ###
-            </script>
-        </section>
-        <section id="x5" data-markdown="">
-            <script type="text/template">
-                ###
-            </script>
-        </section>
-        <section id="x6" data-markdown="">
-            <script type="text/template">
-                ###
-            </script>
-        </section>
-        <section id="x7" data-markdown="">
-            <script type="text/template">
-                ###
-            </script>
-        </section>
+        <!--<section id="x3" data-markdown="">-->
+            <!--<script type="text/template">-->
+                <!--###-->
+            <!--</script>-->
+        <!--</section>-->
+        <!--<section id="x4" data-markdown="">-->
+            <!--<script type="text/template">-->
+                <!--###-->
+            <!--</script>-->
+        <!--</section>-->
+        <!--<section id="x5" data-markdown="">-->
+            <!--<script type="text/template">-->
+                <!--###-->
+            <!--</script>-->
+        <!--</section>-->
+        <!--<section id="x6" data-markdown="">-->
+            <!--<script type="text/template">-->
+                <!--###-->
+            <!--</script>-->
+        <!--</section>-->
+        <!--<section id="x7" data-markdown="">-->
+            <!--<script type="text/template">-->
+                <!--###-->
+            <!--</script>-->
+        <!--</section>-->
 
 
 <!-------------------------------------------------------------------------------------------------->
