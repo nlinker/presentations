@@ -12,7 +12,7 @@ $$q_*(s', a') \leftarrowtail a'$$
 \[
 \mathrlap{\underbrace{q(s, a)}_{\text{new}}}
 \leftarrow (1 - \alpha)
-\mathrlap{\underbrace{q(s, a)}_{\text{old}}}
+\mathrlap{\underbrace{q(s, a)}_{\text{cur}}}
 + \alpha(
 \mathrlap{\underbrace{r(s, a)}_{\text{after $a$}}}
 + \gamma \max_{a'}
@@ -24,12 +24,12 @@ $$q_*(s', a') \leftarrowtail a'$$
 \[
 \mathrlap{\underbrace{q(s, a)}_{\text{new}}}
 \leftarrow
-\mathrlap{\underbrace{q(s, a)}_{\text{old}}}
+\mathrlap{\underbrace{q(s, a)}_{\text{cur}}}
 + \alpha(
 \mathrlap{\underbrace{r(s, a)}_{\text{after $a$}}}
 + \gamma \max_{a'}
 \mathrlap{\underbrace{q(s',a')}_{\text{estimate}}}
-- \mathrlap{\underbrace{q(s, a)}_{\text{old}}}
+- \mathrlap{\underbrace{q(s, a)}_{\text{cur}}}
 )
 \]
 ```
