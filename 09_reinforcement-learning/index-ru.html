@@ -46,10 +46,10 @@
         }
 
         .reveal section {
-            font-size: 34px !important;
+            font-size: 0.8em !important;
         }
         .reveal section pre code {
-            font-size: 0.7em !important;
+            font-size: 1.1em !important;
         }
     </style>
 </head>
@@ -261,27 +261,54 @@
                 запомним эту мысль
             </script>
         </section>
-        <section id="05.2" data-markdown="">
+        <section id="05.2" data-markdown="" data-transition="none">
             <script type="text/template">
                 ### Q-learning, 2
 
                 - Таким образом мы можем итеративно обновлять `q`-функцию аппроксимируя `q_*`
                 - Как будто вытягиваем себя за волосы :-)
+                - `α` - ещё один гиперпараметр, `α ∈ [0, 1]`
                 - Есть теоремы о сходимости
 
                 <img height="100" style="background:none; border:none; box-shadow:none;" src="img/05-q-learning-renew-1.png" alt="renew q function 1"/>
-
             </script>
         </section>
-        <section id="05.3" data-markdown="">
+        <section id="05.3" data-markdown="" data-transition="none">
             <script type="text/template">
                 ### Q-learning, 3
 
                 - Таким образом мы можем итеративно обновлять `q`-функцию аппроксимируя `q_*`
                 - Как будто вытягиваем себя за волосы :-)
+                - `α` - ещё один гиперпараметр, `α ∈ [0, 1]`
                 - Есть теоремы о сходимости
 
                 <img height="100" style="background:none; border:none; box-shadow:none;" src="img/05-q-learning-renew-2.png" alt="renew q function 2"/>
+            </script>
+        </section>
+        <section id="05.4" data-markdown="" data-transition="none">
+            <script type="text/template">
+                ### Q-learning, 4
+
+                ```python
+                # Предварительно генерируем N эпизодов
+                Q = defaultdict(lambda: np.zeros(env.action_space.n))
+                policy = make_epsilon_greedy_policy(Q, epsilon, env.action_space.n)
+                for i_episode in range(num_episodes):
+                    state = env.reset()
+                    for t in itertools.count():
+                        action_probs = policy(state)
+                        action = np.random.choice(np.arange(len(action_probs)), p=action_probs)
+                        next_state, reward, done, _ = env.step(action)
+
+                        best_next_action = np.argmax(Q[next_state])
+                        td_target = reward + gamma * Q[next_state][best_next_action]
+                        td_delta = td_target - Q[state][action]
+                        Q[state][action] += alpha * td_delta
+                        if done:
+                            break
+                        state = next_state
+                return Q, stats
+                ```
 
             </script>
         </section>
