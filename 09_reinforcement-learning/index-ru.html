@@ -91,7 +91,7 @@
                 - AlphaZero, AlphaStar, OpenAI Five
             </script>
         </section>
-        <section id="01.1" data-markdown="" data-state="something">
+        <section id="01.1" data-markdown="">
             <script type="text/template">
                 ### Примеры использования, 1
                 [Learning to Swing-Up and Balance from Scratch](https://youtu.be/Lt-KLtkDlh8)
@@ -99,7 +99,7 @@
                 <video height="400" width="800" controls="" data-autoplay="" src="img/01-cartpole-edited.mp4"></video>
             </script>
         </section>
-        <section id="01.2" data-markdown="" data-state="something">
+        <section id="01.2" data-markdown="">
             <script type="text/template">
                 ### Примеры использования, 2
                 [Робот, бросающий вещи](https://tossingbot.cs.princeton.edu/)
@@ -107,7 +107,7 @@
                 <img height="400" src="img/01-tossingbot.png" alt="Tossingbot"/>
             </script>
         </section>
-        <section id="01.3" data-markdown="" data-state="something">
+        <section id="01.3" data-markdown="">
             <script type="text/template">
                 ### Примеры использования, 3
 
@@ -115,7 +115,7 @@
                 <video height="400" width="800" controls="" data-autoplay="" src="img/01-tossingbot-10k.mp4"></video>
             </script>
         </section>
-        <section id="01.4" data-markdown="" data-state="something">
+        <section id="01.4" data-markdown="">
             <script type="text/template">
                 ### Примеры использования, 4
 
@@ -125,7 +125,7 @@
                 <img height="400" src="img/01-arkanoid.gif" alt="arkanoid"/>
             </script>
         </section>
-        <section id="01.5" data-markdown="" data-state="something">
+        <section id="01.5" data-markdown="">
             <script type="text/template">
                 ### Примеры использования, 5
 
@@ -135,7 +135,7 @@
             </script>
         </section>
 
-        <section id="02.1" data-markdown="" data-state="something">
+        <section id="02.1" data-markdown="">
             <script type="text/template">
                 ### Основные элементы RL, 1
                 <div class="column-left">
@@ -154,7 +154,7 @@
                 </div>
             </script>
         </section>
-        <section id="02.2" data-markdown="" data-state="something">
+        <section id="02.2" data-markdown="">
             <script type="text/template">
                 ### Основные элементы RL, 2
 
@@ -169,7 +169,7 @@
                 </p>
             </script>
         </section>
-        <section id="02.3" data-markdown="" data-state="something">
+        <section id="02.3" data-markdown="">
             <script type="text/template">
                 ### Основные элементы RL, 3
                 <div class="column-left">
@@ -177,13 +177,13 @@
                 </div>
                 <div class="column-right">
                     <p>Стратегия показывает куда идти из клетки.</p>
-                    <p>`V(s)` - ожидаемый выигрыш, если мы находимся в клетке,</p>
+                    <p>`v(s)` - ожидаемый выигрыш, если мы находимся в клетке,</p>
                     <p>Вознаграждение в жёлтой клетке `+1.0`, в красных `-1.0`, в остальных `0`.</p>
-                    <p>`Q(s,a)` не отображена</p>
+                    <p>`q(s,a)` не отображена</p>
                 </div>
             </script>
         </section>
-        <section id="02.4" data-markdown="" data-state="something">
+        <section id="02.4" data-markdown="">
             <script type="text/template">
                 ### Основные элементы RL, 4
 
@@ -191,7 +191,7 @@
                 <img src="img/02-v_star-and-q_star-defs.png" alt="v_star and q_star" />
             </script>
         </section>
-        <section id="02.5" data-markdown="" data-state="something">
+        <section id="02.5" data-markdown="">
             <script type="text/template">
                 ### Основные элементы RL, 5
                 <div class="column-left">
@@ -205,23 +205,83 @@
             </script>
         </section>
 
-        <section id="03" data-markdown="" data-state="something">
+        <section id="03" data-markdown="">
             <script type="text/template">
                 ### Exploration vs Exploitation
 
-                Дилемма: использовать известные возможности как можно лучше или пробовать новые?
+                Дилемма: использовать известные возможности как можно лучше или пробовать новые? ([Pic source](https://www.deviantart.com/drkhorn/art/Azure-dragon-509209905))
 
-                <img height="380" src="img/03-azure-dragon.gif"/>
+                <img height="380" src="img/03-azure_dragon_by_drkhorn.png" alt="azure dragon fanart"/>
             </script>
         </section>
 
-        <section id="04" data-markdown="" data-state="something">
+        <section id="04.1" data-markdown="">
             <script type="text/template">
-                ### Марковский процесс
+                ### Марковский процесс, MDP, 1
 
-                - Дальнейший выигрыш зависит только от текущего состояния.
-                - Если известны вероятности переходов, то гарантируется наличие опт стратегии
+                - Множество задач может быть поставлено как MDP.
+                - Выигрыш зависит только от текущего состояния и дальнейших действий.
+                - Цепь Маркова с вознаграждениями за переходы.
 
+                <video height="300" controls loop data-autoplay src="img/04-markov-chain.mp4"></video>
+            </script>
+        </section>
+        <section id="04.2" data-markdown="">
+            <script type="text/template">
+                ### Марковский процесс, MDP, 2
+
+                - Методы решения: Value Iteration, Policy Iteration, SARSA
+                - Предполагается знание вероятностной модели
+                - Уравнение Беллмана (= dynamic programming)
+
+                <img height="300" src="img/04-bellman-equation.png" alt="bellman equation"/>
+            </script>
+        </section>
+        <section id="04.3" data-markdown="">
+            <script type="text/template">
+                ### Value iteration, demo
+
+                Процесс итеративно обновляет значения `v(s)`
+
+                <video height="400" controls loop data-autoplay src="img/04-value-iteration-demo.mp4"></video>
+            </script>
+        </section>
+
+
+        <section id="05.1" data-markdown="">
+            <script type="text/template">
+                ### Q-learning, 1
+
+                - Что если модель построить невозможно?
+                - Снова взглянем на уравнением Беллмана
+                - Мы можем вычислить максимальное будущее вознаграждение как `r` + `γ`&times;максимальное будущее вознаграждение в следующем состоянии `s'`
+
+                <img height="100" style="background:none; border:none; box-shadow:none;" src="img/05-bellman-deterministic.png" alt="bellman equation"/>
+
+                запомним эту мысль
+            </script>
+        </section>
+        <section id="05.2" data-markdown="">
+            <script type="text/template">
+                ### Q-learning, 2
+
+                - Таким образом мы можем итеративно обновлять `q`-функцию аппроксимируя `q_*`
+                - Как будто вытягиваем себя за волосы :-)
+                - Есть теоремы о сходимости
+
+                <img height="100" style="background:none; border:none; box-shadow:none;" src="img/05-q-learning-renew-1.png" alt="renew q function 1"/>
+
+            </script>
+        </section>
+        <section id="05.3" data-markdown="">
+            <script type="text/template">
+                ### Q-learning, 3
+
+                - Таким образом мы можем итеративно обновлять `q`-функцию аппроксимируя `q_*`
+                - Как будто вытягиваем себя за волосы :-)
+                - Есть теоремы о сходимости
+
+                <img height="100" style="background:none; border:none; box-shadow:none;" src="img/05-q-learning-renew-2.png" alt="renew q function 2"/>
 
             </script>
         </section>
