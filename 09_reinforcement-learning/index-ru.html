@@ -309,40 +309,90 @@
                         state = next_state
                 return Q, stats
                 ```
-
             </script>
         </section>
 
+        <section id="06.1" data-markdown="">
+            <script type="text/template">
+                ### Deep Q-learning, 1
 
-        <!--<section id="03.1" data-markdown="" data-state="something">-->
-            <!--<script type="text/template">-->
-                <!--### Основные элементы RL, 2-->
+                - Простая мысль: а давайте будем приближать Q-функцию нейронной сетью?
 
+                <img height="300" src="img/06-tenor-awesome.gif" alt="awesome"/>
+            </script>
+        </section>
+        <section id="06.2" data-markdown="">
+            <script type="text/template">
+                ### Многие пытались
 
-            <!--</script>-->
-        <!--</section>-->
+                - Данные последовательные, паразитная корреляция
+                - Стратегия сильно скачет от малых изменений `Q`
+                - Стратегия может осциллировать
+                - Агента бросает в экстремальные случаи
+                - Масштаб значений `Q` и `R` неизвестен
+                - Нестабильное обратное распространение ошибки
+            </script>
+        </section>
+        <section id="06.3" data-markdown="">
+            <script type="text/template">
+                ### Deepmind сделали так
 
-        <!--<section id="04.1" data-markdown="">-->
-            <!--<script type="text/template">-->
-                <!--### Сравнение с ГА-->
+                1. Experience replay, циклический массив троек `(s4, a, r)`
+                2. Ввели 2 одинаковые нейронные сети
+                    - Prediction, которая учится на каждом минибатче
+                    - Target, которая обновляется из Prediction каждые 10к шагов
+                3. Обрезание весов до `[-1, 1]`, и...
 
-                <!--<video height="460" width="800" controls="" data-autoplay="" src="img/03-dl-cars.mp4"></video>-->
-                <!--[Deep Learning Cars](https://youtu.be/)-->
-            <!--</script>-->
-        <!--</section>-->
+                ----
+                - Experience replay: сэмплинг разрушает корреляцию
+                - Experience replay: учится на новых стратегиях
+                - Freeze target-NN: более стабильные стратегии и агент
+                - Clipping: Значения `Q` и `R` теперь нормальные, backprop ok
+            </script>
+        </section>
+        <section id="06.4" data-markdown="">
+            <script type="text/template">
+                ### Deep Q-Learning
 
+                ```python
+                nn.Conv2d(3, 16, kernel_size=5, stride=2)
+                nn.BatchNorm2d(16)  # relu
+                nn.Conv2d(16, 32, kernel_size=5, stride=2)
+                nn.BatchNorm2d(32)  # relu
+                nn.Conv2d(32, 32, kernel_size=5, stride=2)
+                nn.BatchNorm2d(32)  # relu
+                # loss = MSE
+                ```
+                <img height="300" src="img/06-dqn-architecture.png" alt="dqn-architecture"/>
+            </script>
+        </section>
+        <section id="06.5" data-markdown="">
+            <script type="text/template">
+                ### Deep Q-Learning
 
+                - Можно распарралелить ([source](https://youtu.be/Aut32pR5PQA))!
 
+                <video height="400" controls loop data-autoplay src="img/06-dqn-cars.mp4"></video>
+            </script>
+        </section>
 
+        <section id="07" data-markdown="">
+            <script type="text/template">
+                ### Результаты
 
+                - [Опубликованы командой Deepmind](https://web.stanford.edu/class/psych209/Readings/MnihEtAlHassibis15NatureControlDeepRL.pdf)
 
-        <!--<section id="20" data-markdown="" data-transition="none">-->
-            <!--<script type="text/template">-->
-                <!--### Спасибо за внимание-->
-                <!--<img height="400" src="img/20-thanks.jpg" />-->
-            <!--</script>-->
-        <!--</section>-->
+                <img height="400" width="800" src="img/07-deepmind-results.png" alt="dqn-architecture"/>
+            </script>
+        </section>
 
+        <section id="08" data-markdown="">
+            <script type="text/template">
+                ### Спасибо за внимание
+
+                <img height="500" src="img/20-agents.jpg" alt="agents"/>
+            </script>
+        </section>
 
 <!-------------------------------------------------------------------------------------------------->
 
