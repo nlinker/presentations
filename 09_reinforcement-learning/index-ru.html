@@ -297,12 +297,11 @@
                 ### Q-learning, 4
 
                 ```python
-                # Предварительно генерируем N эпизодов
                 Q = defaultdict(lambda: np.zeros(env.action_space.n))
                 policy = make_epsilon_greedy_policy(Q, epsilon, env.action_space.n)
                 for i_episode in range(num_episodes):
                     state = env.reset()
-                    for t in itertools.count():
+                    for _t in itertools.count():
                         action_probs = policy(state)
                         action = np.random.choice(np.arange(len(action_probs)), p=action_probs)
                         next_state, reward, done, _ = env.step(action)
