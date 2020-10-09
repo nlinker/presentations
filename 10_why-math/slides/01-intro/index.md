@@ -11,12 +11,12 @@
 
 ## Сейчас в Whamcloud <!-- .element: class="orange" -->
 
-Занимается созданием системного ПО для облачной инфраструктуры
+Компания занимается созданием системного ПО для облачной инфраструктуры
  
 <img src="slides/assets/logo/rust-white.png" style="height: 2.5em; vertical-align: middle" alt=""/>в продакшене
 
-![whamcloud](./slides/01-intro/servers.jpeg) <!-- .element: style="max-height: 300px;" class="plain"  -->
-
+![whamcloud](slides/01-intro/servers.jpeg) <!-- .element: style="max-height: 300px;" class="plain"  -->
+<img src="slides/01-intro/servers.jpeg" style="max-height: 300px" class="plain" />
 ----
 
 ## Вопрос о Жизни, Вселенной и всём таком
