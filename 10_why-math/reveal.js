@@ -1,1 +1,0 @@
-/Users/nick/omsu/presentations/reveal.js
