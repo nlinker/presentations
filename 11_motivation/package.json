@@ -1,0 +1,14 @@
+{
+  "version": "0.0.1",
+  "name": "10_why-math",
+  "private": true,
+  "description": "Зачем математика программисту?",
+  "scripts": {
+    "start": "../reveal.js/node_modules/.bin/gulp --gulpfile ../reveal.js/gulpfile.js serve --root=./"
+  },
+  "author": {
+    "name": "Nick Linker",
+    "email": "nlinker@gmail.com"
+  },
+  "license": "CC BY-NC 4.0"
+}
