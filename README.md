@@ -13,4 +13,6 @@ git diff --cached --submodule
 Routine to update submodule
 ```
 git submodule update --remote reveal.js
+git add reveal.js
+git commit -m "update reveal.js"      
 ```
