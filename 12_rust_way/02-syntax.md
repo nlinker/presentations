@@ -1,4 +1,3 @@
-<!--
 ### Почему у Раста такой шумный синтаксис?
 
 <style>
@@ -25,6 +24,7 @@ pub fn read<P: AsRef<Path>>(path: P) -> io::Result<Vec<u8>> {
 (этот код взят из [статьи тов. Matklad](https://matklad.github.io/2023/01/26/rusts-ugly-syntax.html))
 <img src="slides/03/qr_matklad.png" height=150 alt="qr_matklad.png"></img>
 
+
 #### Низкоуровневый язык!
 
 1. В функции `read` параметр `path` обобщённый
@@ -44,6 +44,7 @@ pub fn read<P: AsRef<Path>>(path: P) -> io::Result<Vec<u8>> {
 }
 ```
 
+
 #### Без этих деталей код упрощается!
 
 ```rust
@@ -58,6 +59,7 @@ pub fn read(path: Path) -> Bytes {
 1. Попробовать избавиться от `;` на концах строк
 2. Сделать так, чтобы `File::open(path)` выглядел как `File.open(path)`
 3. Сделать так, чтобы не были нужны `let` 
+
 
 #### Точки-с-запятой `;`
 
@@ -87,12 +89,12 @@ fn test4() {
 }
 ```
 
+
 #### Универсальное правило
 
 * `expr` вычисляет выражение и возвращает вычисленное значение
 * `expr;` вычисляет выражение, отбрасывает вычисленное значение и возвращает `()`
-
-`;` это и разделитель, и приблизительный аналог функции `void`
+* `;` это и разделитель, и приблизительный аналог функции `void`:
 ```rust
 fn void(t: T) {
    // время жизни t подошло к концу
@@ -106,6 +108,7 @@ fn main() {
    };
 }
 ```
+
 
 #### Двоедвоеточия `::` vs `.`
 
@@ -125,6 +128,24 @@ fn main() {
 Следовательно, должны быть разные разделители:
 - для доступа по модулям и пространствам имён
 - для доступа к полям и методам
+
+<!--
+#### Альтернативы `::`?
+
+Чисто эстетически можете оценить, насколько красивее альтернативы:
+```rust
+fn test() -> io::Result<()> {
+    let _ = std::env::current_dir().map_err(|_| Error::File("..."))?;
+
+    std:env:current_dir().map_err(|_| Error:File("..."))?; // Erlang
+    std/env/current_dir().map_err(|_| Error/File("..."))?; // Nim
+    std$env$current_dir().map_err(|_| Error$File("..."))?; // java bc
+    std-env-current_dir().map_err(|_| Error-File("..."))?; // :-)
+    std^env^current_dir().map_err(|_| Error^File("..."))?; // ^_^
+}
+```
+-->
+
 
 #### Избавиться от `let`?
 
@@ -147,8 +168,9 @@ fn main() {
     let vec = a_collection.iter().map(|x| ...).collect::<Vec<_>>();
 }
 </script></code></pre>
+(Кстати, `|_|` пришёл из Ruby)
 
--->
+
 #### Камень в огород C++
 
 Неоднозначность парсинга:
@@ -167,3 +189,4 @@ void (*signal(int sig, void (*func)(int)))(int)
 char * const (*(* const bar)[5])(int )
 ```
 (https://cdecl.org/ в помощь)
+Разработчики языка Rust грамотно обошли эти грабли

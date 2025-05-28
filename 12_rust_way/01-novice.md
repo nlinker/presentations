@@ -62,7 +62,7 @@ fn add(x: i32) -> impl Fn(i32) -> Box<dyn Fn(i32) -> i32> {
 
 Правда, есть ньюанс
 
-![img.png](slides/02/img.png)
+![img.png](slides/01/img.png)
 
 ---------------------------------------------------------------------------------------------------
 
@@ -87,6 +87,6 @@ fn add(x: i32) -> impl Fn(i32) -> Box<dyn Fn(i32) -> i32> {
 
   </div>
   <div>   
-    <img src="slides/02/qr_rust_beginners.png" alt="rust_beginners_qr.png">
+    <img src="slides/01/qr_rust_beginners.png" alt="rust_beginners_qr.png">
   </div>  
 </div>
