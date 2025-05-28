@@ -4,6 +4,7 @@ use std::sync::mpsc::{channel, Receiver, Sender};
 use std::sync::{Arc, Mutex};
 use std::time::Duration;
 use std::thread;
+use Color::{Blue, Green, Red, Yellow};
 
 #[derive(Debug, Clone, Copy, Eq, PartialEq)]
 enum Color {
@@ -30,7 +31,7 @@ impl Car {
                 println!("Go {color}!")
             }
             let mut distance = 0;
-            for _ in 0..100_000_000 {
+            for _ in 0..10_000_000 {
                 distance += 1;
             }
             std::hint::black_box(distance);
@@ -52,7 +53,7 @@ fn main() {
     let r = Arc::new(Mutex::new(r));
     let place = Arc::new(AtomicU8::new(1));
 
-    let cars = [Color::Red, Color::Yellow, Color::Green, Color::Blue]
+    let cars = [Red, Yellow, Green, Blue]
         .iter()
         .map(|c| Car::new(*c, r.clone(), place.clone())).collect::<Vec<Car>>();
 
