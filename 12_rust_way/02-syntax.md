@@ -180,4 +180,5 @@ void (*signal(int sig, void (*func)(int)))(int)
 char * const (*(* const bar)[5])(int )
 ```
 (https://cdecl.org/ в помощь)
+
 Разработчики языка Rust грамотно обошли эти грабли
