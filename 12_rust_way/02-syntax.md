@@ -1,13 +1,4 @@
-### Почему у Раста такой шумный синтаксис?
-
-<style>
-.twocolumn_03 {
-   display: grid;
-   grid-template-columns: 4fr 1fr;
-   grid-gap: 10px;
-   text-align: left;
-}
-</style>
+### №2. Почему у Раста такой шумный синтаксис?
 
 Обычно приводятся фрагменты
 ```rust

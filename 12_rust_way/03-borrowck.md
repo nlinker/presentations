@@ -1,4 +1,4 @@
-### Почему боров чекер такой душный...
+### №3. Почему боров чекер такой душный...
 
 - ... даже когда у нас всего 1 поток?
 - (это хороший вопрос для собеседования)
@@ -43,7 +43,7 @@ fn main() {
    Compiling playground v0.0.1 (/playground)
 error[E0502]: cannot borrow `a` as mutable because
               it is also borrowed as immutable
- - - > src/main.rs:5:13
+ --> src/main.rs:5:13
 ```
 _Что здесь не так-то?_
 
@@ -86,7 +86,7 @@ fn main() {
 2. Структурирование кода на стадии
 3. Создание специализированной структуры данных
 
-<pre data-id="code-animation"><code class="hljs cplusplus" data-trim data-line-numbers="|9-16|17-23"><script type="text/template">
+<pre data-id="code-animation"><code class="hljs rust" data-trim data-line-numbers="|9-16|17-23"><script type="text/template">
 enum Op {
     Incr(usize),
     Decr(usize),
@@ -110,7 +110,6 @@ fn main() {
             Op::Decr(i) => arr[i] -= 1,
         }
     }
-
     println!("{arr:?}"); // выведет [0, 3, 2]
 }
 </script></code></pre>
