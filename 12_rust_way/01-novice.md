@@ -62,7 +62,8 @@ class B extends Base {
 - Есть классы типов из Haskell!
 
 ```haskell
-let add x y z = x + y + z
+add :: Int -> Int -> Int -> Int 
+add x y z = x + y + z
 ```
 но
 ```rust

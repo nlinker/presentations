@@ -20,8 +20,7 @@
 6. Почему в Раст не завезли ООП и как вообще писать без ООП?
   </div>
   <div>
-    
-    ![mr_fix.png](slides/00/mr_fix.png)
+    <img src="slides/00/mr_fix.png" alt="slides/00/mr_fix.png"></img>
   </div>
 </div>
 

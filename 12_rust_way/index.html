@@ -16,7 +16,7 @@
 
 	</head>
 	<style>
-		body:after {
+		.logo:after {
 			content: url(assets/studentlab_logo_black.svg);
 			transform: scale(.5);
 			position: fixed;
@@ -71,6 +71,14 @@
 				hash: true,
 				// Learn about plugins: https://revealjs.com/plugins/
 				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+			Reveal.on('slidechanged', (event) => {
+				if (event.currentSlide.id === '00') {
+					document.body.classList.remove('logo');
+				} else {
+					document.body.classList.add('logo');
+				}
+				// event.previousSlide, event.currentSlide, event.indexh, event.indexv
 			});
 		</script>
 	</body>
