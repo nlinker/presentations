@@ -172,7 +172,7 @@ pub fn notify_dyn(item: &dyn Summary) {
 
 ### (*) Для интересующихся
 
-- Java, Kotlin, Scala; и в принципе она более-менее фундаментальна.
+- Проблема в Java, Kotlin, Scala; и в принципе она более-менее фундаментальна.
 - проявляется всегда, где есть изменяемость и отношение тип-подтип
 
 ```java
@@ -186,7 +186,7 @@ class Dog extends Animal {
 public class Main {
     public static void main(String[] args) {
         Cat[] cats = { new Cat(), new Cat() };
-        Animal[] animals = cats;
+        Animal[] animals = cats; // ковариантность тут
         animals[0] = new Dog();
         for (Cat cat: cats) {
             cat.myaw(); // java.lang.ArrayStoreException!
