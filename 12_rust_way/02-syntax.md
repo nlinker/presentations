@@ -96,6 +96,7 @@ fn test4() {
 fn void(t: T) {
    // время жизни t подошло к концу
 }
+
 fn main() {
    let mut x = X::new();
    let mut y = { Y::new() };
